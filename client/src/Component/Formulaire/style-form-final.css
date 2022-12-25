@@ -1,0 +1,696 @@
+*{
+    font-family: 'Roboto Slab', serif;
+}
+.principal-formulaire{
+    background-color: #f3f3f3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   /* align-items: flex-end;*//*a cause de cette ligne j'avais le formulaire décalé à droite*/
+    pad: 30px;
+    border: 1px hidden red;
+}
+.text-calcul {
+    font-size: 1vw;
+    width: 70%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border: 1px hidden red;
+}
+.wrap-formulaire{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    height: auto;
+}
+.les-champs-de-calcul{
+    display: flex;
+    flex-direction: column;
+    align-items:center; /*avant étais aline-items start ce qui a décalé le formulaire à gauche*/
+    justify-content: center;
+    width: 80%;
+}
+.calcul-bloc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%; /*pour que l'ecriture soit claire est bie espacé comme le site d'origine"*/
+    height: auto;
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+}
+.calcul-montant{
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 5px 5px;
+    margin-left: 10px;
+    position: fixed;
+    top: 340px;  /* precedent => top : 100px */
+    right: 0px;
+}
+.calcul-montant.tot {
+    z-index: 100;
+}
+.calcul-montant p{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 90%;
+}
+.total-formulaire{
+width: 90%;
+height: 50px;
+border: 1px solid lightgray;
+border-radius: 5px 5px 5px 5px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 50px;
+padding-left: 5px;
+padding-right: 5px;
+}
+.calcul-bloc-item{
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.date-wrap{
+display: flex;
+margin-bottom: 20px;
+width: 100%; /* precedent => width : 90% */
+border: 1px hidden black;  /* ajouter par H*/
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
+.date-wrap .dateWrapInputSoto {
+    border: 1px solid #b2b2b2;
+ height: 60px;
+display: flex;
+align-items: center;
+border-radius: 10px;
+overflow: hidden;
+margin-left: 20px;
+}
+.text-conatiner{
+    width: 95%;
+    margin-bottom: 20px;
+   margin-top: 30px;
+   font-size: 1.9em;
+   font-family: 'Roboto Slab', serif;
+   overflow: hidden;
+}
+
+
+.date-input-style{
+  border: none;
+  border: 1px hidden lightgray;
+  border-radius: 5px 5px 5px 5px;
+  margin: 15px;
+  width: 250px;
+}
+
+
+
+.inter-calcul-item{
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
+    /*margin-top: 15px;*/
+    /*margin-bottom: 5px;*/
+    padding-left: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    border:  1px hidden red;
+    margin-top: 30px;
+}
+/*********************REMONTAGE DEMONTAGE************************/
+.RMNTG{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+.title-RMNTG{
+    width: 100%;
+    font-size: 1.7em;
+    font-weight: 500;
+}
+.content-RMNTG{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.input-RMNTG{
+    height: 45px;
+    width: 100px;
+    cursor: text;
+}
+.text-RMNTG{
+    width: 80%;
+    font-size: 16px;
+    font-weight: 400;
+}
+/********************************STYLING BIG TITLES INSIDE CALCUL BLOC********************************/
+.tit-big-first{
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    border: 1px hidden red;
+    font-size: 18px;
+    /*font-weight: 400;*/
+}
+.tit-big-second{
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 16px;
+  
+    /*height: 50px;*/
+    align-items: center;
+    /*text-decoration: underline 2px 3px #2c216f;*/
+    font-family: 'Roboto Slab', serif;
+    
+}
+
+.tit-big-second.autorisationSpan {
+    border-bottom: 3px solid #2c216f;
+      font-weight: 500;
+}
+
+.big-titles{
+    border: 1px hidden  red;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.mrgntop0px{
+    margin-top: 0px;
+    
+}
+/**********************************************TOOL TIPS STYLING*********************************************/
+.tooltip-styling{
+    width: 200px;
+    height: auto;
+    display:none;
+    font-size: 12px;
+    color: lightgrey;
+    background-color:white;
+    color: #2c216f;
+    position: absolute;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: left;
+}
+.tip-distance1:hover
+ .tooltip-styling{
+   display: flex;
+   
+}
+
+
+.tip-distance1, .tip-mont-meuble1  {
+    margin-top: 5px;
+    color: red;
+}
+
+.tooltip-styling-monte-meuble1{
+    width: 200px;
+    height: auto;
+    display:none;
+    font-size: 12px;
+    color: lightgrey;
+    background-color:white;
+    color: #2c216f;
+    position: absolute;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: left; 
+}
+
+.tip-mont-meuble1:hover
+.tooltip-styling-monte-meuble1{
+display: flex;
+}
+.tip-auton-01:hover .tooltip-styling-auton1{
+display: flex;
+}
+.tooltip-styling-auton1{
+    width: 200px;
+    height: auto;
+    display:none;
+    font-size: 12px;
+    color: lightgrey;
+    background-color:white;
+    color: #2c216f;
+    position: absolute;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: left; 
+}
+
+
+.tip-auton-01 span {
+    margin-top: 4px;
+    margin-left: 5px;
+    color: #2c216f;
+    font-size: 1em;
+}
+/***********************************************YES NO CHECK BOX******************************************************/
+.check-yes-no{
+width: 95%;
+display: flex;
+justify-content: flex-start;
+border:  1px hidden red;
+margin-top: -1px;
+margin-bottom: 40px;
+}
+.wrap-yes-no{
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    /*margin-bottom: 20px;*/
+    border: 1px hidden black;
+}
+
+.secondYesNoRadioButton{
+    border: 1px solid red;
+    height: auto;
+   background-color: red;
+   display: flex;
+   align-items: center;
+justify-content: space-between;
+width: 100%;
+}
+
+
+#autoo2, #auton2 ,#autoo ,#auton, #volummanu, #volcalc, #louro, #louron , #frigo , #piano , #rmntgN , #rmtgdmtg , #dementaged , #remontager ,#checkbox1 , #checkbox2{
+  border-radius:50%;
+  height:20px;
+  width:20px;
+  color: #2c216f;
+  margin-right: 10px;
+}
+
+.mdbinput label{
+    border: 1px hidden red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    font-size: 16px;
+    font-weight: 400;
+}
+.mdbinput{
+   
+    border: 1px hidden blue;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+   /* height: 50px;*/
+}
+
+.volumeInputBloc{
+    border: 1px hidden pink;
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: center;
+ 
+}
+
+.volumeInputBloc label{
+    font-size: 1.17em;
+}
+
+.unitVolumCalc{
+    border: 1px hidden red;
+    margin-top: 0px;
+    display: flex;
+}
+/************************OBJECT LOURD***********************/
+.wrap-check-yes-no{
+    border: 1px hidden red;
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+    margin-bottom: 30px;
+}
+.comment{
+    border: 1px hidden red;
+    text-align: left;
+    width: 60%;
+}
+/*************************************VOLUM STYLING***********************/
+.principale-titles{
+   font-size: 24px;
+   /*height: 50px;*/
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  /*margin-bottom: 20px;*/
+   /*margin-top: 30px;*/
+   font-family: 'Roboto Slab', serif;
+   overflow: hidden;  /* Ajouter */
+   font-weight: 400;
+}
+.text-fomulaire{
+    font-size: 1.17em;
+    font-weight: 400;
+    border: 1px hidden blue;
+
+}
+.text-fomulaire.volumes {
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.4em;
+ color: white;
+}
+.wrap-volum-items{
+    border: 1px hidden red;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.input-vol{
+    height: 45px;
+    width: 100px; 
+  
+}
+#input-vol-manuel{
+ 
+}
+#volummanu{
+    margin-bottom: 0px;
+}
+.volum-text{
+    font-size: 10px;
+    font-family: 400;
+    width: 100%;
+}
+#volummanu{
+    margin-right: 20px;
+}
+#volcalc{
+    margin-right: 20px;  
+    margin-bottom: 0px;
+}
+.unit-vol{
+    height: 100%;
+    font-size:  18px;
+}
+.wrap-volum-items-inter{
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px hidden red;
+    margin-bottom: 30px;
+}
+.wrap-inout-volume{
+    border: 1px hidden yellow;
+     margin-right: 5px;
+}
+/**********************************************************************************************/
+input{
+    height: 45px;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.adressContainerWrapForm{
+    border : 1px hidden black;
+    height: 60px;
+  width: 83%;
+  display: flex;
+  align-items: center;
+}
+
+.addWrapperInput{
+    border : 1px solid #b2b2b2;
+    height: 60px;
+    width: 546px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.address-input{
+    width:  100%;
+height: 40px;
+    border: 1px hidden lightgrey;
+
+}
+
+
+
+.select-ville{
+    height: 45px;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 5px 5px;
+}
+.title{
+        font-size: 12px;
+       /* margin-top: 5px;*/
+        height: 36px;
+        width: 100%;
+        border: 1px hidden red;
+        display: flex;
+        align-items: flex-end;
+        
+    }
+
+    .selectFormOprionSoto{
+        height: 50px;
+        margin-top: 10px;
+    }
+    .title.etage, .title.ascenseur, .title.distance, .title.monteMeuble {
+        font-size: 0.8em;
+        font-weight: 500;
+   
+        font-family: 'Roboto Slab', serif;
+        font-weight: 500;
+    }
+
+
+
+    .flexstart
+    {
+        display: flex;
+        align-items: flex-start;
+  }
+.title a{
+    font-size: 12px;
+   color: #2c216f;
+  
+}
+.volum-input{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.calcul-bloc-item.volumeItemBloc {
+    border: 1px hidden red;
+    background-color: #2C216F;
+    color: white;
+}
+
+
+.btn-formule{
+    background-color:white ;
+    color: #2C216F;
+    font-size: 1.2em;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    width: 20%;
+    margin-top: -15px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.btn-formule:hover{
+    background-color: #ED1C24;
+    color: white;
+}
+.width90{
+    width: 60%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 24px;
+    border: 1px hidden red;
+   font-family: 'Roboto Slab', serif;
+  
+}
+
+.width90-2{
+    width: 60%;
+  margin-bottom: 50px; 
+    font-size: 1.2em;
+    
+}
+.width90-2 li{
+    font-size: 1.2em;
+    font-weight: 400;
+}
+.width90-2-center{
+    width: 80%;
+    display: flex;
+  
+}
+.input-commantaires{
+    height: 200px;
+    width:100%;
+    margin-bottom: 30px;
+    background-color: transparent;
+    border : 2px solid #2C216F;
+    border-radius: 5px;
+}
+.center-comments{
+    border: 1px hidden red;
+ width: 70%;
+    padding-left: 5%;
+}
+input{
+    border: 1px solid lightgrey;
+    outline: none;
+}
+select{
+    border: 1px solid lightgrey;
+    width: 150px;
+    border-radius: 5px 5px 5px 5px ;
+outline: none;
+}
+.Myborder-top{
+    border: 1px hidden goldenrod;
+    width: 20%;
+}
+.dsplyclmn{
+    display: flex;
+    flex-direction: column;
+    border: 1px hidden red;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  
+}
+
+
+
+
+/* ***********************************************/
+/* New changes*/
+
+.inter-calcul-item.big-titles.mrgntop0px {
+    border : 1px hidden black;
+    margin-top: 20px;
+}
+
+
+
+
+#objL{
+     font-family: 'Roboto Slab', serif;
+}
+
+
+.mdbinputSpace {
+    border: 1px hidden black;
+    width: 300px;
+    display: flex;
+    overflow: hidden;
+}
+
+
+
+.wrap-yes-no-aide{
+border: 1px hidden black;
+width: 300px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 50px;
+margin-top: 10px;
+overflow: hidden;
+}
+
+.wrap-yes-no-aide div{
+    border: 1px hidden red;
+
+    display: flex;
+
+}
+/******************************************FOOTER FORMULAIRE***********************************/
+.footer-formulaire{
+    width: 100%;
+    height: 100px;
+    background-color:#2c216f;
+    z-index: 1;
+    margin-top: 100px;
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Changes Hafida */
+.projectFormTitle{
+ color: #2C216F;
+font-size: 6.4em;
+overflow: hidden;
+}
+
+/*$*/
+.reficonsFORM{
+    width: 30px;
+    height: 30px;
+}
+.stageImg{
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+
+.footSotoPage{
+    z-index: -2000;
+}
+
+.envoyerCommentButton{
+    border: 1px hidden black;
+    height: 50px;
+    width: 110px;
+    margin-bottom: 5px;
+    background-color: #ED1C24;
+    color: white;
+    border-radius: 10px;
+
+}
+/*****************************************RESPONSIVR*******************************************/
+@media screen and (max-width:1000px) {
+    .inter-calcul-item{
+flex-direction: column;
+    }
+   .les-champs-de-calcul{
+       width: 100%;
+   }
+    }

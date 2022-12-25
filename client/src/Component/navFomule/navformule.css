@@ -1,0 +1,144 @@
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+.wrap-nav{
+    width: 100%;
+    height: auto;  /* Precedent => height : 70px; */
+   /* background-color:#2c216f ;*/
+    display: flex;
+    flex-direction: column; /* Ajouter Hafida */
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+.wrap-inter{
+    width: 100%;  /* precedement => width : 95% */
+    height: 70px; /* precedement => height : 10%% */
+    display: flex;
+    justify-content: flex-start;
+    background-color:#2c216f ;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+.nav-form-item{
+    border: 1px hidden black;
+    width: fit-content;
+    height: 100%;
+    margin-right: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    margin: 20px;
+    font-weight: 800;
+  
+}
+
+
+.navRightIconSide{
+    border: 1px hidden black;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 20px;
+}
+
+.navRightIconSide .nav-form-item{
+    margin: 10px;
+}
+.text-phone{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+    font-weight: 200;   
+}
+.nav-inter-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9em;
+  border: 1px hidden white;
+    font-weight: 200;  
+    text-align: left;
+}
+
+.nav-form-item.homeReturnButton {
+    border: 1px hidden red;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+   font-weight: 800;
+}
+
+.nav-inter-item .fas.fa-arrow-left {
+    margin-right: 6px;
+    color: #ED1C24;
+}
+.nav-inter-item a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 200; 
+}
+.nav-inter-item a:hover{
+    color: white;
+}
+.speration{
+    width: 15%;
+}
+.icon-nav-formule{
+    font-size: 1.3em;
+    color: white;
+ 
+    
+}
+.circle{
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    border-radius: 20px 20px 20px 20px;
+    background-color:#ed1c24;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+
+}
+@media screen and (max-width:1000px) {
+   .wrap-inter{
+       display: flex;
+       flex-direction: column;
+       height: auto;
+   } 
+   .wrap-nav{
+       height: auto;
+   }
+   .nav-form-item{
+       width: 95%;
+       border: 1px hidden white;
+       height: fit-content;
+       display: flex;
+       justify-content: flex-start;
+       align-items: flex-start;
+       border: 1px hidden red;
+       margin-bottom: 5px;
+   }
+   .nav-inter-item{
+       width: 100%;
+  
+       display: flex;
+       justify-content: flex-start;
+   }
+}

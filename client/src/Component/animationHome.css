@@ -1,0 +1,39 @@
+@keyframes showWord_one {
+    from {
+     transform: translateX(-100%);
+    }
+  
+    to {
+        transform: translateX(0%);
+    }
+  }
+  @keyframes showWord_two {
+    from {
+     transform: translateY(-100%);
+    }
+  
+    to {
+        transform: translateY(0%);
+    }
+  }
+  @keyframes showWord_three {
+    from {
+     transform: translateY(100%);
+    }
+  
+    to {
+        transform: translateY(0%);
+    }
+  }
+.animation_one{
+animation:showWord_one ;
+animation-duration: 2s;
+}
+.animation_two{
+    animation:showWord_two ;
+    animation-duration: 2s;   
+}
+.animation_three{
+    animation:showWord_three ;
+    animation-duration: 2s;  
+}
