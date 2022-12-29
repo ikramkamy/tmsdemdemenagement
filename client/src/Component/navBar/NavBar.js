@@ -2,10 +2,6 @@ import React from 'react'
 import './NavBar.css'
 import Logo from '../../images/logo-01.png';
 import {useState} from 'react'
-import Phone from '../../images/icons_Plan_de_travail_1.png'
-import Email from '../../images/Groupe 205.png'
-import SAV from '../../images/icons-02.png'
-import Cursor from '../../images/1.png';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 export default function NavBar() {
@@ -31,13 +27,16 @@ export default function NavBar() {
 </div>
    <div className='wrap-elem-topnav'>
 
-<div className="navitemTop"> 
-<div><img src={Phone} className="phonetopNav"/></div>
-<div className="navText"> +33 1 41 77 11 32</div>
-</div>
+
 <div className="btn-devis largeMenu">
 <Link to="/soto">Demander un devis</Link>
 </div>
+<div className="navitemTop"> 
+<img src="./images/gifph2.gif" className="phonetopNav"/>
+<div className="navText"> +33 1 41 77 11 32</div>
+</div>
+
+
 </div>
 </div>
 

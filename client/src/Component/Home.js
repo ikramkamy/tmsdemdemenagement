@@ -1,103 +1,121 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Home.css'
 import Pro from '../images/icons/1.png'
 import Etudiant from '../images/icons/2.png'
 import Camion from '../images/icons/3.png'
-import ImgSlide from '../images/image1.png'
 import Avion from '../images/icons/4.png'
 import PlanificationTimeLine from '../images/planificationTimeLine.png'
-import TmsDemImage from '../images/tmsdemPicture.png'
 import Icon_Plan from '../images/icon_Plan de travail 1.png'
 import Trace from '../images/2.png'
 import Step2 from '../images/step2.png'
 import Step3 from '../images/step3.png'
 import Footer from './footer/Footer'
-import Nav from './navBar/NavBar'
+import Navbar from './navBar/NavBar'
 import {Link} from "react-router-dom";
 import './animationHome.css';
+import {FaArrowRight} from 'react-icons/fa';
 export default function Home() {
   const [isScrollActive,setIsScrollActive]=useState(false)
+  
+  /*
   const handelscroll=(e)=> {
    setIsScrollActive(!isScrollActive)
    console.log(e)
    console.log('we are scrolling')
     }
-    /*
-   useEffect(()=>{
-  window.addEventListener('scroll', handelscroll);
-  console.log('we are scrolling')
-})
 */
     return (
 
     
         <div className="Home" >
-              <Nav />  
-           {/* <div className="smallImg">
-                <img src={TmsDemImage} />
-    </div>*/}
-            <div className="slideImage">
+              <Navbar />  
+
+            <div className="slideImage" >
+            
+            <div className='wrap_title_home'>
+            <div className="titleSlideopacityBack"> </div> 
             <div className="titleSlide">
-                    <h1> Nous nous <span className="occupons"> occupons </span></h1>
-                    <h2> nous même de votre </h2>
-                    <h3> déménagement</h3>
-               
+                    <h2 style={{color:"#2C216F",fontWeight:"500"}}> Personnalisez votre devis en quelques clics
+                    avec TMSDEM
+                    </h2>
+                     
+                    <h3>Une équipe de déménageurs expérimentés se chargera de votre déménagement.</h3>
+                    
+                    <h4 className='home-devis-btn'>
+                Personnalisez votre devis
+             <FaArrowRight className='home-arrow-devis' />
+           </h4> 
                 </div>
-             {/*<img src={ImgSlide}/>*/}
+                
+            {/* <img src="./images/nousgif.gif" className='homeimg'
+              alt="nous nous occupons de votre déménamegement"/>*/}
 
-               
+        
+             </div>
 
-
-
-            </div>
-
-
+{/*<img src='./images/homewall.webp' className='homewall'/>
+<img src='./images/moving.webp' className='homewall stephomewall'/>*/}
+             </div>
 
             <div className="textFiled">
-                <p>
+             {/*   <p>
                     L’envie de déménager résulte dans 95% des cas d'un désir profond de changement
-                    grâce auquel vous pouvez repartir du bon pied à la conquête de nouvelles opportunités pour une vie prospère. TMS-DEM vous aide à faire le premier pas en transportant vos affaires en toute sécurité partout en France ou dans les quatres coins du monde.
+                    grâce auquel vous pouvez repartir du bon pied à la conquête de nouvelles opportunités pour une vie prospère. 
+             </p>*/}
+    <h1 className='home_h_text'>TMS-DEM vous aide à faire le premier pas </h1> 
+    <h5 className='home_h_text-h5'>en transportant vos affaires en toute sécurité partout en 
+    France ou dans les quatres coins du monde.</h5>
+    <div className='home_img_text-section'>
+<img src='./images/tmshome2.jpg' className='homewall2'/> 
 
-                </p>
+   <div className='home_img_text_section_text'>
+   <h1 className='animation_typing'>Un service client<br/>
+      24h/24 et 7j/7
+</h1>
+<h4 >
+Nous vous accompagnons avant, pendant et aprés votre déménagement. 
+En revanche.
+{/*, toute remarque est la bienvenue, 
+vous pouvez nous écrire anytime en remplissant le formulaire ci-dessous*/}
+</h4>
+<Link to="/contact" className='btn_home_imagetext-section'>
+    Contactez Nous</Link>
+</div>    
+    </div>
             </div>
-
-
+            <div className="textFiled">
+            <h1 className='home_h_text'>Nos Formules </h1> 
+    <h5 className='home_h_text-h5'>Choisissez la formule qui vous convient.</h5>
+    </div>
 
             <div className="servicesTMSDEM">
                 <div className="serviceContent">
                     <div className="serviceContainer">
-                       <h2 className="titleDemenagementPro"> Déménagement PRO</h2>
+                    <img src="/images/chrono.png" className="proimg" />
+                       <Link to="/chrono"><h2 >Formule Chrono</h2></Link>
                         <div className="imgContent">
-                            <img src={Pro} className="proimg" />
+                        <p>Besoin de bras en plus
+                            ou d’un camion pour
+                            transporter vos affaires ?</p>
                         </div>
                     </div>
 
                     <div className="serviceContainer">
-
-                        <h2> Déménagement
-                            Étudiant </h2>
+                    <img src="/images/stock.png" className="iconStudent" />
+                       <Link to="/stock"><h2> Formule Stock </h2></Link> 
                         <div className="imgContent Studentimgs">
-                            <img src={Etudiant} className="iconStudent" />
+                            
+                         <p> TMSDEM vous propose  des solutions 
+                         innovantes pour la location de stockage </p>
                         </div>
 
                     </div>
 
                     <div className="serviceContainer">
-
-                        <h2> Déménagement
-                            longue distance </h2>
+                    <img src="/images/soto.png" className="iconStudent" />
+                        <Link to="/tanquille"><h2> Formule Tranquille</h2></Link>
                         <div className="imgContent Studentimgs">
-                            <img src={Camion} className="iconStudent" />
-                        </div>
-
-
-                    </div>
-
-                    <div className="serviceContainer">
-                        <h2> Déménagement
-                            international</h2>
-                        <div className="imgContent Studentimgs">
-                            <img src={Avion} className="iconStudent" />
+                         <p>Nous nous occupons nous même de toute la procédure de déménagement</p>
                         </div>
 
                     </div>
@@ -105,9 +123,15 @@ export default function Home() {
             </div>
 
 
+            <div className='large_home_image' >
+<div>
+<h1></h1>
+    
+</div>
 
+</div>
 
-            <div className="reasonsContainer" onScroll={(e)=>handelscroll(e)}>
+            <div className="reasonsContainer">
 
 <div className="reasonsContainerTitle">
     <div className={`${isScrollActive ? "numberReasons animation_one" : "numberReasons"}`} id="animone">

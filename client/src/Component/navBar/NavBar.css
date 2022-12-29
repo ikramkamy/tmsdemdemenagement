@@ -6,7 +6,11 @@
 }
 
 .Nav {
-    border: 1px hidden black;
+   position: sticky;
+   bottom: 0px;
+   top: 0px;
+   background-color: white;
+   
     height: auto;
     width: 100%;
     display: flex;
@@ -18,7 +22,7 @@
 .navTop{
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding-left: 30px;
     padding-right: 30px;
@@ -27,9 +31,10 @@
 }
 .wrap-elem-topnav{
     display: flex;
-    width: 35%;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    width:fit-content;
+    align-items: flex-end;
+    justify-content:center;
 }
 /*
 .navTop .phonetopNav{
@@ -51,7 +56,7 @@
 }
 .navitemTop{
     border: 1px hidden black;
-    width: auto;
+    width: 230px;
     height: auto;
     display: flex;
     justify-content: center;
@@ -86,16 +91,21 @@
 .navTop .savImg{
     margin-right : 6px;
 }
+.phonetopNav{
+    height: 50px;
+    width: 50px;
+    }
 /*
 .navitemTop .navitemTop.navTopemailText{
 display: flex;
 justify-content: flex-start;
-}*/
+}
+*/
 .navContainer{
     border: 1px hidden red;
     height: 90px;
     width: 90%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-around;
 }
@@ -143,6 +153,8 @@ color: white;
     justify-content: space-between;
     font-weight: 600;
     font-size: 1.2em;
+    margin-top: 15px;
+   
 }
 .navItem a{
    
@@ -282,20 +294,10 @@ justify-content: flex-start;
 }
 
 @media screen and (max-width :992px){ 
-   /*
-   
-  
-*/
 .navItem {
-    justify-content: flex-end;
-}
-.navItem .item{
     display: none;
 }
 
-.navItem .item{
-    display: none;
-}
     .fas.fa-bars{
         z-index: 100;
         display: inline-block;
@@ -312,6 +314,9 @@ justify-content: flex-start;
     .navContainer{
         display: flex;
         justify-content: flex-end;
+    }
+    .wrap-elem-topnav{
+        width: fit-content;
     }
 }
 

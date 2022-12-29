@@ -102,12 +102,12 @@ showAlertBox && <div className="alertBoxBoutique">
 
    </Route>
 
-<Route exact path="/services" ><NavBar/><Service/> </Route>
+<Route exact path="/services" ><Service/> </Route>
    <Route exact path="/soto"><NavFomule/><Formulefinale/></Route>
 <Route exact path="/chrono"><NavFomule/><Chrono/></Route>
-<Route exact path="/presentation" ><NavBar/> <Presentation/></Route>
+<Route exact path="/presentation" ><Presentation/></Route>
 
-<Route exact path="/contact"><NavBar/><Contactus/><Footer/></Route>
+<Route exact path="/contact"><Contactus/><Footer/></Route>
 <Route   exact path="/signin"     component={Signin}/>
 <Route exact path="/pdf"><Pdfinvent/></Route>
    </Switch>

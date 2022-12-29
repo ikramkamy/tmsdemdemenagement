@@ -10,45 +10,120 @@
     width: 100%;
     height: auto;
     position: relative;
-}
-
-.slideImage{
-    border: 1px hidden red;
-    height: 550px;
-    width: 100%;
-    position: relative;
-
- 
-}
-
-.slideImage img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
-.titleSlide{
-    border: 1px hidden black;
-    height: auto;
-    width: 400px;
-    /*position: absolute;*/
-    right: 25px;
-    top: 90px;
-    text-transform: uppercase;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    align-items: center;
+    
+}
+.slideImage{
+    height: 100vh;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+    z-index: -10;
+}
+@keyframes colorbtn{
+    from {
+   color: #2C216F;
+    }
+  
+    to {
+        color: #ED1C24;
+    }
+  }
+.home-devis-btn{
+  width: 100%;
+    text-decoration: underline;
+    cursor: pointer;
+    animation:  colorbtn;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    margin-top: 20px;
+    border-radius: 5px 5px 5px 5px ;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    
+}
+@keyframes arrowrannimation{
+    from {
+     transform: translateX(-100%);
+    }
+  
+    to {
+        transform: translateX(0%);
+    }
+  }
+.home-arrow-devis{
+   margin-left: 30px;
+   color: #2C216F;
+   animation: arrowrannimation ;
+   animation-duration: 1s;
+   animation-iteration-count: infinite;
+    }
+   .homewall{
+      width: 40%;
+      height: 400px;
+      margin-top: 50px;
+      box-shadow: 2px 2px 2px 2px lightgray;
+      display: block;
+   }
+   .homewall:hover{
+    opacity: 0;
+   }
+   .stephomewall{
+    position: absolute;
+    opacity: 0;
+    top: opx;
+    right: 30px;
+   
+   }
+   .homewall:hover.stephomewall{
+    opacity: 1;
+   }
+.home_h_text{
+    color: #2C216F;
+    text-align: center;
+}
+.home_h_text-h5{
+    width: 60%;
+    color: #2C216F;
+    text-align: center;
+}
+.wrap_title_home{
+    position: relative;
+    height: 90%;
+    width: 50%;
+}
+.titleSlide{
+    margin-top: 10%;
+    width: 80%;
+    height: 80%;
+    padding: 10PX;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.titleSlideopacityBack{
+    position: absolute;
+    left: 0%;
+    top:10%;
+    background-color:#2C216F;
+    opacity: 0.4;
+    height: 80%;
+    width: 80%;
+    z-index: -1;
 }
 
-.titleSlide h1{
-    font-size: 3.95em;
-    font-weight: 800;
-    color: #2C216F;
-    overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
-    border : 1px hidden black;
-}
 
 .titleSlide  .occupons {
     border: 1px hidden red;
@@ -60,21 +135,15 @@
  
 }
 .titleSlide h3{
-    font-size: 2.9em;
-    font-weight: 600;
-    color: #2C216F;
+ color: white;
     overflow: hidden;
-text-transform: lowercase;
-font-family: 'Montserrat', sans-serif
+   font-weight: 300;
+   margin-top: 20px;
 }
 
  .titleSlide h2{
-    font-size: 2.2em;
-    font-weight: 600;
-   
-    color: #2C216F;
+  color:#2C216F;
     overflow: hidden;
-    text-transform: lowercase;
     font-family: 'Montserrat', sans-serif
 }
 
@@ -114,13 +183,55 @@ font-family: 'Montserrat', sans-serif
 }
 
 .textFiled  {
-    border: 1px hidden black;
-    width: 900px;
+    width: 100%;
     height: auto;
     margin-top : 40px;
-    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
 }
-
+.home_img_text-section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+.home_img_text_section_text{
+    width: 50%;
+    height: 400px;
+    background-color: #2C216F;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.home_img_text_section_text h4{
+    width: 80%;
+    margin-right: 30px;
+    color: white;
+text-align: center;
+}
+.btn_home_imagetext-section{
+    border: 1px hidden black;
+    height: 50px;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: white;
+    color: #2C216F;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.btn_home_imagetext-section:hover{
+    color: #ED1C24;
+    box-shadow: 2px 2px 2px 2px lightgrey;
+}
 .textFiled p {
    text-align: left;
    font-size: 1.2em;
@@ -129,9 +240,25 @@ font-family: 'Montserrat', sans-serif
    letter-spacing: 1px;
    text-align: justify;
 }
+.homewall2{
+    width: 50%;
+    height: 400px;
+}
+.animation_typing{
+    color:#ED1C24;
 
-
-
+}
+.large_home_image{
+    width: 100%;
+    height:500px;
+    background-image: url('/public/images/ikea.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10%;
+    background-attachment: fixed;
+}
+/********************************SECTION SERVICE VOTRE DEMENAGEMENT******************************/
 .servicesTMSDEM{
     border: 1px hidden black;
     height: auto;
@@ -142,8 +269,6 @@ font-family: 'Montserrat', sans-serif
     margin-top: 150px;
     
 }
-
-
 .serviceContent{
 border: 1px hidden pink;
 width: 95%;
@@ -151,47 +276,42 @@ height: auto;
 display: flex;
 align-items: center;
 justify-content: space-around;
-
 }
-
 .servicesTMSDEM .serviceContainer{
-    border: 2px hidden #ED1C24;
-    width: 270px;
-    height: 270px;
+    border: 2px solid #ED1C24;
+    margin: 5px;
+    border-radius: 5px 5px  5px 5px;
+    width: 100%;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-
-
-
 .servicesTMSDEM .serviceContainer h2{
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1.6em;
     color: #2C216F;
    border: 1px hidden black;
    text-align: center;
 }
-
-
-.imgContent{
-    border: 1px hidden black;
-    height: 174px;
-    width: 163px;
-    margin-top: 20px;
+.serviceContainer a{
+    text-decoration: none;
 }
-
+.imgContent{
+    height: auto;
+    width: 80%;
+    margin-top: 20px;
+    color: #2C216F;
+    text-align: center;
+}
 .imgContent img{
     height: 164px;
     width: 153px;
 }
-
-
 .imgContent .proimg{
-    margin-top: -20px;
+    /*margin-top: -20px;*/
 }
-
 .planificationStep{
     border: 1px hidden red;
     height: auto;
@@ -203,15 +323,12 @@ justify-content: space-around;
     flex-direction: column;
     overflow: hidden;
 }
-
 .planificationTitle{
 border: 1px hidden black;
 width: 100%;
 height: auto;
 color: #2C216F;
 }
-
-
 .planificationTitle h1{
     font-size: 6em;
     font-weight: 900;
@@ -318,7 +435,7 @@ color: #2C216F;
 .descriptionPlanification div{
     width: 75%;
 }
-
+/**************************************************END OF PLANIFICATION STYLE*************************************************/
 .text3{
     font-size: 0.9em;
 }
@@ -490,6 +607,11 @@ width: 30px;
 .testimonialName .clientName {
     font-size: 1em;
 }
+.homeimg{
+    height: fit-content;
+    width: 500px;
+    
+}
 /* ***************** RESPONSIVE EDSIGN ************** */
 
 @media screen and (min-width : 1550px) {
@@ -525,22 +647,11 @@ width: 30px;
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
 @media screen and (max-width : 1352px) {
     .textFiled  {
-        width: 95%;
+        width: 100%;
         text-align: center;
-        margin-top : 340px;
+       
     }
 
 

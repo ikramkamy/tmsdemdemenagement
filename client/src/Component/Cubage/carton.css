@@ -332,6 +332,7 @@ background-color: none;
     display: flex;
     justify-content: space-between;
     width: 35%;
+   
 }
 @keyframes showdetails {
     from {

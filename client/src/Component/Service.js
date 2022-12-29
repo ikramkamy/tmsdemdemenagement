@@ -1,13 +1,14 @@
 import React from 'react'
-import Stylee from './Service.css'
+import './Service.css'
 import Serviceimg from '../images/servicePicture.jpeg';
 import Footer from './footer/Footer';
 import {Link} from 'react-router-dom'
-import MonteMeuble from '../images/monteMeuble.jpeg'
+import MonteMeuble from '../images/monteMeuble.jpeg';
+import NavBar from './navBar/NavBar';
 export default function Service() {
     return (
         <div className="serviceContainer">
-
+<NavBar/>
             <div className="titleContainer"> <h1> Déménagez en toute tranquilité  </h1></div>
             {
                <div className="pictureTmsDem">
@@ -36,7 +37,7 @@ export default function Service() {
                             du process ? </p></div>
 
                         <div className="buttoncontainer  soto">
-                        <Link to="soto">laissez-nous faire</Link> </div>
+                        <Link to="/soto">laissez-nous faire</Link> </div>
                     </div>
 
 

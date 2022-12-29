@@ -37,3 +37,74 @@ animation-duration: 2s;
     animation:showWord_three ;
     animation-duration: 2s;  
 }
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+.animation_typing{
+
+}
+@keyframes appearhomeimage {
+  from {opacity:0 ;
+  transform: translateY(-100%);
+  }
+  to { opacity:1 ; 
+    transform: translateY(0);
+  }
+}
+.homewall2_animation{
+  animation:appearhomeimage  ;
+  animation-duration: 3s;
+
+}
+@keyframes pagehomeappear {
+  from {
+    opacity:0 ;
+    
+  }
+  to { opacity:1 ; 
+  
+  }
+}
+@keyframes pageserviceappear {
+  from {
+    transform: translateX(-100%);
+    
+  }
+  to {  transform: translateX(0); 
+  
+  }
+}
+.Home{
+  animation: pagehomeappear;
+  animation-duration: 3s;
+
+}
+.serviceContainer{
+  animation: pageserviceappear;
+  animation-duration: 2s;
+}
+@keyframes backgroundswitch{
+  from {
+background-image: url('/public/images/pic99.jpg');
+}
+  to {  
+    background-image: url('/public/images/pic9.jpg');
+    background-position: 10% 40%;
+    
+  }
+}
+.slideImage{
+ 
+  animation:backgroundswitch;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+ animation-direction: alternate;
+ 
+}
