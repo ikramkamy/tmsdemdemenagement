@@ -108,3 +108,10 @@ background-image: url('/public/images/pic99.jpg');
  animation-direction: alternate;
  
 }
+.serviceContainer:hover{
+  transform: scale(1.1);
+ 
+ }
+ .serviceContainer:hover.serviceContent{
+ border: 1px solid red;
+ }

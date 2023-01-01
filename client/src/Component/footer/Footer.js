@@ -27,7 +27,7 @@ export default function Footer() {
 
                 <div className="footeremail">
                     <div className="footerIcones"> <i className="fas fa-envelope"></i> </div>
-                    <div className="addressText contacttextFooter"> contact@tms-dem.com </div>
+                    <div className="addressText contacttextFooter"> contact@tms-dem.fr </div>
                 </div>
 
 
