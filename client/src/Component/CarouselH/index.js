@@ -1,55 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
+import { test } from './testlist';
+import TesmItem from './TesItem';
+import './testem.css';
+
 const Carous =()=>{
-const testemList=useState[{
-    auteur:"",
-    text:"",
-    stars:5,
-}]
-return(<div>
+const[list,setList]=useState([{
+    auteur:"Marie Claude Grillot",
+    text:"Personnel très compétent et très aimable.Bon rapport qualité de prix",
+    stars:5
+}]);
+const[count,setCount]=useState(0);
+const nextTemoignage=()=>{
+       setList([test[count]])
+        console.log(test[2])
+        setCount(count+1)
+       if(count===(test.length-1)){
+        setCount(0)
+       }
 
-<div className="testimonial">
-                <h2> Ils témoignent</h2>
+}
 
-                <div className="slider">
-                    <div className="controllButton">
-                        <div>
-                            <p> / </p>
-                        </div>
-                    </div>
-                    <div className="sliderContent">
-                     {/*   <div className="stars">
+return(<div className='testimonial'>
+<h2 style={{color:"white"}}> Ils témoignent</h2>
+<div className='wrap_testemonial'>
 
-                            <div> <img src={Trace} /></div>
-                            <div> <img src={Trace} /></div>
-                            <div> <img src={Trace} /></div>
-                            <div> <img src={Trace} /></div>
-                            <div> <img src={Trace} /></div>
+{list?.map((e)=><TesmItem  auteur={e.auteur} text={e.text}
+ stars={e.stars}  key={e.auteur} nextTemoignage={nextTemoignage}/>)}
 
-
-                        </div>
-                       */}
-                        <div className="testimonialName">
-                            <div className="clientName">
-                                <Link to="https://g.co/kgs/S71DQC">Lina Fakhoury</Link>
-                                  </div>
-                        </div>
-                        <div className="testimonialText">
-                            <div>
-                                
-                                 Surprise très positive! Un service rapide, efficace. Je recommande! </div>
-
-                        </div>
-                        
-                    </div>
-
-                    <div className="controllButton">
-                        <div>
-                            <p> / </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<img src='./images/testem11.webp' className='testem_wall'/>
+</div>              
+             
+<h2> <Link to="/soto" style={{color:"white"}}>Je déménage </Link></h2>      
 </div>)
 }
 export default Carous;

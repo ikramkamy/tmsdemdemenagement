@@ -1,13 +1,26 @@
 import React, { useState,useEffect } from 'react';
 import  './carton.css';
-import {FaArrowDown,FaPlus, FaTrash} from 'react-icons/fa';
+import {FaArrowDown,FaArrowUp,FaPlus, FaTrash, FaUps} from 'react-icons/fa';
 import useForceUpdate from 'use-force-update';
 
 const Cubage=(props)=>{
 const{showVolum}=props;
 const {handelCubage}=props;
 const [i,setI]=useState("0");
-const [room,setRoom]=useState([]);
+const [room,setRoom]=useState([{
+  name:"Salon",
+  tab:[],
+  id:""
+},{
+  name:"Cuisine",
+  tab:[],
+  id:""
+},
+{
+  name:"Chambre",
+  tab:[],
+  id:""
+}]);
 const [showRoom,setShowRoom]=useState(false);
 const [room_volum,setRoom_volum]=useState(0)
 const [tableau,setTableau]=useState([]);
@@ -170,17 +183,37 @@ const showDetails =(e)=>{
     
   }
 }
+var options = [
+  { value: 'one', label: 'One' },
+  { value: 'two', label: 'Two' }
+];
+
+function logChange(val) {
+  console.log('Selected: ', val);
+}
 return(
 <div className="carton">
 <h1 className="cartonGeneralTitle" style={{fontSize:"24px"}}>
 L'inventaire de votre déménagement</h1>
 <div className="wrap-carton-elemnt">
+<div className="Total-carton">
+{/*<div className="img-carton">
+<img src="/images/cubage2.jpg" className="img-carton-size"/>
+      </div>*/}
+
+<div className="tail-volum-result ">
+  Le volume total:
+  </div>
+<h3 style={{fontWeight:"600"}}>{sommevol.toFixed(2)}m<sup>3</sup>
+</h3>
+
+</div>
 <div className="calcul-carton">
 
 <div className="text-carton">
 <div>
 
-<div className="text-fomulaire volumDetails">
+{/*<div className="text-fomulaire volumDetails">
   <p> 
 Listez vos meubles pièce par pièce.
 </p>
@@ -193,40 +226,43 @@ Attention, ne pas oublier de compter le cabanon de
   d'objets posés sur les meubles ou par terre !
 
 </p>
-  </div>
+  </div>*/}
 </div>
 
 
 </div>
-<div className=" btn-add-room  room-btn" 
+<div className=' room-btn'>
+<div className=" btn-add-room" 
  onClick={addtoroom}>
   <FaPlus className="add-object-icon"/> 
-  Ajouter une piéce
+ 
   </div>
   
 <div className="add-box">
 <select className="select-la-piece" name="name" id="select"  value={input.name} onChange={handelroom}>
-                <option value="">Selectionner</option>
+                <option value="">Ajoutez une pièce</option>
                 <option value="🛌 chambre ">Chambre</option>
                 <option value="🏡 Jardin ">Jardin</option>
                 <option value="🛋️ salon ">Salon</option>
                 <option value="🍜 cuisine ">Cuisine</option>
 </select>
 </div>
-<div className="text-fomulaire piecesTitle">
+</div>
+{/*<div className="piecesTitle">
   Les piéces selectionnées :
   </div>
-  {showRoom && ( 
+*/}
   <div className='wrap-under-room'>
 {room?.map((e)=>
 <div className="wrap-room">
 
  <div className="title-wrap-room">
  <div className='room-name'> {e.name}</div>
- <div className='room-name'> {room_volum}</div>
+ <div className='wrap_btns_room'>
+  <div>{room_volum} </div>m3 
    <FaTrash className='delet-room-icon' onClick={()=>remoovRoom(e)}/>
    <FaArrowDown className='delet-room-icon detail-icon' onClick={()=>showDetails(e)}/>
-  
+   </div>
    </div> 
    <div className='msg-cache'>voir plus de détails</div>
    <div id={room.indexOf(e)} className="hide-room-datails">
@@ -291,6 +327,8 @@ Attention, ne pas oublier de compter le cabanon de
                 <option value="carton_Livre 0.75 30">Carton livre</option>
                 <option value="carton_standard 0.1 30">Carton standard</option>
 </select>
+
+
 </div>
 
 
@@ -300,24 +338,38 @@ Attention, ne pas oublier de compter le cabanon de
 
       
   </div>
-      {e.tab?.map((p)=><div className="wrap-btns-cubage-elem">
-      <div className="cubage-item-name" >{p.name}</div>
+      {e.tab?.map((p)=>
+      <div className="wrap-btns-cubage-elem">
+      <div className="cubage-item-name" >
+      <FaTrash className='delet-room-icon' />
+       <div className='nom_de_onject'>{p.name}</div> 
+        </div>
 
 <div  className="wrap-btn-quantie">
-      <button onClick={()=>qminus(p)} className="buttonCOntMinus">
-        -
-       {/* <FaMinus  className="cubage-icon"/>*/}
-      
-      
-      
-      </button>
-      <div className="cubage-quantite">{p.quantite}</div>
+  <div style={{backgroundColor:"lightgray",borderRadius:"5px"}}>
+    
       <button  onClick={()=>qadd(e,p)} className="buttonCOntMinus">
-        +
-        {/*<FaPlus className="cubage-icon"/>*/}
-        
-        
+      ▴
         </button>
+        <button onClick={()=>qminus(p)} className="buttonCOntMinus">
+        ▾
+      </button>
+        </div>
+      <div className="cubage-quantite">{p.quantite}</div>
+  
+</div>
+<div className='romontage_demontage_select'>
+<select className="select-remontage" name="name" id="select" >
+                <option value="">Selectionner</option>
+                <option value="">Non</option>
+                <option value="">Démontage simple</option>
+                <option value="">Démontage/Remontage simple</option>
+                <option value="">Démontage complexe</option>
+                <option value="">Démontage/Remontage complexe</option>
+</select>
+</div>
+<div className='embalage'>
+  <input type="radio"/>
 </div>
   </div>)}
 
@@ -327,22 +379,10 @@ Attention, ne pas oublier de compter le cabanon de
 
 </div>)}
 </div>
-)}
+
 </div>
 
-<div className="Total-carton">
-<div className="img-carton">
-<img src="/images/cubage2.jpg" className="img-carton-size"/>
-</div>
 
-<div className="tail-volum-result ">
-  Le volume total:
-  </div>
-<h3 style={{fontWeight:"600"}}>{sommevol.toFixed(2)}m<sup>3</sup></h3>
-
-{/*<div className="btn-carton">Continue</div>
-<div className="btn-carton" >Retour</div>*/}
-</div>
 </div>
     </div>)
 }

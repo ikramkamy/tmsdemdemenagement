@@ -1,4 +1,6 @@
 import react,{useState,useEffect} from 'react';
+import './contact.css';
+import NavBar from '../navBar/NavBar';
 
 const Contactus=()=>{
 
@@ -6,17 +8,28 @@ const handelcontact=()=>{
     alert("Merci de nous avoir contacter :)")
 }
 
-const [input,setInput]=useState({
-email:"",
-phone:"",
+const [input,setInput]=useState({})
+const handelChange=(e)=>{
 
+setInput({
+email:e.target.value,
+name:e.target.value,
+phone:e.target.value,
+objet:e.target.value,
 })
 
-    return(    <div className="formContactt">
-    <h1>Contactez </h1>
-    <h2> Nous</h2>
-
-
+}
+console.log("succed",input)
+    return(<div className="formContactt">
+        <NavBar/>
+  
+    <h1 style={{color:"#2C216F"}}>Contactez Nous</h1>
+<div className='wrap_contact_form'>
+<div className='wall_contact'>
+    <img src='/images/logo-01.png'/>
+ 
+</div>
+<div className='wrap_form'>
     <div className="formContactContainer">
         <div className="fieldContent">
             <div className="fieldLabelContent">
@@ -24,57 +37,54 @@ phone:"",
             </div>
             <div className="fieldInputContent">
 
-                <form>
-                    <input value={input.email} placeholder="EX: email@gmail.com" name="email"/>
-                    
-                </form>
+        <input  
+                    placeholder="EX: email@gmail.com"
+                    value={input.email}
+                    onChange={((e)=>handelChange(e))} 
+                    name="email" className='Contact_page_input'/>
 
             </div>
         </div>
+        <div className="fieldContent">
+            <div className="fieldLabelContent">
+                <label> Nom et Prénom</label>
+            </div>
+            <div className="fieldInputContent">
 
+               
+<input   placeholder="Nom et Prénom" name="name" 
+onChange={handelChange}
+className='Contact_page_input'/>
+                    
+                
+
+            </div>
+        </div>
         <div className="fieldContent">
             <div className="fieldLabelContent">
                 <label> Télèphone </label>
             </div>
             <div className="fieldInputContent">
-
-                <form>
-                    <input value={input.phone} name="phone" placeholder="EX :+33632225599" />
-                </form>
+<input  name="phone" 
+placeholder="Ex :+33632225599"
+onChange={handelChange}
+className='Contact_page_input'/>
+              
 
             </div>
         </div>
-
 
         <div className="fieldContent">
             <div className="fieldLabelContent">
-                <label> Objet </label>
-            </div>
-            <div className="fieldInputContent">
-
-                <form>
-                    <input />
-                </form>
-
-            </div>
-        </div>
-
-
-        <div className="fieldContent">
-            <div className="fieldLabelContent messageLabel">
-                <label className="messageLabel"> Message </label>
-            </div>
-            <div className="fieldInputContent textFieldContent">
-
-                <form>
-                    <textarea />
-                </form>
-            </div>
-        </div>
-
-
-
-
+                <label>Objet </label>
+                <div className='fieldInputContent'>
+                <input  name="objet" onChange={((e)=>handelChange)}
+placeholder="Déménagement économique" 
+className='Contact_page_input'/>
+</div>
+            </div> </div>
+       
+       
     </div>
 
     <div className="sendButton">
@@ -83,6 +93,9 @@ phone:"",
         <button onClick={handelcontact}> Envoyer</button>
 
         </div>
+    </div>
+    </div>
+   
     </div>
 </div>)
 }

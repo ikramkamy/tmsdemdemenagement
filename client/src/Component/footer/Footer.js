@@ -10,7 +10,10 @@ export default function Footer() {
             <div className="footerleft">
 
 <div  className="tmsdemlogo"> 
-<img src={LogoTMSDEM} />
+
+<iframe 
+src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10509.6394254878!2d2.5301712!3d48.8122409!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe002b9238fd0c503!2sTMS%20DEM!5e0!3m2!1sen!2sdz!4v1672723548789!5m2!1sen!2sdz" 
+ allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className='map_footer'></iframe>
 </div>
 
 

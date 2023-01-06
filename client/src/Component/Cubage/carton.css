@@ -36,14 +36,16 @@ overflow: hidden;
 }
 .calcul-carton{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
     width: 100%;
-    padding: 10px;
+    /*padding: 10px;*/
 }
 .wrap-carton-elemnt{
     display: flex;
-  
+    flex-direction: column;
+  position: relative;
+  height: 110vh;
 }
 .img-carton-size{
     height: 200px;
@@ -75,7 +77,6 @@ font-size: 1.5em;
 }
 .Total-carton{
     background-color: rgb(243,243,243);
-   /* border: 1px solid #e3e3e3;*/
     border-radius: 5px 5px 5px 5px;
     width: 300px;
     height: fit-content;
@@ -153,14 +154,18 @@ width: 80%;
     align-items: center;
     margin-bottom: 25px;
     background-color:rgb(243,243,243); 
-    border: 1px solid red;
+    
 }
 .select-inter-piéce{
 width: 80%;
 margin-bottom: 10px;
 }
 .add-box{
-height: auto;
+height: 100%;
+z-index: 10;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 .icon-colum-item{
   color: #2c216f;  
@@ -177,7 +182,7 @@ height: auto;
 .select-la-piece{
     width: 80%;
     height: 45px;
-  
+    margin-bottom: 0px;
     margin-left: 18px;
 }
 
@@ -188,6 +193,10 @@ height: auto;
     margin-top: 30px;
     margin-left: 18px;
 }
+.piecesTitle{
+    margin-bottom: 25%;
+    
+}
 /***************************ROOM STYLING********************/
 
 /****************************ROOM STYLE*******************************/
@@ -197,9 +206,9 @@ height: auto;
     justify-content: space-between;
     margin-bottom: 30px;
     border: 1px solid lightgray;
-    padding: 20px;
+    background-color: white;
     margin-top: 20px;
-    margin-left: 18px;
+    
 
 }
 .wrap-elems-room{
@@ -216,9 +225,20 @@ height: auto;
     justify-content: center;
 }
 .title-wrap-room{
-    width: 90%;
+    width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: black;
+    background-color: lightgray;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 3px;
+}
+.wrap_btns_room{
+    display: flex;
+    width: 25%;
 }
 .btns-wrap-room{
     display: flex;
@@ -230,19 +250,23 @@ height: auto;
 .wrap-btns-cubage-elem{
     border-bottom: 1px solid #2c216f;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 3px;
 }
+.nom_de_onject{
+    margin-left: 15px;
+}
 .btn-add-room{
-    width: 180px;
+    width: 50px;
+    height: 50px;
     margin-bottom: 5px;
     margin-top: 15px;
     height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 50%;
     cursor: pointer;
     background-color: #2C216F;
     color: white;
@@ -257,7 +281,10 @@ height: auto;
    box-shadow: 2px 2px lightgray;
 }
 .room-btn{
-    /*width: 40%;*/
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .add-object-icon{
     width: 20px;
@@ -304,14 +331,15 @@ align-items: center;
     justify-content: flex-start;
     align-items: center;
     height: 50px;
-    border: 1px hidden red;
+    border: 1px solid purple;
 }
 .cubage-quantite{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3em;
-    width: 65%;
+    font-size: 1.2em;
+    width: 70%;
+    border: 1px solid red;
 }
 
 .tail-volum-result{
@@ -322,16 +350,15 @@ background-color: none;
 }
 .buttonCOntMinus{
     border: 1px solid black;
-    height: 50px;
-    width: 30px;
-    font-size: 2em;
+     width: 30px;
+    font-size: 1.1em;
     color: #2C216F;
 }
 .wrap-btn-quantie{
-    border: 1px hidden red;
+    border: 1px solid red;
     display: flex;
     justify-content: space-between;
-    width: 35%;
+    width: 15%;
    
 }
 @keyframes showdetails {
@@ -372,6 +399,15 @@ background-color: none;
     border: 1px solid lightgray;
     max-height: 300px;
     min-height: 0px;
+    width: 100%;
     overflow: scroll;
     overflow-x: hidden!important;
+    bottom: 0px;
+}
+.select-remontage{
+    height: 25px;
+    width: 100%;
+}
+.romontage_demontage_select{
+    width: 30%;
 }

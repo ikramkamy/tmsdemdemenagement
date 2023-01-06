@@ -4,10 +4,10 @@ import './App.css';
 import { BrowserRouter as Router,Switch, Route} from "react-router-dom";
 import Formulefinale from './Component/Formulaire/Formule';
 import NavFomule from './Component/navFomule';
-import Home from './Component/Home';
+import Home from './Component/Home/Home'
 import NavBar from './Component/navBar/NavBar';
-import Presentation from './Component/Presentation';
-import Service from './Component/Service';
+import Presentation from './Component/Presentation/Presentation';
+import Service from './Component/Services/Service';
 import Footer from './Component/footer/Footer';
 import Contactus from './Component/Contact';
 import Pdfinvent from './Component/Pdfinventaire';
@@ -16,39 +16,13 @@ import Comp from '../src/images/Comp 1.gif'
 import Ecommerceall from './Component/Ecommerce/Ecommerceall';
 import Signin from './Component/Signin';
 import Admin from './Component/admin';
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
+import Stock from './Component/Stock';
+import Tranquille from './Component/Tranquille';
 function App() {
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyA1vGW5SKhAyvJSXTBEjsIk4VKvRBCS2io",
-  authDomain: "tmsdem-520a9.firebaseapp.com",
-  projectId: "tmsdem-520a9",
-  storageBucket: "tmsdem-520a9.appspot.com",
-  messagingSenderId: "988279726703",
-  appId: "1:988279726703:web:2d701a48554d9348eaa39a",
-  measurementId: "G-5HT1EG4BBQ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-  const [showAlertBox, setShowAlertBox] = useState(false)
-  const showAlert = () => {
-    setShowAlertBox(!showAlertBox)
-  }
-
-
 useEffect(() => {
 
   setTimeout(() => {
-    showAlert() 
+    /*showAlert() */
   },2000);
 }, [])
 
@@ -76,9 +50,7 @@ useEffect(() => {
   className="ecommComponent" 
   Style={{border : "1px solid red"}} />
   </div>
-{
-
-showAlertBox && <div className="alertBoxBoutique">
+{/*showAlertBox && <div className="alertBoxBoutique">
   <div className="alertBoxBoutiqueContents">
     <div className="closeButtonAlertBox" onClick={() => setShowAlertBox(false)}> X </div>
     <div>  <h4> Vous envisagez de déménager ? </h4></div>
@@ -96,7 +68,7 @@ showAlertBox && <div className="alertBoxBoutique">
     </div>
     </div>
 
-}
+  */}
   </div>
 <Footer/>
 
@@ -106,7 +78,8 @@ showAlertBox && <div className="alertBoxBoutique">
    <Route exact path="/soto"><NavFomule/><Formulefinale/></Route>
 <Route exact path="/chrono"><NavFomule/><Chrono/></Route>
 <Route exact path="/presentation" ><Presentation/></Route>
-
+<Route exact path="/tranquille"><Tranquille/></Route>
+<Route exact path="/stock"><Stock/></Route>
 <Route exact path="/contact"><Contactus/><Footer/></Route>
 <Route   exact path="/signin"     component={Signin}/>
 <Route exact path="/pdf"><Pdfinvent/></Route>

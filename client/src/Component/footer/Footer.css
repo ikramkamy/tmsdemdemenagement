@@ -96,6 +96,12 @@ margin-top: 5px;
 .footeremail .contacttextFooter, .footerclientservice .clientSAVFooter{
     width: auto;
 }
+.map_footer{
+    width:600px;
+     height:100%;
+      
+}
+
 
 @media screen and (max-width : 772px) {
     .fas{

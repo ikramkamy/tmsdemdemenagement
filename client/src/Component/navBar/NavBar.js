@@ -53,14 +53,6 @@ export default function NavBar() {
 <div className="item"><Link to="/services"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Nos services</Link>  </div>
 <div className="item"><Link to="/boutique"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Boutique</Link> </div>
 <div className="item"><Link to="/contact"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Contact</Link>  </div>
-<div className="btn-devis">
-
-</div>
-
-<div className="itemContainerInfo"> 
-<div className="item emailAdress">   contact@tms-dem.com </div>
-<div className="item gps">   GPS </div>
-</div>
    </div>
 
 }

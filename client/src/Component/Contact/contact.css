@@ -1,0 +1,172 @@
+/*  Form  */
+
+
+.formContactt{
+    border: 1px hidden black;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+.formContactt h1{
+   border: 1px hidden black;
+    width: 100%;
+    text-align: center;
+overflow: hidden;
+}
+.formContactt h2{
+    border: 1px hidden black;
+    width: 100%;
+    color: #2C216F;
+    text-align: center;
+ 
+}
+.formContactt h1{
+ margin-bottom: 30px;
+}
+
+.formContactContainer{
+  
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    justify-content:center;
+    
+  
+}
+.wrap_contact_form{
+  
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+   
+
+}
+.wrap_form{
+    background-color: #2C216F;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px;
+  height: 90%;
+}
+.wall_contact{
+    width: 40%;
+    height:90%;
+    background-image: url('/public/images/contact3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+}
+.fieldContent{
+    
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+   
+}
+
+
+.fieldLabelContent{
+  
+    height: auto;
+    width: 70%;
+    color: white;
+    
+}
+
+.fieldLabelContent label {
+     text-align: left;
+     border: 1px hidden black;
+}
+
+
+
+.fieldInputContent{
+    border: 1px hidden orange;
+    height: auto;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+}
+
+
+
+.fieldInputContent input { 
+    border: 1px hidden black;
+    height: 50px;
+    width: 100%;
+    border-bottom:1px solid white;
+    background-color: #2C216F;
+   
+} 
+
+.messageLabel{
+    height: 300px; 
+    overflow: hidden;
+}
+
+
+.fieldInputContent.textFieldContent textarea {
+    width: 700px;
+    height: 300px;
+    border-radius: 30px;
+    border: 1px solid #2C216F;
+}
+
+
+.sendButton{
+    border: 1px hidden black;
+    width: 100%;
+   margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.sendCotent{
+  
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+   
+}
+
+.sendButton button {
+    border: 1px hidden black;
+    height: 50px;
+    width: 130px;
+    font-size: 1.45em;
+    border-radius: 50px;
+    background-color: #ED1C24;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Contact_page_input{
+    border-radius: 0%;
+    color: lightgrey;
+}
+
+

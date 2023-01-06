@@ -1,0 +1,12 @@
+.autre_formules{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.autre_formules h1 ,h3{
+    width: 90%;
+    text-align: center;
+    color: #2C216F;
+}
