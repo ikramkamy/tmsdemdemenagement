@@ -41,15 +41,10 @@ useEffect(() => {
 <Route  path="/admin"    component={Admin}  />
 
   <Route  path="/boutique">
-  <NavBar/>
-  <div className="originalBoutiquePage"> 
-  <div className="originalBoutiqueContainer"> 
-
-  <h1 className="boutTitle"> Notre Boutique </h1>
   <Ecommerceall sendPrixcarton={sendPrixcarton}  
   className="ecommComponent" 
   Style={{border : "1px solid red"}} />
-  </div>
+ 
 {/*showAlertBox && <div className="alertBoxBoutique">
   <div className="alertBoxBoutiqueContents">
     <div className="closeButtonAlertBox" onClick={() => setShowAlertBox(false)}> X </div>
@@ -69,8 +64,8 @@ useEffect(() => {
     </div>
 
   */}
-  </div>
-<Footer/>
+ 
+
 
    </Route>
 

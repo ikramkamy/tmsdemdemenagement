@@ -93,10 +93,37 @@ color: #2C216F;
   }
   .formules_services{
     width: 80%;
-    height: 50px;
-    border: 1px solid rebeccapurple;
+    height: 90vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-  }
+}
+.fromule_item_style{
+background-color: #ED1C24;
+    width: 70%;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: white;
+    font-size: larger;
+}
+.wrap_formule_item{
+    border: 1px solid #2C216F;
+    width: 20%;
+    padding: 5px;
+    min-height: 300px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    color: #2C216F;
+    align-items: center;
+    box-shadow: 5px 5px;
+}
+.wrap_formule_item:hover{
+    transform: translateY(-5%);
+}
+.formule_item_text li{
+padding-left: 0px;
+}

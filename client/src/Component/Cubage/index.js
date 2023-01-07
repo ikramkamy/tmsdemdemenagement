@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import  './carton.css';
-import {FaArrowDown,FaArrowUp,FaPlus, FaTrash, FaUps} from 'react-icons/fa';
+import {FaArrowDown,FaEye,FaPlus, FaTrash} from 'react-icons/fa';
 import useForceUpdate from 'use-force-update';
-
+import { Comment_details,Comment_details2,Comment_details3 ,Comment_details4 , Comment_details5,Comment_Objet_Dialoguebox} from '../Comments';
 const Cubage=(props)=>{
 const{showVolum}=props;
 const {handelCubage}=props;
@@ -10,15 +10,18 @@ const [i,setI]=useState("0");
 const [room,setRoom]=useState([{
   name:"Salon",
   tab:[],
+  vol_room:0,
   id:""
 },{
   name:"Cuisine",
   tab:[],
+  vol_room:0,
   id:""
 },
 {
   name:"Chambre",
   tab:[],
+  vol_room:0,
   id:""
 }]);
 const [showRoom,setShowRoom]=useState(false);
@@ -68,8 +71,15 @@ const addtoroom=()=>{
     input.name=""
   }
 }
+/******************************Supprimer une chambre et soustraire son volume*************************** */
+const [volum_chambre,setVolum_chambre]=useState(0)
 const remoovRoom=(e)=>{
 alert('êtes-vous sûr de vouloir supprimer cette piéce?')
+console.log("c'est la liste des object la chambre",e.tab)
+var volume_chambre=0;
+e.tab.map((ob)=>volume_chambre=volume_chambre+Number(ob.volume)*ob.quantite)
+console.log('le volume de la chambre',volume_chambre)
+setVolum_chambre(volume_chambre);
 const i = room.indexOf(e)
 room.splice(i,1)
 console.log('room',room)
@@ -82,7 +92,7 @@ forceUpdate()
 }
 //console.log("Room",room);
 const [input2,setInput2]=useState({
-  name:"",
+  name:"Ajouter un objet",
   volume:0,
   prix:0,
   quantite:0
@@ -134,14 +144,27 @@ const addelem=(e)=>{
   }
   /************************************** */
 const qadd=(e,p)=>{
-  p.quantite=Number(p.quantite)+1;
+  var cham_vol=0;
+  /*
+e.tab.forEach(ob => {
+ cham_vol=volum_chambre+Number(ob.volume)*ob.quantite
+ setTimeout(3000)
+});
+*/
+console.log("is the cham valu updated or not?",cham_vol)
+setVolum_chambre(volum_chambre+1)
+
+console.log('le volume de la chambre',volum_chambre)
+e.vol_room=volum_chambre;
+console.log("vol_room e",e.vol_room)
+forceUpdate()
+p.quantite=Number(p.quantite)+1;
   setSommevol(sommevol+Number(p.volume));
   forceUpdate();
 }
 /******remove element cubage */
 const removeItem=(e,p)=>{
-
-  for(let i=0 ; i<room.length;i++){
+for(let i=0 ; i<room.length;i++){
     if(room.indexOf(e)==room.indexOf(room[i])){
     e["tab"].splice(e["tab"].indexOf(p),1);
   }
@@ -153,7 +176,6 @@ useEffect(()=>{
   console.log('le total de mon volume est de',sommevol)
 },[(sommevol)])
 
-//console.log("le volume total",sommevol);
 /************************************ADD MINUS ELEM CUBAGE******************************/
 const [q,setQ]=useState(0);
 const qminus=(p)=>{
@@ -166,11 +188,6 @@ if(p.quantite==0){
   forceUpdate();
 }}
 /*************************************LA SOMME DES VOLUMES*****************************/
-/*
-useEffect(()=>{
- handelCubage(sommevol)
-})
-*/
 const [class_change,setClass_change]=useState('hide-room-datails')
 const [class_elem,setClass_elem]=useState()
 const showDetails =(e)=>{
@@ -183,14 +200,12 @@ const showDetails =(e)=>{
     
   }
 }
-var options = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two' }
-];
-
-function logChange(val) {
-  console.log('Selected: ', val);
+/****************************Ajouter un commentaire sur l'object**********************/
+const [commentBox,setCommentBox]=useState(false);
+const ShowCommentBox=()=>{
+setCommentBox(!commentBox)
 }
+/**************Add the comment to the specific object */
 return(
 <div className="carton">
 <h1 className="cartonGeneralTitle" style={{fontSize:"24px"}}>
@@ -258,18 +273,26 @@ Attention, ne pas oublier de compter le cabanon de
 
  <div className="title-wrap-room">
  <div className='room-name'> {e.name}</div>
+ <div></div> 
  <div className='wrap_btns_room'>
-  <div>{room_volum} </div>m3 
-   <FaTrash className='delet-room-icon' onClick={()=>remoovRoom(e)}/>
-   <FaArrowDown className='delet-room-icon detail-icon' onClick={()=>showDetails(e)}/>
+ 
+   <div className='delet-room-icon supprimer_piece_btn' onClick={()=>remoovRoom(e)}>
+   <Comment_details2 />
+    <FaTrash/>
+   </div>
+   <div className='delet-room-icon detail-icon' onClick={()=>showDetails(e)}>
+    <FaEye/>
+   <Comment_details />
+   </div>
+   
    </div>
    </div> 
    <div className='msg-cache'>voir plus de détails</div>
    <div id={room.indexOf(e)} className="hide-room-datails">
    <div className='wrap-select-object'>
    <div   onClick={()=>addelem(e)} className="btn-add-room btnMApAddRoom btn-ad-ojet">
-     { /*<i className="fas fa-plus"></i>*/}
-     <FaPlus className='add-object-icon '/> Ajouter un objet
+   <Comment_details3/>
+     <FaPlus className='add-object-icon '/> 
      </div>
 <select name="name" className="select-la-piece" value={input2b.name} onChange={(e)=>handelelem(e)} id="select-objet"  >
                 <option value={input2.name}>{input2.name}</option>
@@ -339,14 +362,14 @@ Attention, ne pas oublier de compter le cabanon de
       
   </div>
       {e.tab?.map((p)=>
-      <div className="wrap-btns-cubage-elem">
+      <div className="wrap-btns-cubage-elem ">
       <div className="cubage-item-name" >
       <FaTrash className='delet-room-icon' />
        <div className='nom_de_onject'>{p.name}</div> 
         </div>
 
 <div  className="wrap-btn-quantie">
-  <div style={{backgroundColor:"lightgray",borderRadius:"5px"}}>
+  <div className='up_down_btn'>
     
       <button  onClick={()=>qadd(e,p)} className="buttonCOntMinus">
       ▴
@@ -368,8 +391,13 @@ Attention, ne pas oublier de compter le cabanon de
                 <option value="">Démontage/Remontage complexe</option>
 </select>
 </div>
+
 <div className='embalage'>
-  <input type="radio"/>
+  <input type="radio" className='input_radio_embalage'/>
+  <Comment_details5/>
+</div>
+<div className='icon_chat' onClick={ShowCommentBox}><img src='/images/icones/chat.png'/>
+<Comment_details4/>
 </div>
   </div>)}
 
@@ -384,6 +412,8 @@ Attention, ne pas oublier de compter le cabanon de
 
 
 </div>
+{commentBox && <Comment_Objet_Dialoguebox  closeDialogueBox={ShowCommentBox}/>}
+
     </div>)
 }
 export default Cubage;

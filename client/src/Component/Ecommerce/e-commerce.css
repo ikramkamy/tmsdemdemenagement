@@ -7,7 +7,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px hidden red;
+    background-color: #f3f3f3;
+}
+.wrap_shoping_area{
+    width: 80%;
+    background-color: white;
+}
+.boutTitle{
+    width: 80%;
+    background-color: white;
+    text-align: center;
+    color: #2c216f;
+    font-size: 25px;
 }
 .carton-cathegorie-bloc{
     display: flex;

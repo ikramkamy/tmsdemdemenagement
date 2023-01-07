@@ -3,14 +3,9 @@ import NavBar from '../navBar/NavBar';
 import Footer from '../footer/Footer';
 import './tranquille.css';
 import Select from 'react-select';
-import AsyncSelect from 'react-select/async';
+import { OptionList } from './OptionList';
+import CreatableSelect from 'react-select/creatable';
 const Tranquille=()=>{
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
-      
       function logChange(val) {
         console.log('Selected: ', val);
       }
@@ -23,8 +18,8 @@ const Tranquille=()=>{
          className="basic-single"
          classNamePrefix="select"
          name="color"
-        options={options}/>
-       
+        options={OptionList}/>
+   <CreatableSelect isClearable options={OptionList} />    
            
 <Footer/>
     </div>)

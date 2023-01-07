@@ -1,0 +1,62 @@
+.comment ,.comment2 , .comment3, .comment4 , .comment5{
+    font-size: 10px;
+    color:#2c216f;
+    background-color: white;
+    width: fit-content;
+    right: 0px;
+    display: none;
+   text-align: center;
+   border-radius: 5px;
+  
+}
+.detail-icon{
+ 
+    width: 50%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrap_btns_room{
+    position: relative;   
+}
+.detail-icon:hover .comment{
+    display: block;
+   position: absolute;
+   bottom: 0px;
+}
+.supprimer_piece_btn:hover .comment2{
+    display: block;
+    position: absolute;
+    bottom: 0px; 
+    right: 20%;  
+}
+.btn-ad-ojet:hover .comment3{
+    display: block;
+    position: absolute;
+    bottom: 0px; 
+    left: 0px;   
+    bottom: 0px; 
+}
+.wrap-select-object{
+    position: relative;
+    height: 70px;
+    display: flex;
+   
+}
+.wrap-btns-cubage-elem{
+    background-color: lightgray;
+    position: relative;
+}
+.icon_chat:hover .comment4{
+    display: block;
+    position: absolute;
+    bottom: 0px; 
+}
+.embalage:hover .comment5{
+    display: block;
+    position: absolute;
+
+   bottom: 0px;
+
+}

@@ -3,7 +3,7 @@ import './Footer.css'
 import Phone from '../../images/Groupe 136.png'
 import SAV from '../../images/Groupe 138.png'
 import LogoTMSDEM from '../../images/tmsdemfooterlogo.png'
-
+import {FaFacebook,FaLinkedin,FaInstagram,FaTwitter} from 'react-icons/fa';
 export default function Footer() {
     return (
         <div className="footer">
@@ -38,6 +38,16 @@ src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10509.6394254878!2d2.5
                     <div className="footerIcones"> <img src={SAV} className="sav" /> </div>
                     <div className="addressText clientSAVFooter"> Service client 7j/7</div>
                 </div>
+                
+                <div className='social_media_footer'>
+<a href='https://www.facebook.com/profile.php?id=100078029094599'><FaFacebook className='footer_social_icon'/></a>
+<a href='https://www.linkedin.com/company/tmsdem/'><FaLinkedin className='footer_social_icon'/></a>
+<a href='https://www.instagram.com/tmsdem/?igshid=YmMyMTA2M2Y%3D'><FaInstagram className='footer_social_icon'/></a>
+<a href='https://twitter.com/TmsDem94?t=MFoVzgOOm7herA-_ND8PJw&s=09'><FaTwitter className='footer_social_icon'/></a>
+
+    </div>
+
+
 
             </div>
        

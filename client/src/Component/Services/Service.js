@@ -4,7 +4,7 @@ import Footer from '../footer/Footer';
 import {Link} from 'react-router-dom'
 import NavBar from '../navBar/NavBar';
 import './service_style.css';
-import {FaArrowAltCircleUp, FaArrowLeft, FaArrowRight, FaArrowsAlt} from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight} from 'react-icons/fa';
 export default function Service() {
     return (
         <div className="">
@@ -37,8 +37,8 @@ export default function Service() {
         Nous assurons l'emballage des meubles soigneusement </p>
     </div>  
     <div className='image_text_service'>
-    <p>Vos meubles sont précieux?<br/>
-        Nous assurons l'emballage des meubles soigneusement </p><FaArrowRight  className='icon_service'/>
+    <p>Vous cherchez une formule économique ou une prise en charche totale?<br/>
+        On vous propose plusieurs <a href='#formules'>formules</a>  </p><FaArrowRight  className='icon_service'/>
         <img src='/images/wall5.jpg' className='img_service_wall'/>
     </div>
     <div className='image_text_service'>
@@ -55,66 +55,59 @@ export default function Service() {
         <img src='/images/hometms.jpg' className='img_service_wall'/>
         
     </div> 
-    <h3 className=''>
+    <h3 className='' id="formules">
      Choisissez l'une de ces formules</h3>
      <div className='formules_services'>
-        <div><Link to="/chrono">Chrono</Link></div>
-        <div><Link to="/tranquille">Tranquille</Link></div>
-        <div><Link to="/stock">Stock</Link></div>
-        <div><Link to="/soto">Soto</Link></div>
-     </div>
-     </div>
-
-<div className="monteMeubleContainer">
-
-<div className="monteMeubleText">
-<h1> Monte-meuble</h1>
-<div className="monteMeubleTextDescription">
-<p>
-
-
-
-À cause du poids ou des  dimensions de certains meubles,
-nous utilisons un monte meuble qui facilite le transport de ses derniers vers la navette, sans avoir à passer  par l’escalier ni par l’ascenseur.
-
-Notre équipe est hautement qualifiée pour mener l’opération de levage en toute sécurité  afin d’éviter tous risques de chute.
-
-Vous pouvez toutefois louer nos  monte-meubles dans le cas d’un usage personnel.
-
-</p>
-
-</div>
-</div>
-
-<div className="monteMeubleImg">
-image here
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-            <div className="actionContainer">
-                <div className="actionContainerItem">
-                    <h1> Je déménage</h1>
-                </div>
-                <div className="actionContainerItem">
-                    <h2> mais j'ai besoin de cartons</h2>
-                </div>
-                <div className="actionContainerItem buttonShop">
-
-               
-                    <button ><Link to="/e-commerce">SHOP</Link> </button>
+        <div className='wrap_formule_item'>
+        <Link className='fromule_item_style' to="/chrono">Chrono</Link>
+        <div className='formule_item_text'>Chrono vous permet de louer:
+            <ul>
+                <li><img src="/images/icones/check-mark.png"/>Un camion </li>
+                <li><img src="/images/icones/check-mark.png"/>Un monte-meuble</li>
                 
-                </div>
+            </ul>
+            ou bien demadez l'aide d'une ou plusieurs personnes
+        </div>
+        </div>
+        <div  className='wrap_formule_item'>
+            <Link   className='fromule_item_style' to="/tranquille">Tranquille</Link>
+            <div className='formule_item_text'>TMSDEM vous propose un démégement complet:
+            <ul>
+                <li><img src="/images/icones/check-mark.png"/>Une équipe sera mobilisée</li>
+                <li><img src="/images/icones/check-mark.png"/>Prise en charge totale du déménagement </li>
+                
+            </ul>
+         
+        </div>
             </div>
+        <div className='wrap_formule_item'>
+            <Link  className='fromule_item_style'  to="/stock">Stock</Link>
+            <div className='formule_item_text'>TMSDEM vous propose un service de stockage:
+            <ul>
+                <li><img src="/images/icones/check-mark.png"/>Découvrez notre formule 'stock'</li>
+                <li><img src="/images/icones/check-mark.png"/> Plusieurs solutions de stockage sont disponibles </li>
+                
+            </ul>
+         
+        </div>
+            </div>
+        <div className='wrap_formule_item'>
+            <Link className='fromule_item_style'  to="/soto">Soto</Link>
+            <div className='formule_item_text'>Personnalisez vous même votre devis:
+            <ul>
+                <li><img src="/images/icones/check-mark.png"/>Précisez tout les détails 
+                de votre déménagement</li>
+                <li><img src="/images/icones/check-mark.png"/>Imprimez votre devis</li>
+                
+            </ul>
+         
+        </div>
+            
+            </div>
+     </div>
+     </div>
+
+
 
             <Footer />
         </div>

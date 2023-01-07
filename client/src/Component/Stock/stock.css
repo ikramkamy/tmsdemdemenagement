@@ -1,5 +1,6 @@
 .autre_formules{
     width: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,3 +11,45 @@
     text-align: center;
     color: #2C216F;
 }
+.css-1f43avz-a11yText-A11yText{
+   
+    /*position:inherit;*/
+}
+.css-1f43avz-a11yText-A11yText{
+height: 10vh;
+background-color: #2C216F;
+}
+.react-select-3-listbox{
+    height: 500px;
+}
+.css-13cymwt-control{
+
+}
+.css-b62m3t-container{
+    /*border: 1px solid rebeccapurple;*/
+    border: 4px solid salmon;
+   
+}
+.select__control{
+    
+}
+.select__menu{
+
+}
+.css-1nmdiq5-menu{
+ 
+    height: 50vh;
+    z-index: 99999999999;
+    position: absolute;
+    max-height: max-content;
+    top: 0px;
+
+}
+.basic-single{
+    width: 50%;
+    position: static;
+    
+   }
+   .select_menu{
+   
+   }

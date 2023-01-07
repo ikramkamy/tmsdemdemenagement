@@ -38,6 +38,7 @@ overflow: hidden;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     /*padding: 10px;*/
 }
@@ -162,6 +163,7 @@ margin-bottom: 10px;
 }
 .add-box{
 height: 100%;
+width: 90%;
 z-index: 10;
 display: flex;
 justify-content: center;
@@ -180,10 +182,10 @@ align-items: center;
     margin-top: 10px;
 }
 .select-la-piece{
-    width: 80%;
-    height: 45px;
+    width: 100%;
+    height: 30px;
     margin-bottom: 0px;
-    margin-left: 18px;
+   
 }
 
 
@@ -205,7 +207,7 @@ align-items: center;
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 30px;
-    border: 1px solid lightgray;
+    border-bottom: 2px solid #2c216f;
     background-color: white;
     margin-top: 20px;
     
@@ -238,7 +240,10 @@ align-items: center;
 }
 .wrap_btns_room{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 25%;
+    
 }
 .btns-wrap-room{
     display: flex;
@@ -248,29 +253,28 @@ align-items: center;
 
 }
 .wrap-btns-cubage-elem{
-    border-bottom: 1px solid #2c216f;
+    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3px;
 }
 .nom_de_onject{
-    margin-left: 15px;
+   margin-left: 5px; 
+   font-weight: bold;
+   color: #2C216F;
 }
 .btn-add-room{
-    width: 50px;
-    height: 50px;
-    margin-bottom: 5px;
-    margin-top: 15px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: 5px;
     cursor: pointer;
     background-color: #2C216F;
     color: white;
-    font-size: 12px;
+    
     /*j'ai chancger ici parce que ça a cause un scroll*/
 }
 .btn-ad-ojet{
@@ -281,14 +285,15 @@ align-items: center;
    box-shadow: 2px 2px lightgray;
 }
 .room-btn{
-    
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    width: 90%;
+    
 }
 .add-object-icon{
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     margin-left: 5px;
     margin-right: 5px;
     color: white;
@@ -298,12 +303,15 @@ align-items: center;
 }
 .wrap-select-object{
 width: 100%;
+
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 /**************delet rooom icin***********************************/
 .delet-room-icon{
     color:#ed1c24;
-    margin-left: 25%;
     cursor: pointer;
 }
 .fas.fa-plus {
@@ -330,8 +338,8 @@ align-items: center;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 50px;
-    border: 1px solid purple;
+    height: 30px;
+    
 }
 .cubage-quantite{
     display: flex;
@@ -339,7 +347,7 @@ align-items: center;
     align-items: center;
     font-size: 1.2em;
     width: 70%;
-    border: 1px solid red;
+   
 }
 
 .tail-volum-result{
@@ -354,8 +362,14 @@ background-color: none;
     font-size: 1.1em;
     color: #2C216F;
 }
+.up_down_btn{
+   background-color:lightgray;
+   border-radius:5px;
+   border: 1px solid #2C216F;
+}
 .wrap-btn-quantie{
-    border: 1px solid red;
+    border: 1px solid lightgray;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     width: 15%;
@@ -374,7 +388,7 @@ background-color: none;
     width: 100%;
     animation: showdetails;
     animation-duration: 1.25s;
- 
+    margin-bottom: 10px;
 }
 .hide-room-datails{
     border: 1px solid purple;
@@ -397,9 +411,10 @@ background-color: none;
 
 .wrap-under-room{
     border: 1px solid lightgray;
+    margin-top: 30px;
     max-height: 300px;
     min-height: 0px;
-    width: 100%;
+    width: 90%;
     overflow: scroll;
     overflow-x: hidden!important;
     bottom: 0px;
@@ -410,4 +425,26 @@ background-color: none;
 }
 .romontage_demontage_select{
     width: 30%;
+   
 }
+.romontage_demontage_select select{
+    width: 100%;
+}
+.select-remontage{
+    width: 100%;
+}
+.embalage{
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input_radio_embalage{
+    margin-bottom: 0px;
+    margin-right: 5px;
+}
+.icon_chat{
+    cursor: pointer;
+}
+

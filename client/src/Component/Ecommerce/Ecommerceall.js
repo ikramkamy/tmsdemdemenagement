@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import  './e-commerce.css';
 import './ecommerceAll.css';
-import { FaArrowCircleLeft, FaLock, FaMinus, FaPlus, FaTrash} from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import {FaMinus, FaPlus} from 'react-icons/fa';
+import NavBar from '../navBar/NavBar';
+import Footer from '../footer/Footer';
 import ItemAll from './ItemwrapAll';
-//import  {MDBInput}  from 'mdbreact';
 import Signin from '../Signin';
 import axios from 'axios';
 const Ecommerceall=(props)=>{
@@ -262,7 +262,13 @@ return(
 
 
 
+<div >
+<NavBar/>
+  
 <div className="wrap-ecommerce">
+  <div className="boutTitle"> Notre Boutique </div>
+ 
+ <div className='wrap_shoping_area'>
 <h1 className="product-titles mrgtop">Pour le non-fragile</h1>
 <h3 className="product-s-titles">Vêtements, livres, ustensiles de cuisine</h3>
 <div className="carton-cathegorie-bloc-all">
@@ -345,8 +351,9 @@ dimmension={e.dimmension} quantite={e.quantite} description={e.description}/>)}<
 
 
 
-    
-    
+  </div>
+  </div>
+  <Footer/>
     </div>)
 }
 export default Ecommerceall;

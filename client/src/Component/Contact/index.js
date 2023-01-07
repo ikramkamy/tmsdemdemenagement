@@ -1,7 +1,7 @@
 import react,{useState,useEffect} from 'react';
 import './contact.css';
 import NavBar from '../navBar/NavBar';
-
+import {FaFacebook,FaLinkedin,FaInstagram,FaTwitter} from 'react-icons/fa';
 const Contactus=()=>{
 
 const handelcontact=()=>{
@@ -96,6 +96,14 @@ className='Contact_page_input'/>
     </div>
     </div>
    
+    </div>
+    <h1 style={{color:"#2C216F",marginTop:"40px"}}>Suivez nous sur les réseaux sociaux </h1>
+    <div className='social_media_contact'>
+<a href='https://www.facebook.com/profile.php?id=100078029094599'><FaFacebook className='social_media_icon'/></a>
+<a href='https://www.linkedin.com/company/tmsdem/'><FaLinkedin className='social_media_icon'/></a>
+<a href='https://www.instagram.com/tmsdem/?igshid=YmMyMTA2M2Y%3D'><FaInstagram className='social_media_icon'/></a>
+<a href='https://twitter.com/TmsDem94?t=MFoVzgOOm7herA-_ND8PJw&s=09'><FaTwitter className='social_media_icon'/></a>
+
     </div>
 </div>)
 }

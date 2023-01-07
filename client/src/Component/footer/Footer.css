@@ -101,8 +101,26 @@ margin-top: 5px;
      height:100%;
       
 }
-
-
+.social_media_footer{
+width: 30%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+margin-left: 4%;
+margin-top: 5px;
+height: 50px;
+}
+.footer_social_icon{
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+.footer_social_icon:hover{
+    width: 28px;
+    height: 28px;
+   
+}
+/******************************************RESPONSIVE DESIGN ***************************************/
 @media screen and (max-width : 772px) {
     .fas{
         margin-left: 10px;
