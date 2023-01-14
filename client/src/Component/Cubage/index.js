@@ -5,8 +5,9 @@ import useForceUpdate from 'use-force-update';
 import { Comment_details,Comment_details2,Comment_details3 ,Comment_details4 , Comment_details5,Comment_Objet_Dialoguebox} from '../Comments';
 const Cubage=(props)=>{
 const{showVolum}=props;
-const {handelCubage}=props;
+const {handelCubage, handelroomList}=props;
 const [i,setI]=useState("0");
+const[sommevol,setSommevol]=useState(0);
 const [room,setRoom]=useState([{
   name:"Salon",
   tab:[],
@@ -28,7 +29,7 @@ const [showRoom,setShowRoom]=useState(false);
 const [room_volum,setRoom_volum]=useState(0)
 const [tableau,setTableau]=useState([]);
 const [control,setControl]=useState(false);
-const[sommevol,setSommevol]=useState(0);
+
 /************************************FORCE UPDATE*************************/
 const forceUpdate = useForceUpdate();
 const handleClick = () => {
@@ -44,17 +45,20 @@ const [input,setInput]=useState({
 const [inputb,setInputb]=useState({
   name:"",
   tab:[],
+  vol_room:0,
   id:""
 })
 const handelroom=(event)=>{
 const n=event.target.value;
  setInput({
 name:n,
-tab:[]
+tab:[],
+vol_room:0
  })
  setInputb({
   name:n,
-  tab:[]
+  tab:[],
+  vol_room:0
    })
    forceUpdate()
 }
@@ -72,17 +76,11 @@ const addtoroom=()=>{
   }
 }
 /******************************Supprimer une chambre et soustraire son volume*************************** */
-const [volum_chambre,setVolum_chambre]=useState(0)
 const remoovRoom=(e)=>{
 alert('êtes-vous sûr de vouloir supprimer cette piéce?')
-console.log("c'est la liste des object la chambre",e.tab)
-var volume_chambre=0;
-e.tab.map((ob)=>volume_chambre=volume_chambre+Number(ob.volume)*ob.quantite)
-console.log('le volume de la chambre',volume_chambre)
-setVolum_chambre(volume_chambre);
+setSommevol(sommevol-e.vol_room)
 const i = room.indexOf(e)
 room.splice(i,1)
-console.log('room',room)
 if(room.length===0){
   console.log('room',room)
   setShowRoom(false)
@@ -94,6 +92,9 @@ forceUpdate()
 const [input2,setInput2]=useState({
   name:"Ajouter un objet",
   volume:0,
+  emballage:'',
+  remontage:"",
+  commentaire:"",
   prix:0,
   quantite:0
 });
@@ -122,7 +123,7 @@ setInput2b({
 })
 forceUpdate()
   }
-//console.log("input",input2)
+
 const addelem=(e)=>{
   if(input2b.name===""){
     alert('Sélectionnez un objet')
@@ -132,7 +133,7 @@ const addelem=(e)=>{
       e["tab"].push(input2)
       input2b.name=""
       forceUpdate();
-      console.log("this is the element",e)
+     
     }
     if(input2b.name!=""){
       input2b.name=""
@@ -144,45 +145,32 @@ const addelem=(e)=>{
   }
   /************************************** */
 const qadd=(e,p)=>{
-  var cham_vol=0;
-  /*
-e.tab.forEach(ob => {
- cham_vol=volum_chambre+Number(ob.volume)*ob.quantite
- setTimeout(3000)
-});
-*/
-console.log("is the cham valu updated or not?",cham_vol)
-setVolum_chambre(volum_chambre+1)
-
-console.log('le volume de la chambre',volum_chambre)
-e.vol_room=volum_chambre;
-console.log("vol_room e",e.vol_room)
-forceUpdate()
-p.quantite=Number(p.quantite)+1;
+  e.vol_room=e.vol_room+Number(p.volume)
+ p.quantite=Number(p.quantite)+1;
   setSommevol(sommevol+Number(p.volume));
   forceUpdate();
 }
 /******remove element cubage */
-const removeItem=(e,p)=>{
-for(let i=0 ; i<room.length;i++){
-    if(room.indexOf(e)==room.indexOf(room[i])){
-    e["tab"].splice(e["tab"].indexOf(p),1);
-  }
-  }
+const removeItem=(p,e)=>{
+  e.vol_room=e.vol_room-Number(p.volume*p.quantite)
+  setSommevol(sommevol-Number(p.volume*p.quantite));
+const i = e.tab.indexOf(p)
+e.tab.splice(i,1)
   forceUpdate();
 }
+/************************just to send the value to the form page  */
 useEffect(()=>{
   handelCubage(sommevol)
-  console.log('le total de mon volume est de',sommevol)
+  handelroomList(room)
 },[(sommevol)])
 
 /************************************ADD MINUS ELEM CUBAGE******************************/
-const [q,setQ]=useState(0);
-const qminus=(p)=>{
+const qminus=(e,p)=>{
 if(p.quantite==0){
   alert("la quantité est nulle")
 }else{
   p.quantite=Number(p.quantite)-1;
+  e.vol_room=e.vol_room-Number(p.volume)
   setSommevol(sommevol-Number(p.volume));
   handelCubage(sommevol)
   forceUpdate();
@@ -204,8 +192,30 @@ const showDetails =(e)=>{
 const [commentBox,setCommentBox]=useState(false);
 const ShowCommentBox=()=>{
 setCommentBox(!commentBox)
+input2.commentaire="";
 }
 /**************Add the comment to the specific object */
+const sendComment_obj=(data)=>{
+  input2.commentaire=data;
+}
+const SaveComment=()=>{
+setCommentBox(!commentBox)
+}
+/****************************************REMONTAGE DEMONTAGE*******************************/
+const [remont,setRemont]=useState(false);
+const handelRemontage=(e)=>{
+  setRemont(e.target.value)
+  input2.remontage=e.target.value;
+
+}
+/*********************************************EMBALLAGE****************************************/
+const[radioEMb,setRadioEMB]=useState(false)
+const handelEmballages=(e)=>{
+  setRadioEMB(!radioEMb)
+if(radioEMb===true){
+  input2.emballage='Non'
+}else if(radioEMb===false){input2.emballage='Oui'}
+}
 return(
 <div className="carton">
 <h1 className="cartonGeneralTitle" style={{fontSize:"24px"}}>
@@ -256,10 +266,10 @@ Attention, ne pas oublier de compter le cabanon de
 <div className="add-box">
 <select className="select-la-piece" name="name" id="select"  value={input.name} onChange={handelroom}>
                 <option value="">Ajoutez une pièce</option>
-                <option value="🛌 chambre ">Chambre</option>
-                <option value="🏡 Jardin ">Jardin</option>
-                <option value="🛋️ salon ">Salon</option>
-                <option value="🍜 cuisine ">Cuisine</option>
+                <option value=" chambre ">Chambre</option>
+                <option value="Jardin ">Jardin</option>
+                <option value=" salon ">Salon</option>
+                <option value="cuisine ">Cuisine</option>
 </select>
 </div>
 </div>
@@ -273,7 +283,7 @@ Attention, ne pas oublier de compter le cabanon de
 
  <div className="title-wrap-room">
  <div className='room-name'> {e.name}</div>
- <div></div> 
+ <div className='room-name'>{e.vol_room.toFixed(2)}m³</div> 
  <div className='wrap_btns_room'>
  
    <div className='delet-room-icon supprimer_piece_btn' onClick={()=>remoovRoom(e)}>
@@ -294,7 +304,8 @@ Attention, ne pas oublier de compter le cabanon de
    <Comment_details3/>
      <FaPlus className='add-object-icon '/> 
      </div>
-<select name="name" className="select-la-piece" value={input2b.name} onChange={(e)=>handelelem(e)} id="select-objet"  >
+<select name="name" className="select-la-piece" value={input2b.name}
+ onChange={(e)=>handelelem(e)} id="select-objet"  >
                 <option value={input2.name}>{input2.name}</option>
                 <option value="table 1.5 30">Table</option>
                 <option value="chaise 0.5 30" >Chaise</option>
@@ -303,7 +314,7 @@ Attention, ne pas oublier de compter le cabanon de
                 <option value="Armoire 1  30">Armoire</option>
                 <option value="Buffet 1  30">Buffet</option>
                 <option value="Bureau 1  30">Bureau</option>
-                <option value="Cabinet vitrage 1  30">Cabinet vitrage</option>
+                <option value="Cabinet_vitrage 1  30">Cabinet vitrage</option>
                 <option value="Canapé_2_palces 1  30">Canapé 2 palces</option>
                 <option value="Canapé_3_palces 1.5  30">Canapé 3 palces</option>
                 <option value="Canapé_d'_angle 3  30">Canapé d'angle</option>
@@ -364,7 +375,7 @@ Attention, ne pas oublier de compter le cabanon de
       {e.tab?.map((p)=>
       <div className="wrap-btns-cubage-elem ">
       <div className="cubage-item-name" >
-      <FaTrash className='delet-room-icon' />
+      <FaTrash className='delet-room-icon' onClick={()=>removeItem(p,e)}/>
        <div className='nom_de_onject'>{p.name}</div> 
         </div>
 
@@ -374,7 +385,7 @@ Attention, ne pas oublier de compter le cabanon de
       <button  onClick={()=>qadd(e,p)} className="buttonCOntMinus">
       ▴
         </button>
-        <button onClick={()=>qminus(p)} className="buttonCOntMinus">
+        <button onClick={()=>qminus(e,p)} className="buttonCOntMinus">
         ▾
       </button>
         </div>
@@ -382,18 +393,21 @@ Attention, ne pas oublier de compter le cabanon de
   
 </div>
 <div className='romontage_demontage_select'>
-<select className="select-remontage" name="name" id="select" >
+<select className="select-remontage" name="name" id="select" 
+value={remont}
+onChange={(e)=>handelRemontage(e)}>
                 <option value="">Selectionner</option>
-                <option value="">Non</option>
-                <option value="">Démontage simple</option>
-                <option value="">Démontage/Remontage simple</option>
-                <option value="">Démontage complexe</option>
-                <option value="">Démontage/Remontage complexe</option>
+                <option value="Non">Non</option>
+                <option value="Démontage simple">Démontage simple</option>
+                <option value="Démontage/Remontage simple">Démontage/Remontage simple</option>
+                <option value="Démontage complexe">Démontage complexe</option>
+                <option value="Démontage/Remontage complexe">Démontage/Remontage complexe</option>
 </select>
 </div>
 
 <div className='embalage'>
-  <input type="radio" className='input_radio_embalage'/>
+  <input type="radio" checked={radioEMb} onChange={()=>setRadioEMB(!radioEMb)} className='input_radio_embalage'
+   onClick={(e)=>handelEmballages(e)}/>
   <Comment_details5/>
 </div>
 <div className='icon_chat' onClick={ShowCommentBox}><img src='/images/icones/chat.png'/>
@@ -412,7 +426,8 @@ Attention, ne pas oublier de compter le cabanon de
 
 
 </div>
-{commentBox && <Comment_Objet_Dialoguebox  closeDialogueBox={ShowCommentBox}/>}
+{commentBox && <Comment_Objet_Dialoguebox  
+closeDialogueBox={ShowCommentBox} sendComment_obj={sendComment_obj} SaveComment={SaveComment}/>}
 
     </div>)
 }

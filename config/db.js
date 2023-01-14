@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-mongoose.connect("mongodb://localhost:27017/tmsdem",{},(err)=>{
+mongoose.connect("mongodb+srv://ikramzerkout:tmsdem@cluster0.ffmb6.mongodb.net/test",{},(err)=>{
 if(err)
 console.log("ERROR IN CONNECTION WITH SERVER IS",err)
 else 

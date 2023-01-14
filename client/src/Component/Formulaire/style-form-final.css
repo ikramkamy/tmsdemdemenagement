@@ -685,6 +685,11 @@ overflow: hidden;
     border-radius: 10px;
 
 }
+.fermer-inventaire{
+    z-index: 20;
+    position: fixed;
+    top: 0px;
+}
 /*****************************************RESPONSIVR*******************************************/
 @media screen and (max-width:1000px) {
     .inter-calcul-item{

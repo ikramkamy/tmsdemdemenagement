@@ -1,10 +1,9 @@
 .signin{
-    width: 40%;
+    width: 70%;
    height: fit-content;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
    background-color: white;
   border: 1px solid black;
 
@@ -15,7 +14,8 @@
    display: flex;
    flex-direction: column;
    justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  
     
 }
 .back-signin{
@@ -26,11 +26,12 @@ background-size: 100%;
 
 }
 .signin-box-wrap{
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 5px;
 
 }
 .signin-title{
@@ -55,10 +56,11 @@ background-size: 100%;
     justify-content:space-between;
     align-items: center;
   font-weight: 300; 
+  margin-top: 30px;
 }
 .form-signin label,input,button{
     font-size: 100%;
-    /*height: 20%;*/
+
     width: 100%;
     display: flex;
     justify-content:flex-start;
@@ -68,40 +70,38 @@ background-size: 100%;
 
 }
 .label-sigin{
-    
+    margin-bottom: 10px;
     width: 100%;
 }
 .btn-signin-wrapper {
 margin-top: 5%;
-width: 60%;
+margin-bottom: 5%;
+width: 100%;
 height: 50%;
 display: flex;
-flex-direction: column;
+
 justify-content: space-between;
 align-items: center;
-
-
 }
 .btn-signin-wrapper button{
     background-color: #2C216F;
-    width: 100%;
-    height: fit-content;
+    width: 50%;
+
     border: none;
-    cursor: pointer;
+    border-radius: 25px;
+    height: 50px;
     color: white;
     text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.btn-signin-wrapper button a:hover{
+.btn-signin-wrapper button:hover{
 
     color: white;
+    background-color: #ED1C24;
 }
-.wrap-signup{
-    width: 100%;
-    height: 100%;
-}
+
 .inscrire{
     cursor: pointer;
     color:#ED1C24;  
@@ -120,7 +120,49 @@ align-items: center;
 .logo-sign{
     width: 200px;
     height: 150px;
-   
+}
+.side_siginbox{
+    width: 50%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2C216F;
+}
+.sentence{
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+    
+}
+@keyframes movelogo{
+    from{
+transform: translateX(0%);
+    }
+    to{
+        transform: translateX(25%);
+    }
+}
+.logo-sign_box{
+animation-name:movelogo;
+animation-duration: 1s;
+animation-direction:alternate;
+ height: 100px;
+ width: 100px;
+
+}
+
+.wrap_logo_s_box{
+    height: 30%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 5px 5px 5px 5px white;
+    
 }
 @media screen  and (max-width :1100px){
     .signin{

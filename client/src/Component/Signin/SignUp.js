@@ -59,7 +59,7 @@ alert("Entrez un email valide SVP !")
     
 return(<div className="signup">
 
-<div className="signin-box-wrap">
+<div className="signup-box-wrap">
 <div className="signup-box">
 <form className="form-signup">
 <label>Nom</label>
@@ -70,11 +70,13 @@ return(<div className="signup">
 <input  type="email"  placeholder="email@gmail.com" onChange={handelChange} value={input.email} name="email"/>
 <label>Télèphone</label>
 <input  type="Number" maxLength="10" placeholder="Numéro de télèphone" onChange={handelChange} value={input.phone} name="phone"/>
-<label>Password</label>
-<input  type="password"  placeholder="password" onChange={handelChange} value={input.password} name="password" />
+<label>Mot de passe</label>
+<input  type="mot de passe"  placeholder="password" onChange={handelChange} value={input.password} name="password" />
 
 <div className="btn-signup-wrapper">
-<div className="signup-btn-wrapper"><Link className="signup-btn"  onClick={handelClick} to="/shop">S'inscrir</Link></div>
+<div className="signup-btn-wrapper">
+  <Link className="signup-btn"  onClick={handelClick} to="/shop">S'inscrire</Link>
+  </div>
 <FaArrowCircleLeft onClick={handelshowBack} style={{color:"#2C216F",cursor:"pointer"}}/>
 </div>
 </form>

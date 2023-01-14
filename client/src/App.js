@@ -42,8 +42,7 @@ useEffect(() => {
 
   <Route  path="/boutique">
   <Ecommerceall sendPrixcarton={sendPrixcarton}  
-  className="ecommComponent" 
-  Style={{border : "1px solid red"}} />
+  className="ecommComponent"/>
  
 {/*showAlertBox && <div className="alertBoxBoutique">
   <div className="alertBoxBoutiqueContents">

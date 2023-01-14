@@ -7,165 +7,29 @@ import Footer from '../footer/Footer';
 import ItemAll from './ItemwrapAll';
 import Signin from '../Signin';
 import axios from 'axios';
+import './cart2.css';
+import { producList, producList2,producList3,producList4 } from './produclist';
 const Ecommerceall=(props)=>{
 const{sendPrixcarton,sendCart}=props;
 const[prixcarton,setPrixcarton]=useState(0);
 const [increment,setIncrement]=useState();
 const [show,setShow]=useState(false);
-const[produit,setProduit]=useState([
-{name:"carton livre",
-prix:"20 £",
-dimmension:"35 x 27,5 x 30 cm",
-quantite:0,
-description:"3 à 4 cartons par mètre linéaire de livres",
-url:"/images/cartonLivre.jpg"
-},
-{
-  url:"/images/cartonstandard.jpg",
-name:"carton standard",
-prix:"20 £",
-dimmension:"55 x 35 x 30 cm",
-quantite:0,
-description:"10 à 20 par pièce"
-},
-
-  ])
-const[produit2,setProduit2]=useState([
-    {
-      url:"/images/cartonstandard.jpg",
-      name:"Carton renforcéCarton renforcé",
-    prix:"20 £",
-    dimmension:"55 x 35 x 30 cm",
-    quantite:0,
-    description:"3 à 5 par pièce"
-    },
-    {
-url:"/images/cartongrand.jpg",
-name:"Grand carton fragile ultra renforcé",
-prix:"20 £",
-dimmension:"45 cm x 45 cm x 56,5 cm",
-quantite:0,
-description:""
-},
-{
-url:"/images/cartonverre.jpg",
-name:"Carton 24 verres",
-prix:"20 £",
-dimmension:"35 × 34 × 27 cm",
-quantite:0,
-description:"Pour 24 verres. Accepte les verres d'un diamètre maximum 7.6 cm et d'une Hauteur maximum 14,4 cm"
-},
-{
-url:"/images/cartonultraverre.jpg",
-name:"Carton ultra renforcé 75 verres",
-prix:"20 £",
-dimmension:"45 cm x 45 cm x 56,5 cm",
-quantite:0,
-description:""
-},
-{
-url:"/images/cartonbouteille.jpg",
-name:"Carton bouteilles",
-prix:"20 £",
-dimmension:"35 x 34 x 27 cm",
-quantite:0,
-description:"Pour 12 bouteilles. Toutes sortes de bouteilles respectant un diamètre inférieur à 8,6 cm pour une hauteur maximum de 28 cm"
-},
-{
-url:"/images/cartonassiettes.jpg",
-name:" Carton assiettes",
-prix:"20 £",
-dimmension:" 35 × 34 × 27 cm",
-quantite:0,
-description:"Pour 9 assiettes. Ce croisillon en carton accepte toutes les assiettes d'un diamètre de 28 cm maximum et de 3.2 cm d’épaisseur"
-},
-{
-url:"/images/papierbull.jpg",
-name:"Papier bulle",
-prix:"20 £",
-dimmension:"Rouleau de 10 m",
-quantite:0,
-description:""
-},
-{
-url:"/images/bullcraft.jpg",
-name:"Bullkraft",
-prix:"20 £",
-dimmension:" 1,25 m x L 10 m",
-quantite:0,
-description:""
-},
-  ]);
-  
-const[produit3,setProduit3]=useState([
-    {
-    url:"/images/cartonpandri.jpg",
-    name:"Carton penderie",
-    prix:"20 £",
-    dimmension:"  1m linéaire de vêtements sur cintres = 2 cartons",
-    quantite:0,
-    description:""
-    },
-
-  ])
-const[produit4,setProduit4]=useState([
-  {
-  url:"/images/rouloadhesif.jpg",
-  name:"Rouleau adhésif",
-  prix:"20 £",
-  dimmension:"(1 pour 20 cartons).",
-  quantite:0,
-  description:""
-  },
-  {
-  url:"/images/divider.jpg",
-  name:"Dévidoir Pistolet pour adhésif",
-  prix:"20 £",
-  dimmension:"",
-  quantite:0,
-  description:""
-  },
-  {
-    url:"/images/hous.jpg",
-  name:" Housse de matelas",
-  prix:"20 £",
-  dimmension:"2,30 m de long, 2 m de large et 22 cm de haut",
-  quantite:0,
-  description:""
-  },
-  {
-  url:"/images/film.jpg", 
-  name:"Film étirable opaque",
-  prix:"20 £",
-  dimmension:"45 cm x 270 m",
-  quantite:0,
-  description:""
-  },
-
-])
+const[produit,setProduit]=useState(producList)
+const[produit2,setProduit2]=useState(producList2);
+const[produit3,setProduit3]=useState(producList3)
+const[produit4,setProduit4]=useState(producList4)
 const [cart,setCart]=useState([]);
-
-/*
-const add=(e)=>{
-  setCart(...{e})
-}
-*/
-
 const handelshow=(e)=>{
-console.log("index of",cart.indexOf(e))
 if(cart.indexOf(e)!==-1){
-  
-  setShow(true);
+   setShow(true);
   e.quantite=e.quantite+1
   setPrixcarton(prixcarton+Number(e.prix.split(" ")[0]))
-  console.log("ptix total",prixcarton)
   setIncrement(increment+1)
 }else{
   setCart([...cart,e]);
   setShow(true);
   e.quantite=e.quantite+1
   setPrixcarton(prixcarton+Number(e.prix.split(" ")[0]))
-  console.log("ptix total",prixcarton)
   setIncrement(increment+1)
 }
 }
@@ -207,14 +71,14 @@ const [showsignin, setShowsignin]=useState(true)
 const token=localStorage.getItem('token');
 useEffect(()=>{
 if(token===null){
-  /*
+  setShowsignin(true)
   const modal = document.querySelector(".modal")
     const closeBtn3 = document.querySelector(".close3")
     modal.style.display = "block";
     closeBtn3.addEventListener("click", () => {
       modal.style.display = "none";
       
-    })*/
+    })
 console.log("WE ARE NO ADDING PRODUCT BEFOR SIGN IN")
 }else{
 setShowsignin(false)
@@ -227,14 +91,16 @@ console.log("votre session est ouvert vous pouvez commander")
 const [user,setUser]=useState();
 const _id=localStorage.getItem('user_id');
 //console.log("user",_id)
+
+
 useEffect(()=>{
 axios.get(`/getuserbyid/${_id}`).then((response)=>{
-
   setUser(response.data);
-  console.log("we are getting data unser for Ecommerceall")
+  console.log("we are getting data unser for Ecommerceall",user)
 }).catch((err)=>{
 })
 },[])
+
 /*****************ENVOYER LA COMMANDE A LADMIN***********/
 const [commande,setCommande]=useState({
   user:[],
@@ -250,19 +116,15 @@ console.log("la commande est pret à envoyer",commande)
 const handelcommande=()=>{
 axios.post('/ajouter-une-commande',commande).then(()=>{
 alert("votre commande a étè envoyée avce succés")
-
+setCart([]);
+setShow(false)
+localStorage.clear();
 }).catch((err)=>{})}
 
 
 
 
-return(
-
-
-
-
-
-<div >
+return(<div >
 <NavBar/>
   
 <div className="wrap-ecommerce">
@@ -272,7 +134,7 @@ return(
 <h1 className="product-titles mrgtop">Pour le non-fragile</h1>
 <h3 className="product-s-titles">Vêtements, livres, ustensiles de cuisine</h3>
 <div className="carton-cathegorie-bloc-all">
-{produit.map((e)=>
+{produit?.map((e)=>
 <ItemAll add={()=>handelshow(e)} 
 url={e.url} name={e.name} prix={e.prix} 
 dimmension={e.dimmension} quantite={e.quantite} 
@@ -285,7 +147,7 @@ description={e.description} plus={plus}  minus={()=>handelminus(e)}/>)}</div>
 
 <h1 className="product-titles">Pour le fragile</h1>
 <h3 className="product-s-titles">Vaisselle, bouteilles, bibelots.</h3>
-<div className="carton-cathegorie-bloc-all">{produit2.map((e)=><ItemAll 
+<div className="carton-cathegorie-bloc-all">{produit2?.map((e)=><ItemAll 
 add={()=>handelshow(e)} url={e.url} name={e.name} prix={e.prix} 
 minus={()=>handelminus(e)}
 dimmension={e.dimmension} quantite={e.quantite} description={e.description}/>)}</div>
@@ -297,12 +159,12 @@ dimmension={e.dimmension} quantite={e.quantite} description={e.description}/>)}<
 
 
 <h1 className="product-titles">Pour les vêtements sur cintre</h1>
-<div className="carton-cathegorie-bloc-all">{produit3.map((e)=><ItemAll
+<div className="carton-cathegorie-bloc-all">{produit3?.map((e)=><ItemAll
  add={()=>handelshow(e)}  url={e.url} name={e.name} prix={e.prix}
  minus={()=>handelminus(e)}
  dimmension={e.dimmension} quantite={e.quantite} description={e.description}/>)}</div>
 <h1 className="product-titles">Autres fournitures</h1>
-<div className="carton-cathegorie-bloc-all">{produit4.map((e)=><ItemAll 
+<div className="carton-cathegorie-bloc-all">{produit4?.map((e)=><ItemAll 
  add={()=>handelshow(e)} url={e.url} name={e.name} prix={e.prix} 
  minus={()=>handelminus(e)}
  dimmension={e.dimmension} quantite={e.quantite} description={e.description}/>)}</div>
@@ -310,43 +172,53 @@ dimmension={e.dimmension} quantite={e.quantite} description={e.description}/>)}<
   
   {show &&(
   <div className="modal-cart">
-  <div className="cart">
+  <div className="cart2">
  
  <div className="cart-title">
-   <h3>Mon panier</h3>
-   
- <div onClick={()=>setShow(false)} className="close-cart">&times;</div>
+  <img alt='' src='/images/tmsdemfooterlogo.png' className='logo-cart2-'/> 
+
+ 
+ {<div onClick={()=>setShow(false)} className="close-cart">&times;</div>}
  </div>
-    <h4>{user[0].firstName} {user[0].lastName}</h4>
-     {cart.map((e)=><div className="myrow">
+    <h4 className='client_nom'>{user[0]?.firstName} {user[0]?.lastName}</h4>
+    <div className='liste-dachats'>
+     {cart?.map((e)=><div className='wrap_shoping_cart_item'>
+      <div className="myrow">
      <div className="cart-item">{e.name}</div>
      <img src={e.url} style={{height:"50px",width:"50px"}}/>
      <div className="cart-item">{e.prix}</div>
      <div className="cart-item quantite-cart">
-     <FaMinus  className="Item-Icons"/>
+      <div className='wrap_qnt_btn-cart'>
+     <button  className="">
+      ▴
+        </button>
+        <button  className="">
+        ▾
+      </button>
+      </div>
      <div> {e.quantite}</div>
-     <FaPlus  className="Item-Icons"/>
+     </div>
      </div>
   </div>)} 
-
+  </div>
   <div className="btn-commande" onClick={handelcommande}>Envoyer la commande </div>
   </div> 
     
   </div>)}   
 
   
-  {/*showsignin && (<div>
+  {showsignin && (<div>
 
     <div className="js-btn"></div>
     <div class="modal">
     <div class="modal_content-signin">
-    <span class="close3">&times;</span> 
-    <Signin/>
+   <span class="close3" style={{display:"none"}}>&times;</span> 
+    <Signin hidesignBox={()=>setShowsignin(false)}/>
      
    </div>
 </div>
 
-  </div>)*/}
+  </div>)}
   
 
 

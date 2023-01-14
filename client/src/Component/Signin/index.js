@@ -8,6 +8,7 @@ import {loginUser} from '../actions/useractions';
 import Signup from './SignUp';
 
 const Signin=(props)=>{
+  const {hidesignBox}=props;
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -44,11 +45,20 @@ const handelClick=()=>{
  // alert('we are adding user')
 input.email=email;
 input.password=password;
+/*
 loginUser(input);
+
 setInput(
   { email:"",
    password:""}
  )
+*/
+
+ loginUser(input).then(response => {
+  console.log("we finished logging in")
+  }).catch(error => {
+  console.log("the raison of failure", error) 
+ })
 if(token!==null){
   history.push("/boutique")
   setInput(
@@ -57,13 +67,14 @@ if(token!==null){
   )
 }else if (token===null){
   alert("votre email ou mot de passe est invalide, Vérifiez votre inscription !")
-  history.push("/boutique")
+  /*history.push("/boutique")*/
   window.location.reload()
   setInput(
     { email:"",
      password:""}
    )
 }
+
 }
 
 const [loginout,setLoginout]=useState("login");
@@ -76,9 +87,19 @@ console.log("submit succed")
 return(
 
 <div className="signin">
-<div className="header-sign" >
+  
+<div className='side_siginbox'>
+<div onClick={hidesignBox}></div>
+<div className='sentence'>{sign}</div>
+  <div className='wrap_logo_s_box'>
+ 
+<img src="/images/logo-01.png" className="logo-sign_box"/>
+ </div>
+ </div>
+{/*<div className="header-sign" >
 {sign}
-<img src="/images/tmsdemfooterlogo.png" className="logo-sign"/></div>
+<img src="/images/tmsdemfooterlogo.png" className="logo-sign"/>
+</div>*/}
 {/*<img src="/images/3.png" className="logo-sign"/>*/}
 { !show && (
 <div className="signin-box-wrap">
@@ -96,7 +117,7 @@ return(
 
 </div>
 </form>
-Vous n'avez pas un compte?
+<h4 style={{color:"#2C216F"}}>Vous n'avez pas un compte?</h4>
 <span onClick={handelshow} className="inscrire">S'inscrire</span>
 </div>
 </div>)}

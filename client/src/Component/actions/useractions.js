@@ -19,17 +19,17 @@ export function loginUser (newuser){
     
      localStorage.setItem('token', response.data.token);
      localStorage.setItem('user_id', response.data.user._id);
-    //console.log("token",response.data.token)
+    console.log("token",response.data.token)
      
      //const id=response.data.user._id;
      //console.log("id from response",id)
-     const history = useHistory();
+    // const history = useHistory();
      //history.push(`/shop`);
      //setLoginout("logout")
     
     
     }).catch(error => {
-    
+    console.log("erreur in posting sign in request is : here",error)
       /*history.push('/signin');
       alert("check you if you are signed up ")
       */

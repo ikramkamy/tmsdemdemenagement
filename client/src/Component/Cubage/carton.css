@@ -232,7 +232,7 @@ align-items: center;
     align-items: center;
     justify-content: space-between;
     color: black;
-    background-color: lightgray;
+    background-color: #f3f3f3;
     height: 40px;
     padding-left: 10px;
     padding-right: 10px;
@@ -258,6 +258,8 @@ align-items: center;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 .nom_de_onject{
    margin-left: 5px; 
@@ -300,6 +302,8 @@ align-items: center;
 }
 .room-name{
     width: 25%;
+    color: #2C216F;
+    font-weight: 600;
 }
 .wrap-select-object{
 width: 100%;
@@ -363,7 +367,7 @@ background-color: none;
     color: #2C216F;
 }
 .up_down_btn{
-   background-color:lightgray;
+   background-color:#f3f3f3;
    border-radius:5px;
    border: 1px solid #2C216F;
 }

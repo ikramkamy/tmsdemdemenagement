@@ -152,8 +152,6 @@ const add=(e)=>{
 */
 
 const handelshow=(e)=>{
-//console.log(e.name)
-//console.log(cart[0].name)
  cart.find(e=>e.quantite+1);
  if(cart.indexOf(e)!==-1){
   e.quantite=e.quantite+1;
@@ -162,26 +160,13 @@ const handelshow=(e)=>{
   e.quantite=e.quantite+1;
   setCart([...cart,e]);
  }
-   
-  
-  
- // setCart([...cart,e]);
-  //setShow(true);
-  //e.quantite=e.quantite+1;
-
-
-
-
-
-  setPrixcarton(prixcarton+Number(e.prix.split(" ")[0]))
-  console.log("ptix total",prixcarton)
+   setPrixcarton(prixcarton+Number(e.prix.split(" ")[0]))
   setIncrement(increment+1)
 }
 const handelminus=(e)=>{
   if(e.quantite==0){
     alert("la quantité est 0")
   }else{ 
-  //setShow(true);
     e.quantite=e.quantite-1
     setPrixcarton(prixcarton-Number(e.prix.split(" ")[0]))
     setIncrement(increment+1)
@@ -190,7 +175,7 @@ const handelminus=(e)=>{
 
 useEffect(()=>{
   sendPrixcarton(prixcarton);
-  /*sendCart(cart);*/
+  sendCart(cart);
   console.log("prixcarton",prixcarton)
 
 },[prixcarton])

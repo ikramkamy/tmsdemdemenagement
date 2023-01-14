@@ -1,14 +1,10 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState} from 'react';
 import './style-form-final.css';
 import { Link } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import Cubage from '../Cubage';
 import Ecommerce from '../Ecommerce';
 import useForceUpdate from 'use-force-update';
-import { jsPDF } from "jspdf";
-import Pdfinvent from '../Pdfinventaire';
-import './pdf.css';
-import logo from "../../images/logo-01.png";
 import ImgDepart from '../../images/1png-02.png'
 import ImgDateForm from '../../images/1png_Plan de travail 1.png'
 import ImgEtage from '../../images/1png-03.png'
@@ -16,6 +12,8 @@ import AscenseurImg from '../../images/1png-04.png'
 import ImgDist from '../../images/1png-05.png'
 import MonteMeuble from '../../images/1png-06.png'
 import Footer from '../footer/Footer';
+import PdfComponent from '../Pdfinventaire/PdfComponent';
+import './form-item-style.css';
 //simport ReactTooltip from 'react-tooltip';
 const Formulefinale = () => {
     const forceUpdate = useForceUpdate();
@@ -24,6 +22,7 @@ const Formulefinale = () => {
     const [box2, setBox2] = useState(true);
  /**************************************************calcult de cubage******************************************** */
 const [cubage, setCubage] = useState(0);
+const [roomList,setRoomList]=useState([]);
 const [volmanu, setVolmanu] = useState(true);
 const [volcalc, setVolcalc] = useState(false);
 const [vol1, setVol1] = useState(0);
@@ -34,22 +33,15 @@ setCubage(event.target.value)
 setVarchange(varchange + 1);
 forceUpdate()
 }
-const handelCubage = (data) => {
-  /*
-      if(volmanu==true){
-        setCubage(vol1)
-        alert("veillez avez estimer le volume manuellement")
-        console.log("cubage manuel", cubage)
-      }else{
-        */
-        console.log("cubage calculé en rajoutant des produits", cubage)
-        setCubage(data)
-        //console.log("we are getting data from chlidern",data)
-        //console.log("prix de cubage",cubage*10)
-        setVarchange(varchange + 1);
-        forceUpdate()
-     
+
+const handelroomList=(data)=>{
+setRoomList(data)
 }
+const handelCubage = (data) => {
+ setCubage(data)
+setVarchange(varchange + 1);
+forceUpdate()
+     }
 
     /***************************************CALCUL DE VOLUM********************************* */
     const [volum, setVolum] = useState(false);
@@ -62,20 +54,18 @@ const handelCubage = (data) => {
    
   
     useEffect(() => {
-        if (volmanu == true) {
+        if (volmanu === true) {
             setVol2(0)
-            
-           
         } else { setVol2(vol2) }
-    })
+    },[volmanu])
     useEffect(() => {
-        if (volcalc == true) {
+        if (volcalc === true) {
             setVol1(0)
             setVolum(true)
         } else {
             setVol1(vol1);
         }
-    })
+    },[volcalc])
     const handelVolmanu = () => {
         setVolmanu(true);
         setVolum(false);
@@ -294,7 +284,7 @@ const handelCubage = (data) => {
     const handelpiano = () => {
         setPiano(!piono);
 
-    }
+    } 
     const handelfrigo = () => {
         setFrigo(!frigo)
     }
@@ -302,83 +292,35 @@ const handelCubage = (data) => {
     /***************************************************************************************************/
     /*****************************************************Calcul pri carton**************************************** */
     const [pricart, setPricart] = useState(0);
+    const [cart, setCart] = useState([]);
     const sendPrixcarton = (data) => {
         setPricart(data);
         setVarchange(varchange + 1);
     }
+    const sendCart=(data)=>{
+        setCart(data);
+    }
     /***********************************PDF GENERATION**********************************/
     const [showpdf, setShowpdf] = useState(false);
-    const generatepdf = () => {
-        var doc = new jsPDF('portrait', 'pt', 'a3');
-        /*
-        doc.text(60,60,'Entreprise: Amogela');
-        doc.text(60,40,'Télèphone:+2130.......');
-        doc.text(60,20,'Email:email@gmail.com');
-        doc.text(60,10,"liste");
-        */
-        doc.html(document.querySelector("#all"), { callback: function (pdf) { pdf.save("inventaire.pdf") } })
-    }
-
+    
     /***********************date get**************** */
     const [date, setDate] = useState("")
     const getDate = (event) => {
         setDate(event.target.value)
-
-    }
+}
 
 
     return (
 
         <div className="principal-formulaire">
-
+ 
             {showpdf && (
-                <div className="modal-cart">
-                <div className="pdf-stylig">
-                    <div className="wrap-pdf-stylig" id="all">
-                        <Pdfinvent generatepdf={generatepdf} className="wrap-pdf" >
-                            <div className="header-inventaier" onClick={() => setShowpdf(false)}>&times;</div>
-                            <h1 className="principale-titles invent-title">
-                                <img src={logo} />
-                                <div className="invent-inter">
-                                    <div className="invent-item">contact@tms-dem.com</div>
-                                    <div className="invent-item">+33 1 41 77 11 32</div>
-                                </div>
-                                <div className="invent-inter">
-                                    <div className="invent-item">Service client 7j/7</div>
-                                    <div className="invent-item">300 A Rue Marcel Paul,
-                                        94500 Champigny-sur-Marne, France</div>
-                                </div>
-                            </h1>
-                            <h1 className="principale-titles-pdf"> Votre demande</h1>
-                            <div className="inevnt-item">
-                                <div>La date de démènagement :</div>
-                                <div>{date}</div>
-                            </div>
-                            <div className="inevnt-item">
-                                <div>l'adresse de départ :</div>
-                                <div>.....</div>
-                            </div>
-                            <div className="inevnt-item">
-                                <div>l'adresse de l'arrivée:</div>
-                                <div>.....</div>
-                            </div>
-                            <div className="inevnt-item">
-                                <div>Le volume de total  calculé:</div>
-                                <div>{cubage}</div>
-                            </div>
-                            <div className="inevnt-item"><div>Le volume de total estimé:</div><div>{vol1}</div></div>
-                            <div className="inevnt-item"><div>La liste d'achat: </div></div>
-                            <div className="inevnt-item" style={{ marginBottom: "50px" }}>
-                                <div>Le montant total:</div>
-                                <div>{total}</div>
-                            </div>
-
-                        </Pdfinvent>
-                    </div>
-                    <div className=" btn-formule btn-download"
-                        onClick={generatepdf}>Télècharger</div>
-                        </div>
-                </div>)}
+                <div> 
+                    <div className="fermer-inventaire">
+                    <div className="header-inventaier" onClick={()=>setShowpdf(!showpdf)}>&times;</div>
+                   </div>
+            <PdfComponent date={date} cubage={cubage} adress1="adress de départ"  
+             adress2="adress2" total={total} roomList={roomList} cart={cart}/></div>)}
 
             <div style={{ width: "80%" }}>
                 <div className="text-calcul">
@@ -415,7 +357,7 @@ const handelCubage = (data) => {
                             </div>
                             <div className="inter-calcul-item">
                                 <label className=" Myborder-top">
-                                    <div className="title etage"> <img src={ImgEtage} className="stageImg"/>ETAGE  </div>
+                                    <div className="title etage"> <img src={ImgEtage} className="stageImg" alt=""/>ETAGE  </div>
                                     <select value={numetage} name='numetage' onChange={handelChangeall} className="selectFormOprionSoto">
                                         {etage.map((option) => (
                                             <option value={option.value} key={option.label}>{option.label}</option>
@@ -429,7 +371,7 @@ const handelCubage = (data) => {
                                     </div >
                                 </label>
                                 <label className=" Myborder-top">
-                                    <div className="title ascenseur"> <img src={AscenseurImg} className="stageImg" /> ASCENSEUR</div>
+                                    <div className="title ascenseur"> <img src={AscenseurImg} className="stageImg" alt=""/> ASCENSEUR</div>
                                     <select value={valassenseur} name="valassenseur" onChange={handelChangeassens} className="selectFormOprionSoto">
                                         {assenseur.map((option) => (
                                             <option value={option.value} key={option.label}>{option.label}</option>
@@ -443,7 +385,7 @@ const handelCubage = (data) => {
                                     </div>
                                 </label>
                                 <label className=" Myborder-top">
-                                    <div className="title distance" > <img src={ImgDist} className="stageImg" />  DISTANCE</div>
+                                    <div className="title distance" > <img src={ImgDist} className="stageImg" alt=""/>  DISTANCE</div>
 
                                     <select value={valdistance} name="valdistance" onChange={handelvaldistance} className="selectFormOprionSoto" >
                                         {distance.map((option) => (
@@ -459,14 +401,14 @@ const handelCubage = (data) => {
                                     </div>
                                 </label>
                                 <label className=" Myborder-top">
-                                    <div className="title monteMeuble" > <img src={MonteMeuble}  className="stageImg"/> MONTE-MEUBLES </div>
+                                    <div className="title monteMeuble" > <img src={MonteMeuble}  className="stageImg" alt=""/> MONTE-MEUBLES </div>
                                     <select type="number" placeholder="Monte-meuble" name="mnt" className="selectFormOprionSoto" value={mnt} onChange={handelMnt}>
                                         <option label="Non" value="0">Non</option>
                                         <option label=" oui (7h)" value="450">Oui pour 7h</option>
                                         <option label=" oui (1/2j)" value="250">Oui pour une demie journée</option>
                                     </select>
                                     <div className="title flexstart">
-                                        <Link className="tip-mont-meuble1">
+                                        <Link className="tip-mont-meuble1" to="/soto">
                                             Plus d'information
                                             <div className="tooltip-styling-monte-meuble1">
                                                 Lors du démenagement, il arrive parfois que l'absence
@@ -490,7 +432,7 @@ const handelCubage = (data) => {
                             </div>
 
                             <div className="title" style={{ alignItems: "flex-start", marginLeft: "5.5%" }}>
-                                <Link className="tip-auton-01"> <span> Plus d'information </span>
+                                <Link className="tip-auton-01" to="/soto"> <span> Plus d'information </span>
                                     <div className="tooltip-styling-auton1">
                                         Si vous habitez en ville il est possible
                                         que le camion se gare dans la rue.Selon votre commune
@@ -532,7 +474,7 @@ const handelCubage = (data) => {
 
                         <div className="calcul-bloc-item">
                             <div className="inter-calcul-item">
-                                <h1 className="principale-titles"> <img src={ImgDepart} className="reficonsFORM"/>Arrivé</h1>
+                                <h1 className="principale-titles"> <img src={ImgDepart} className="reficonsFORM" alt=""/>Arrivé</h1>
                                 <div className="adressContainerWrapForm">
                                     <div className="addWrapperInput">
                                 <input type="text" className="address-input" />
@@ -541,7 +483,7 @@ const handelCubage = (data) => {
                             </div>
                             <div className="inter-calcul-item">
                                 <label className=" Myborder-top">
-                                    <div className="title etage">  <img src={ImgEtage} className="stageImg"/> ETAGE </div>
+                                    <div className="title etage">  <img src={ImgEtage} className="stageImg" alt=""/> ETAGE </div>
                                     <select value={numetage2} name='numetage2' className="selectFormOprionSoto" onChange={handelChangeall2}>
                                         {etage.map((option) => (
                                             <option value={option.value}>{option.label}</option>
@@ -555,7 +497,7 @@ const handelCubage = (data) => {
                                     </div>
                                 </label>
                                 <label className=" Myborder-top">
-                                    <div className="title ascenseur"> <img src={AscenseurImg} className="stageImg" /> ASCENSEUR</div>
+                                    <div className="title ascenseur"> <img src={AscenseurImg} className="stageImg" alt=""/> ASCENSEUR</div>
                                     <select value={valassenseur2} name="valassenseur2" className="selectFormOprionSoto" onChange={handelChangeassens2}>
                                         {assenseur.map((option) => (
                                             <option value={option.value}>{option.label}</option>
@@ -569,7 +511,7 @@ const handelCubage = (data) => {
                                     </div>
                                 </label>
                                 <label className=" Myborder-top">
-                                    <div className="title distance">  <img src={ImgDist} className="stageImg" /> DISTANCE</div>
+                                    <div className="title distance">  <img src={ImgDist} className="stageImg" alt=""/> DISTANCE</div>
                                     <select value={valdistance2} name="valdistance2"  className="selectFormOprionSoto" onChange={handelvaldistance2} >
                                         {distance.map((option) => (
                                             <option value={option.value}>{option.label}</option>
@@ -586,7 +528,7 @@ const handelCubage = (data) => {
                                     </div>
                                 </label>
                                 <label className=" Myborder-top">
-                                    <div className="title monteMeuble"> <img src={MonteMeuble}  className="stageImg"/> MONTE-MEUBLES</div>
+                                    <div className="title monteMeuble"> <img src={MonteMeuble}  className="stageImg" alt=""/> MONTE-MEUBLES</div>
                                     <select type="number" placeholder="Ascenseur" name="mnt2" value={mnt2} className="selectFormOprionSoto" onChange={handelMnt2} >
                                         <option label="Non" value="0">Non</option>
                                         <option label=" oui (7h)" value="450">Oui pour 7h</option>
@@ -617,7 +559,7 @@ const handelCubage = (data) => {
                                 </div>
 
                             <div className="title flexstart" style={{ alignItems: "flex-start", marginLeft: "5.5%" }}>
-                                <Link className="tip-auton-01">
+                                <Link className="tip-auton-01" to="/soto">
                                     Plus d'information
                                     <div className="tooltip-styling-auton1">
                                         Si vous habitez en ville il est possible que le camion
@@ -753,7 +695,7 @@ const handelCubage = (data) => {
 
                         </div>
                        
-                        {volum && (<Cubage showVolum={showVolum} handelCubage={handelCubage} />)}
+                        {volum && (<Cubage showVolum={showVolum} handelCubage={handelCubage} handelroomList={handelroomList}/>)}
                         
 
 
@@ -807,7 +749,8 @@ const handelCubage = (data) => {
                             <div className="inter-calcul-item  dsplyclmn" style={{marginTop: "-50px"}}>
                                 <div className="mdbinput">
                                 <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Piano"  id="piano" value="Piano" name="rdB5" checked={piono}/*checked={autoO}*/ onChange={handelpiano} />
+                                    <input  type="radio" label="Piano"  
+                                    id="piano" value="Piano" name="rdB5" checked={piono}/*checked={autoO}*/ onChange={handelpiano} />
                                     <label for="Piano">Piano</label>
                                     </div>
                                 </div>
@@ -952,7 +895,9 @@ const handelCubage = (data) => {
 
 
                                     <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Oui" id="checkbox1" value="Oui" name="rdB7" checked={box1}  /*checked={autoO}*/ onChange={handelCheck} />
+                                    <input  type="radio" label="Oui"
+                                     id="checkbox1" value="Oui" name="rdB7" checked={box1} 
+                                      /*checked={autoO}*/ onChange={handelCheck} />
                                     <label for="Oui"> Oui</label>
                                     </div>
 
@@ -964,23 +909,25 @@ const handelCubage = (data) => {
                                  
                                     </div>
                                     <div className=" mdbinput" style={{ marginBottom: "30px" }}>
-
-
                                     <div style={{display:"flex"}}> 
                                     <input  type="radio" label="Non" id="checkbox2" value="Oui" name="rdB7" checked={box2}  /*checked={autoO}*/ onChange={handelCheck2} />
                                     <label for="Non"> Non</label>
                                     </div>
 
 
-
+                                   
                                       {  /*<MDBInput label="Non" type="checkbox" id="checkbox2" checked={box2} onChange={handelCheck2} />*/}
                                     </div>
                                 </div>
                             </div>
+                            {showecommerce && 
+                           <Ecommerce 
+                        sendPrixcarton={sendPrixcarton} id="ecommerce" sendCart={sendCart}/>
+                           }
                         </div>
+                        {/** (<Link className='wrap-link-to-shop' to="/boutique">Voir Notre Boutique</Link>) */}
 
-
-                        {showecommerce && (<Ecommerce sendPrixcarton={sendPrixcarton} id="ecommerce" />)}
+                       
 
 
                     </div>
@@ -1050,7 +997,9 @@ const handelCubage = (data) => {
             <div className="calcul-montant tot" style={{border: "1px hidden red", background:"rgba(44,33,111,0.1)", color:"rgb(44,33,111)"}}><p>DÉMÉNAGEMENT SOTO<br /></p>
 
                 <div className="total-formulaire" style={{border:"none"}}>
-                    <div style={{fontSize:"1.3em", fontWeight:"600", color:"rgb(44,33,111)", border:"none", fontSize:"1.77em", marginTop:"-30px"}}>Total: {total} €</div>
+                    <div style={{ 
+                    fontWeight:"600", color:"rgb(44,33,111)",
+                     border:"none", fontSize:"1.77em", marginTop:"-30px"}}>Total: {total} €</div>
 
                 </div>
                 <div className=" btn-formule btn-download" style={{border:"1px hidden black", width:"250px", background:"#ED1C24", color:"white"}}

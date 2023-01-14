@@ -249,6 +249,8 @@ Choisissez vos options et votre devis se recalcule automatiquement.</div>
 
 </div>
 </div>
+
+<h3>Cette page est encours de construction 😌</h3>
 <div className="les-champs-de-calcul chrono-form">
 <div className="wrap-formulaire">
 <div className="calcul-bloc">
@@ -388,7 +390,8 @@ Choisissez vos options et votre devis se recalcule automatiquement.</div>
 </div>)
 }
 
-Avez-vous besoin de fournitures pour votre déménagement?
+
+{/*Avez-vous besoin de fournitures pour votre déménagement?
 <div className="wrap-formulaire-all">
 <div className="calcul-bloc-all">
 <div className="calcul-bloc-item-all">
@@ -407,7 +410,7 @@ Avez-vous besoin de fournitures pour votre déménagement?
     
     
     </div> 
-</div>
+</div>*/}
 
 
 

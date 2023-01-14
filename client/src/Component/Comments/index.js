@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './comment.css';
 import './dialoguebox.css';
 export const Comment_details=()=>{
@@ -36,14 +36,22 @@ Si cet objet a besoin d'emballage
 
     </div>)
 }
-export const Comment_Objet_Dialoguebox=(props)=>{
-const {closeDialogueBox, SaveComment}=props;
 
+export const Comment_Objet_Dialoguebox=(props)=>{
+const {closeDialogueBox, SaveComment,sendComment_obj}=props;
+const [comment_obj,setComment_obj]=useState('');
+const handelComment_object=(e)=>{
+    setComment_obj(e.target.value);
+}
+useEffect(()=>{
+    sendComment_obj(comment_obj)   
+    console.log("comment obj",comment_obj)
+},[comment_obj])
     return(<div className='wrap_dialoguebox'>
     <div className='Dialogue_box'>
      <h1> Information complémentaire </h1>
      <h5> Ajoutez une remarque </h5>
-     <input type='text'  placeholder='Notre.....' />
+     <input type='text'  placeholder='Notre.....' value={comment_obj} onChange={(e)=>handelComment_object(e)}/>
      <div className='btn_dialoguebox'>
         <button onClick={closeDialogueBox}>Annuler</button>
         <span style={{width:"5px"}}></span>

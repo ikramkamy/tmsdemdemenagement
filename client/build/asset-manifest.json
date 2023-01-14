@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "./static/css/main.27348900.css",
-    "main.js": "./static/js/main.e15f9524.js",
+    "main.css": "./static/css/main.b7c60842.css",
+    "main.js": "./static/js/main.a07318aa.js",
     "static/js/905.e482015a.chunk.js": "./static/js/905.e482015a.chunk.js",
     "static/js/313.73c1a59f.chunk.js": "./static/js/313.73c1a59f.chunk.js",
-    "static/js/817.ecc1ed5a.chunk.js": "./static/js/817.ecc1ed5a.chunk.js",
+    "static/js/827.68b2fbcb.chunk.js": "./static/js/827.68b2fbcb.chunk.js",
     "static/js/27.b8265b0d.chunk.js": "./static/js/27.b8265b0d.chunk.js",
     "static/media/pic99.jpg": "./static/media/pic99.805b3c00c355613f5126.jpg",
+    "static/media/sug1.jpg": "./static/media/sug1.679a67b49bcd9932db40.jpg",
     "static/media/pic9.jpg": "./static/media/pic9.6b75d8ff2a740be4a514.jpg",
-    "static/media/servicePicture.jpeg": "./static/media/servicePicture.8302bfc036d13697542f.jpeg",
-    "static/media/contact_Plan de travail 1.png": "./static/media/contact_Plan de travail 1.5bdf153942de3e1b2281.png",
-    "static/media/monteMeuble.jpeg": "./static/media/monteMeuble.400f00e9d9ee56dd450b.jpeg",
-    "static/media/ikea.jpg": "./static/media/ikea.1af390ffbdc1e1d33baf.jpg",
-    "static/media/planificationTimeLine.png": "./static/media/planificationTimeLine.7b6572c88593cdaad82f.png",
+    "static/media/team.jpg": "./static/media/team.1cb1b3374522e2e368cb.jpg",
+    "static/media/contact3.jpg": "./static/media/contact3.ee0a351740a664baaaf1.jpg",
+    "static/media/team2.jpg": "./static/media/team2.04fb2274a8f4d50ee000.jpg",
     "static/media/Comp 1.gif": "./static/media/Comp 1.9cb7b5881056e6b47197.gif",
     "index.html": "./index.html"
   },
   "entrypoints": [
-    "static/css/main.27348900.css",
-    "static/js/main.e15f9524.js"
+    "static/css/main.b7c60842.css",
+    "static/js/main.a07318aa.js"
   ]
 }

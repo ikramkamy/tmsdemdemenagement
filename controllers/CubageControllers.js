@@ -22,7 +22,7 @@ exports.createcubage =  (req, res) => {
        }
        if (cube) {
          
-         const {name,cathegorie, pname,cathegorie} = cube;
+         const {name,pname,cathegorie} = cube;
          return res.status(201).json({
            
             cube: {name,  valume,pname,  cathegorie},
