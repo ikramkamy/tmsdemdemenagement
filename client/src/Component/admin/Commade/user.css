@@ -1,9 +1,10 @@
-.user{
+.user_commande{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     border: 1px hidden blue;
-    background-color: rgba(44,33,111,.2);
     color: #2C216F;
+    font-size: 0.6em;
+    width: 30%;
 }
 .elem-cmnd-list{
     width: 16.66%;

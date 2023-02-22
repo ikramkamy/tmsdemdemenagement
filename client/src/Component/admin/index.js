@@ -1,10 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Comm from './Commade';
-import User from './Commade/User.js';
-import Cart from './Commade/Cart.js';
-import NavBar from '../navBar/NavBar.js';
-import Logo from '../../images/logo-01.png';
 import axios from 'axios';
 import './admin.css';
 import Utilisateur from './Utilisateur';
@@ -13,16 +8,18 @@ import Produit from './Produit';
 import ProduitCreate from './Produit/CreateProduit';
 import EditeProduit from './Produit/ProduitEdite';
 import CubageCreate from './Cubage/CreateCubage';
-import Cubage from './Cubage';
-const Admin=(props)=>{
+import Dashboard from './Dashboard';
+const Admin=()=>{
 const [showCommande,setshowCommande]=useState(false);
 const [showusers,setshowusers]=useState(false);
 const [showproduit,setshowproduit]=useState(false);
 const [showcubage,setShowcubage]=useState(false)
+const [dash,setDash]=useState(false)
 const [commande,setCommande]=useState([]);
 const [user,setUser]=useState([]);
 const [produit,setProduit]=useState([]);
 const [cubage,setCubage]=useState([]);
+const [showtypecommande,setShowtypecommande]=useState(false)
 useEffect(()=>{
 axios.get('/afficher-les-commandes').then((response)=>{
     setCommande(response.data);
@@ -32,7 +29,7 @@ axios.get('/afficher-les-commandes').then((response)=>{
 
 /***************************UTILISAEURS*************************/
 const [currentPage,setCurrentPage]=useState(1);
-const [dataperpage,setDataperpage]=useState (15);
+const [dataperpage,setDataperpage]=useState (10);
 const indexOfLastPost=currentPage * dataperpage;
 const indexOfFirstPost=indexOfLastPost-dataperpage;
 const currentPost=user.slice(indexOfFirstPost,indexOfLastPost);
@@ -53,12 +50,19 @@ useEffect(()=>{
     )
 },[produit])
  const handeldelete=(_id)=>{
-     alert("wera deleting");
-     console.log('id',_id)
+     alert("Êtes-vous sûr de vouloir supprimer cet élément ?");
+    
 axios.delete(`/Deleteproduit/${_id}`,).then((response)=>{
 console.log("respnse",response);
 })
  }
+ /******************************Supprimer un utilisateur*********************/
+ const deletuser=(_id)=>{
+alert("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+axios.delete(`/delete/${_id}`).then((response)=>{
+ })
+    
+}
 /*********************************CUBAGE*****************************/
 const [showcubageCreate,setshowcubageCreate]=useState(false);
 useEffect(()=>{
@@ -73,24 +77,35 @@ const handelshowcommande=()=>{
     setshowusers(false);
     setshowproduit(false);
     setShowcubage(false);
+    setDash(false);
 }
 const handelshowusers=()=>{
     setshowCommande(false );
     setshowproduit(false);
     setShowcubage(false);
     setshowusers(true );
+    setDash(false);
 }
 const handelshowproduit=()=>{
     setshowusers(false);
     setshowCommande(false );
     setshowproduit(true);
     setShowcubage(false);
+    setDash(false);
 }
 const handelshowcubage=()=>{
     setshowusers(false);
     setshowCommande(false );
     setshowproduit(false);
     setShowcubage(true);
+    setDash(false);
+}
+const showDashboard=()=>{
+setDash(true)
+setshowusers(false);
+setshowCommande(false );
+setshowproduit(false);
+setShowcubage(false);
 }
 const [showcreate,setShowcreate]=useState(false);
 const [showedite,setShowedite]=useState(false);
@@ -100,23 +115,72 @@ const showhendel1=()=>{
 const showhendel=()=>{
     setShowedite(!showedite) 
 }
+const refresh=()=>{
+    window.location.reload()
+}
+const showtypeC=()=>{
+    setShowtypecommande(true)
+    setDash(false)
+setshowusers(false);
+setshowCommande(true);
+setshowproduit(false);
+setShowcubage(false);
+}
+const showCalender=()=>{
+    setShowtypecommande(false)
+    setDash(false)
+setshowusers(false);
+setshowCommande(false );
+setshowproduit(false);
+setShowcubage(false);  
+}
 return(<div className="admin">
-    <div className="nav-admin">
-        <img src={Logo}/>
-        <h1 className="side-title">TMSDEM </h1>
-        </div>
+    {/*<div className="nav-admin">
+        <div className="side-title">TMSDEM </div>
+</div>*/}
 <div className="wrap-admin">
 <div className="side-bar">
-<h1 className="side-title">TMSDEM admin</h1>
-<div className="side-btn" onClick={handelshowusers}>Utilisateur</div>
-<div className="side-btn" onClick={handelshowcommande}> commandes</div>
-<div className="side-btn" onClick={handelshowproduit}>Produits</div>
-<div className="side-btn" onClick={handelshowcubage}> Elèments de cubage</div>
-<div className="side-btn" onClick={()=>setshowCommande(true)}>Calendrier</div>
+    <div className='wrap_logo_admin'>
+TMSDEM
+</div>
+<div className='wrap_logo_admin'>
+    <img src='/images/icones/admin/admin.png' alt="l'admin de TMSDEM" className='mini-icon-admin'/>
+<div className='admin-name'>Biri Massinissa</div>
+</div>
+<div className="side-btn" onClick={showDashboard}>
+    <img src="/images/icones/admin/dashboard.png" className='mini-icon-admin' 
+    alt="la liste des utilisateurs TMSDEM"/>Tableau de bord</div>
+<div className="side-btn" onClick={handelshowusers}>
+    <img src="/images/icones/admin/user.png" className='mini-icon-admin' 
+    alt="la liste des utilisateurs TMSDEM"/>Utilisateur</div>
+<div className="side-btn" onClick={showtypeC}>
+    <img src="/images/icones/admin/checkout.png" 
+    className='mini-icon-admin' alt="la liste des commandes TMSDEM"/>
+    
+     commandes</div>
+     {showtypecommande && (<ul className='ul_side_btn'>
+    <li className="side-btn" onClick={()=>handelshowcommande()}>Soto</li>
+    <li className="side-btn">Chrono</li>
+    <li className="side-btn">Stock</li>
+    <li className="side-btn">Tranquille</li>
+</ul>) }
+<div className="side-btn" onClick={handelshowproduit}>
+   <img src="/images/icones/admin/gift.png" className='mini-icon-admin' 
+   alt="La liste des produit TMDSEM"/>Produits</div>
+<div className="side-btn" onClick={handelshowcubage}>
+    <img src="/images/icones/admin/cube.png" className='mini-icon-admin' 
+    alt="la liste des élèmets de cubage TMDEM"/>cubage</div>
+<div className="side-btn" onClick={showCalender}>
+    <img src="/images/icones/admin/calendar.png" className='mini-icon-admin' 
+    alt="le calendrier TMDEM"/>Calendrier</div>
 </div>
 {showCommande &&(<div className="item-admin">
 <h2 className="title-admin-inter">les commandes</h2>
-{currentPost2?.map((e)=><Comm   cart={e.cart}  user={e.user}/>)}
+{currentPost2?.map((e)=>
+
+<Comm   cart={e.cart}  user={e.user}/>
+
+)}
 
 
 
@@ -132,16 +196,13 @@ return(<div className="admin">
 <h2 className="title-admin-inter">les utilisateurs</h2>
 <div  className="item-admin-inter" >
 <div className="items-user">
-<div className="elem-user">Nom</div>
-<div className="elem-user">Prénom</div>
-<div  className="elem-user">Télèphone</div> 
-<div  className="elem-user">Email</div> 
-<div className="elem-user">Supprimer</div>
 </div>
 
 </div>
 {currentPost?.map((e)=>
-<Utilisateur  name={e.firstName} phone={e.phone}  email={e.email} fname={e.lastName} />
+<Utilisateur  name={e.firstName} phone={e.phone}  email={e.email} fname={e.lastName} 
+deletuser={
+    ()=>deletuser(e._id)}/>
 
 )}
  <Pagination  
@@ -213,12 +274,20 @@ return(<div className="admin">
 </div>)}
 
 
+{dash && (<Dashboard user={user} soto={commande}/>)}
 
 
-
-
+{/*<div className='info-admin'>
+    <div className='admin-img'></div>
+    <div className='admin-name'>admin name</div>
+    <div className='admin-name bnt-deconnect-admin'>
+        <img alt="" src="/images/icones/exit.png" className='mini-icon-admin '/>
+        Déconnexion
+   </div>
+</div>*/}
 
 </div>
+
 </div>)
 }
 export default Admin;

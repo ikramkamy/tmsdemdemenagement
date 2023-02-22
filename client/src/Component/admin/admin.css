@@ -3,31 +3,77 @@
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 1px;
+   
 }
-
+.admin{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+}
+.ul_side_btn{
+    margin-left: -50%;
+}
 .wrap-admin{
     display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+    background-color: #f3f3f3;
+    
+    padding: 5px;
+}
+.nav-admin-logo{
+    height: 30px;
+    width: 30px;
+    background-color: white;
+}
+.wrap_logo_admin{
+    background-color: #2C216F;
+    color: white;
+    width: 80%;
+    display: flex;
     justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid white;
+    padding-bottom: 3px;
 }
 .side-bar{
-    width: 300px;
-    height: 100vh;
-    border:  1px solid #2C216F;
-    margin-top: 30px;
+    width: 260px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color:#2C216F;
+    border-radius: 25px 0px 0px 25px;
+    justify-content: space-around;
+    position: fixed;
+    left: 0px;
 }
 .side-title{
     color: #2C216F;
+    height: fit-content;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 30px;
+    background-color: white;
+}
+.mini-icon-admin{
+    margin-right: 5px;
+   width: 35px;
 }
 .side-btn{
-color: #414042;
-font-weight: 510;
-font-size: 18px;
+color: white;
 margin-left: 10px;
 cursor: pointer;
-margin-bottom: 20px;
+margin-bottom: 10px;
+width: 95%;
+
+background-color: #2C216F;
+
 }
 .side-btn:hover{
 color: #ED1C24;
@@ -39,6 +85,7 @@ color: #ED1C24;
     justify-content: space-between;
     padding-left: 30px;
     padding-right: 30px;
+    
 }
 .btn-create{
     cursor: pointer;
@@ -52,4 +99,34 @@ color: #ED1C24;
 .btn{
     background-color:#ED1C24 ;
     color:white ;
+}
+.info-admin{
+    height: 100%;
+    width: 10%;
+    border-radius: 0px 25px 25px 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin-img{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    
+}
+.admin-name{
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: smaller;
+  
+}
+.bnt-deconnect-admin{
+    cursor: pointer;
 }

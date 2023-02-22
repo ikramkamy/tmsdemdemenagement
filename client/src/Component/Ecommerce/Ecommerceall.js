@@ -69,6 +69,7 @@ const handeld1=()=>{
 /***************************valiser l'inscription***************************/
 const [showsignin, setShowsignin]=useState(true)
 const token=localStorage.getItem('token');
+const [tk,setTk]=useState(token)
 useEffect(()=>{
 if(token===null){
   setShowsignin(true)
@@ -80,8 +81,9 @@ if(token===null){
       
     })
 console.log("WE ARE NO ADDING PRODUCT BEFOR SIGN IN")
-}else{
+}else if(token){
 setShowsignin(false)
+
 console.log("votre session est ouvert vous pouvez commander")
 }
 

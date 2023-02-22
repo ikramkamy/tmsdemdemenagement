@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import './animationHome.css';
 import {FaArrowRight} from 'react-icons/fa';
 import Carous from '../CarouselH'
+import Nospartenaire from '../NosPartenaire';
 export default function Home() {
 const [isScrollActive,setIsScrollActive]=useState(false)
   /*
@@ -182,7 +183,7 @@ Déménagement Maintenant
 
 
            
-
+<Nospartenaire/>
             <Footer  className="footerComponent"/>
         </div>
 

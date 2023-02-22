@@ -1,8 +1,28 @@
 .cart{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    border: 1px hidden yellow;
+    border: 1px solid yellow;
     width: 100%;
     
+}
+.cart_admin{
+    display: flex;
+    flex-direction: column;
+   width: 100%;
+   font-size:6px;
+
+}
+.list_cart_admin{
+
+}
+.liste_achat_titres{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wrap_list_achat{
+    border: 1px solid red;
+    position:absolute;
+    background-color: #f3f3f3;
+  
 }

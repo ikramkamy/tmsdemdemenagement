@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import NavBar from '../navBar/NavBar';
 import './service_style.css';
 import { FaArrowLeft, FaArrowRight} from 'react-icons/fa';
-export default function Service() {
+const  Service=()=> {
     return (
         <div className="">
 <NavBar/>
@@ -113,3 +113,4 @@ export default function Service() {
         </div>
     )
 }
+export default Service;

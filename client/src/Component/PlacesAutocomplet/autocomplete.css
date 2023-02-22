@@ -1,0 +1,59 @@
+.wrap_autocomplete{
+   
+    width: 95%;
+    margin-bottom: 20px;
+}
+.wrap_autocomplete input{
+    padding-left: 10px;
+    height: 60px;
+}
+.btn_autocomplete{
+    background-color: white;
+    border: none;
+    width: 40%;
+    border-radius: 20px;
+    background-color: #2C216F;
+    color: white;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrp_auto-btns{
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: fit-content;
+    margin-bottom: 20px;
+    
+}
+.isloaded{
+    color: lightgray;
+}
+.icon_refresh{
+    cursor: pointer;
+}
+.note_refresh_adress{
+    width:50%;
+    color: #2C216F;
+    display: none;
+}
+.refreshadress_btn:hover .note_refresh_adress{
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    left: 35%;
+    }
+.info_adresse {
+font-size: 1.3em;
+
+    }
+.info_adresse span{
+    margin-left: 15px;
+  color: #2C216F;
+}
+.info_adresse p{
+    color: lightgray;
+    font-size: 0.7em;
+}

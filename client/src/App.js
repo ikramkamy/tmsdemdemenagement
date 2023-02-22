@@ -18,6 +18,8 @@ import Signin from './Component/Signin';
 import Admin from './Component/admin';
 import Stock from './Component/Stock';
 import Tranquille from './Component/Tranquille';
+import AdminSignin from './Component/admin/AdminSignin';
+
 function App() {
 useEffect(() => {
 
@@ -34,12 +36,10 @@ useEffect(() => {
       <Router>
    <Switch>
      <Route exact path="/">< Home/></Route>
-   <Route exact path="/depart"> <div className="devis-wrap"><NavFomule/><Formulefinale/></div> </Route>
-  
 <Route exact path="/e-commerce"><NavBar/> <Ecommerceall sendPrixcarton={sendPrixcarton} /><Footer/> </Route>
   
 <Route  path="/admin"    component={Admin}  />
-
+<Route  path="/admins"    component={AdminSignin}  />
   <Route  path="/boutique">
   <Ecommerceall sendPrixcarton={sendPrixcarton}  
   className="ecommComponent"/>

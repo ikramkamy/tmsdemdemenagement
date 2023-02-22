@@ -14,6 +14,9 @@ import MonteMeuble from '../../images/1png-06.png'
 import Footer from '../footer/Footer';
 import PdfComponent from '../Pdfinventaire/PdfComponent';
 import './form-item-style.css';
+import MyComponent from '../PlacesAutocomplet';
+import Signin from '../Signin';
+import axios from 'axios';
 //simport ReactTooltip from 'react-tooltip';
 const Formulefinale = () => {
     const forceUpdate = useForceUpdate();
@@ -308,9 +311,85 @@ forceUpdate()
     const getDate = (event) => {
         setDate(event.target.value)
 }
+/**************recevoir les adresses de départ et d'arrivée********* */
+
+const [infoadresse, setInfoadresse] = useState({
+    addepart: '',
+    adarrivee: '',
+    distance_adress: 0,
+    coutTransport: 0,
+  });
+/*const { addepart, adarrivee, distance_adress } = infoadresse;*/
+const send_distance=()=>{
+    console.log( "type of the variable",typeof infoadresse.distance_adress)
+    setInfoadresse({
+        addepart:localStorage.getItem('originref'),
+        adarrivee:localStorage.getItem('destination'),
+        distance:localStorage.getItem('distance'),
+        coutTransport: 0,
+    })
+if(infoadresse.distance_adress > 50){
+    
+    console.log("le cout du transport est ", infoadresse.coutTransport)
+    setInfoadresse({
+        addepart:localStorage.getItem('originref'),
+        adarrivee:localStorage.getItem('destination'),
+        distance:localStorage.getItem('distance'),
+        coutTransport:infoadresse.distance_adress,
+    })}
+else{
+    alert("la distance dépasse les 50 km , une tarification sera appliquée")
+    setInfoadresse({
+        addepart:localStorage.getItem('originref'),
+        adarrivee:localStorage.getItem('destination'),
+        distance:localStorage.getItem('distance'),
+        coutTransport:0,
+    })
+    
+  }
+}
+/***************************Require signe in to get price estimation************************* */
+const [showsignin, setShowsignin]=useState(true)
+const token=localStorage.getItem('token')
+const [tk,setTk]=useState(token)
+const [user,setUser]=useState([])
+const _id=localStorage.getItem('user_id')
+useEffect(()=>{
+if(token===null){
+  setShowsignin(true)
+  const modal = document.querySelector(".modal")
+    const closeBtn3 = document.querySelector(".close3")
+    modal.style.display = "block";
+    closeBtn3.addEventListener("click", () => {
+      modal.style.display = "none";
+      
+    })
+
+}else if(token){
+setShowsignin(false)
+axios.get(`/getuserbyid/${_id}`).then((response)=>{
+    setUser(response.data);
+ 
+  }).catch((err)=>{
+   
+  })
+}
+console.log("we are getting data unser for la formule final",user)
+},[])
+/****************************Associé la commande avec le nom d'utilisateur******************************** */
+
+//console.log("user",_id)
 
 
-    return (
+useEffect(()=>{
+axios.get(`/getuserbyid/${_id}`).then((response)=>{
+  setUser(response.data);
+  console.log("we are getting data unser for la formule final",user)
+}).catch((err)=>{
+})
+},[])  
+
+return (
 
         <div className="principal-formulaire">
  
@@ -319,8 +398,19 @@ forceUpdate()
                     <div className="fermer-inventaire">
                     <div className="header-inventaier" onClick={()=>setShowpdf(!showpdf)}>&times;</div>
                    </div>
-            <PdfComponent date={date} cubage={cubage} adress1="adress de départ"  
-             adress2="adress2" total={total} roomList={roomList} cart={cart}/></div>)}
+            <PdfComponent 
+            name={user.firsrname}
+
+            date={date} 
+            cubage={cubage} 
+            adress1={infoadresse.addepart} 
+            distance={infoadresse.distance} 
+            adress2={infoadresse.adarrivee} 
+            total={total} 
+            roomList={roomList} 
+            cart={cart} 
+             
+             /></div>)}
 
             <div style={{ width: "80%" }}>
                 <div className="text-calcul">
@@ -343,15 +433,19 @@ forceUpdate()
                                     <input type="date" className="date-input-style" value={date} onChange={getDate} />
                                 </div>
                             </div>
+                        <MyComponent send_distance={send_distance}/>
+                           
                         </div>
-
+le coût du transport : {infoadresse.coutTransport}
 
                         <div className="calcul-bloc-item" id="date">
                             <div className="inter-calcul-item">
                                 <h1 className="principale-titles"> <img src={ImgDepart} className="reficonsFORM"/>Départ</h1>
                                 <div className="adressContainerWrapForm">
+                                
                                     <div className="addWrapperInput">
-                                        <input type="text" className="address-input" />
+                                    <h5> {infoadresse.addepart}</h5>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -477,7 +571,7 @@ forceUpdate()
                                 <h1 className="principale-titles"> <img src={ImgDepart} className="reficonsFORM" alt=""/>Arrivé</h1>
                                 <div className="adressContainerWrapForm">
                                     <div className="addWrapperInput">
-                                <input type="text" className="address-input" />
+                               <h5 >{infoadresse.adarrivee}</h5> 
 </div>
 </div>
                             </div>
@@ -1013,7 +1107,18 @@ moy:{moy}<br/>
 simple:{simple}<br/>
 complique:{complique}<br/>*/}
             </div>
+            {showsignin && (<div>
 
+<div className="js-btn"></div>
+<div class="modal">
+<div class="modal_content-signin">
+<span class="close3" style={{display:"none"}}>&times;</span> 
+<Signin hidesignBox={()=>setShowsignin(false)}/>
+ 
+</div>
+</div>
+
+</div>)}
             <Footer className="footSotoPage" style={{zIndex : "-10000"}}/>
         </div>)
 }

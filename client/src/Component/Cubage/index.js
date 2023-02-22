@@ -2,7 +2,8 @@ import React, { useState,useEffect } from 'react';
 import  './carton.css';
 import {FaArrowDown,FaEye,FaPlus, FaTrash} from 'react-icons/fa';
 import useForceUpdate from 'use-force-update';
-import { Comment_details,Comment_details2,Comment_details3 ,Comment_details4 , Comment_details5,Comment_Objet_Dialoguebox} from '../Comments';
+import { Comment_details,Comment_details2,Comment_details3 ,
+  Comment_details4 , Comment_details5,Comment_Objet_Dialoguebox} from '../Comments';
 const Cubage=(props)=>{
 const{showVolum}=props;
 const {handelCubage, handelroomList}=props;

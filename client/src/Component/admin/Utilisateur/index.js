@@ -4,15 +4,23 @@ import axios  from 'axios';
 import './utilisateur.css';
 import {FaPen, FaTrash, sFaTrash} from 'react-icons/fa';
 const Utilisateur=(props)=>{
-
+const {deletuser}=props
  
 return(<div className="item-admin-inter">
-    <div className="items-user">
-    <div className="elem-user">{props.name}</div>
-    <div className="elem-user">{props.fname}</div>
-    <div className="elem-user">{props.phone}</div>
-    <div className="elem-user width-style">{props.email}</div>
-    <div className=" elem-user icon-delete"><FaTrash/> supprimer</div>
+    <div className="new-user-itemm">
+        <div className='info-user'>
+        <div className="elem-user">
+        <div  className='elem_user_text'>{props.fname}-{props.name}</div>
+        <div className='elem_user_text Grey'>{props.email}</div>
+        <div className='elem_user_text Grey'>+33 {props.phone}</div>
+        </div>
+   
+    </div>
+    <div className='commande-user'></div>
+    
+    
+    
+    <div className=" elem-user icon-delete" onClick={deletuser}><FaTrash/></div>
 </div>
 
 

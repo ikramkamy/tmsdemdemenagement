@@ -12,7 +12,7 @@ return(
 <div className="pagination">
 { pageNumbers?.map((number)=>
     <li key={number} className="page-item">
-  <div className="page-link" onClick={()=>paginate(number)}>
+  <div className="page-link pagination_num" onClick={()=>paginate(number)}>
       {number}
    </div>
    </li>

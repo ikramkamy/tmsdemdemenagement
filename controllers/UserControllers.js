@@ -62,15 +62,14 @@ exports.signup = (req, res) => {
       if (error) return res.status(400).json({ error });
       if (user) {
         const isPassword = await user.authenticate(req.body.password);
-       
-        if (isPassword && user.role === "user") {
-          // const token = jwt.sign(
-          //   { _id: user._id, role: user.role },
-          //   process.env.JWT_SECRET,
-          //   { expiresIn: "1d" }
-          // );
-          const token = generateJwtToken(user._id, user.role);
+        /*const token = generateJwtToken(user._id, user.role);*/
           const { _id, firstName, lastName, email,phone } = user;
+          if (isPassword && user.role === "user") {
+            const token = jwt.sign(
+             { _id: user._id, role: user.role },
+             process.env.JWT_SECRET,
+             { expiresIn: "60" }
+          );
           res.status(200).json({
             token,
             user: { _id, firstName, lastName, email,phone },
@@ -89,7 +88,13 @@ exports.signup = (req, res) => {
     });
   };
 
-
+  exports.requiresignin=(req,res,next)=>{
+    const token=(req.headers.authorization).split(" ")[1];
+    console.log(token)
+    const user=jwt.verify(token, process.env.JWT_SECRET);
+    req.user=user;
+    next()
+    }
 
   exports.Delete=(req,res)=>{
 

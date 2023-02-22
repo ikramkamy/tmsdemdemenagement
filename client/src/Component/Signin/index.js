@@ -1,8 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import './signin.css';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import {loginUser} from '../actions/useractions';
 /* test pull2*/ 
 import Signup from './SignUp';
@@ -13,7 +10,6 @@ const Signin=(props)=>{
     window.scrollTo(0, 0)
   }, [])
 const AUTH = 'AUTH';
-const history = useHistory();
 const [issignin,setIssignin]=useState(false);
 const {showinscription}=props;
 const [sign,setSign]=useState("Connectez-vous")
@@ -42,25 +38,17 @@ const handelChange2=(event)=>{
        
 const token=localStorage.getItem('token');
 const handelClick=()=>{
- // alert('we are adding user')
+
 input.email=email;
 input.password=password;
-/*
-loginUser(input);
-
-setInput(
-  { email:"",
-   password:""}
- )
-*/
 
  loginUser(input).then(response => {
-  console.log("we finished logging in")
+console.log('response of login function',response.data.token)
   }).catch(error => {
   console.log("the raison of failure", error) 
  })
 if(token!==null){
-  history.push("/boutique")
+  //history.push("/boutique")
   setInput(
    { email:"",
     password:""}
@@ -96,11 +84,6 @@ return(
 <img src="/images/logo-01.png" className="logo-sign_box"/>
  </div>
  </div>
-{/*<div className="header-sign" >
-{sign}
-<img src="/images/tmsdemfooterlogo.png" className="logo-sign"/>
-</div>*/}
-{/*<img src="/images/3.png" className="logo-sign"/>*/}
 { !show && (
 <div className="signin-box-wrap">
 
