@@ -164,13 +164,15 @@ height: 20%;
     color: #2C216F;
     overflow: hidden;
     font-family: 'Montserrat', sans-serif;
- 
 }
 .titleSlide h3{
- color: white;
+    text-align: left;
+    color: white;
     overflow: hidden;
    font-weight: 300;
    margin-top: 20px;
+   width: 100%;
+  
 }
 
  .titleSlide h2{

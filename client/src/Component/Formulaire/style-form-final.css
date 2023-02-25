@@ -66,7 +66,7 @@
     width: 90%;
 }
 .total-formulaire{
-width: 90%;
+width: 100%;
 height: 50px;
 border: 1px solid lightgray;
 border-radius: 5px 5px 5px 5px;
@@ -566,6 +566,9 @@ height: 40px;
     background-color: transparent;
     border : 2px solid #2C216F;
     border-radius: 5px;
+    padding: 40px;
+    font-size: 1.5em;
+    color: #2C216F;
 }
 .center-comments{
     border: 1px hidden red;

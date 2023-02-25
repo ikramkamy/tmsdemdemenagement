@@ -14,7 +14,7 @@ const  MyComponent=(props) =>{
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
   const [trigerdistansecal,setTrigerdistansecal]=useState(0)
-  const {send_distance}=props;
+  const {send_distance,send}=props;
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef()
   /** @type React.MutableRefObject<HTMLInputElement> */
@@ -25,9 +25,20 @@ const  MyComponent=(props) =>{
     console.log("we are sending values from autocomplete componenet",originRef )
     })
     */
+    const [cout,setCout]=useState(0);
+
+   /* const handelcost=()=>{
+      console.log(distance.split(' ')[0])
+ if(Number(distance.split(' ')[0])>50){setCout(
+        (Number(distance.split(' ')[0])-50)*2)}
+      else{
+        setCout(0)
+      }
+      console.log("cout de transport dis", cout)
+    }
+ */
    
-    
-  if (!isLoaded) {
+ if (!isLoaded) {
     return <div className='isloaded'>is loaded</div>
   }
 
@@ -41,6 +52,7 @@ const  MyComponent=(props) =>{
     localStorage.setItem('destination',destiantionRef.current.value)
     localStorage.setItem('distance',distance)
     localStorage.setItem('duration',duration)
+   
     const results = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
@@ -51,9 +63,21 @@ const  MyComponent=(props) =>{
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
     send_distance(distance,duration)
+  
+  
+    if(Number(distance.split(' ')[0])>50){
+      alert('la distance dépasse des 50 km une tarification sera appliquée')
+      setCout(
+      (Number(distance.split(' ')[0])-50)*2)}
+    else{
+      setCout(0)
+    }
+  
+  
   }
 
-  function clearRoute() {
+
+ function clearRoute() {
     setDirectionsResponse(null)
     setDistance('')
     setDuration('')
@@ -64,18 +88,23 @@ const  MyComponent=(props) =>{
     localStorage.removeItem('distance')
     localStorage.removeItem('duration')
   }
- 
-
+  const handelChange=()=>{
+    send(originRef,destiantionRef,distance,duration)
+   
+   }
+  
   return (
     <div className='wrap_autocomplete'>
    <Autocomplete>
-              <input type='text' placeholder='Adresse de départ' ref={originRef} />
+              <input type='text' placeholder='Adresse de départ' ref={originRef} onChange={
+                handelChange}/>
    </Autocomplete>
    <Autocomplete>
               <input
                 type='text'
                 placeholder="Adresse d'arrivée"
                 ref={destiantionRef}
+                onChange={handelChange}
               />
     </Autocomplete>
     <div className='wrp_auto-btns'>

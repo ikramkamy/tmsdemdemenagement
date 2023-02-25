@@ -117,7 +117,7 @@ console.log("la commande est pret à envoyer",commande)
 },[])
 const handelcommande=()=>{
 axios.post('/ajouter-une-commande',commande).then(()=>{
-alert("votre commande a étè envoyée avce succés")
+alert("votre commande a étè envoyée avec succés")
 setCart([]);
 setShow(false)
 localStorage.clear();

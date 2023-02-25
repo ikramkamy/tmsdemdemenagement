@@ -16,6 +16,7 @@ import PdfComponent from '../Pdfinventaire/PdfComponent';
 import './form-item-style.css';
 import MyComponent from '../PlacesAutocomplet';
 import Signin from '../Signin';
+import UserToform from './UserToform';
 import axios from 'axios';
 //simport ReactTooltip from 'react-tooltip';
 const Formulefinale = () => {
@@ -278,19 +279,53 @@ forceUpdate()
     }, [varchange])
     /*************************************************VOIR LES OBJETS LOURD*******************************/
     const [lourd, setLourd] = useState(true);
-    const [piono, setPiano] = useState(false);
-    const [pianonum, setPianonum] = useState(0);
-    const [frigo, setFrigo] = useState(false)
+    const [piano, setPiano] = useState(false);
+    const [frigo, setFrigo] = useState(false);
+    const [triglourd,setTriglourd]=useState(0);
+    const [lourPdf,setLourdPdf]=useState({
+       piano:"",
+       frigo:"", 
+       pas_obejts_lourd:""
+    })
     const handelLourd = () => {
         setLourd(!lourd)
+        /*setTriglourd(triglourd+1)*/
+        if(lourd===true){
+         
+            setPiano(false)
+            setFrigo(false) 
+            setTriglourd(triglourd+1)
+        }
+        else{ 
+            setLourd(!lourd)
+            setPiano(piano)
+            setFrigo(frigo)
+            setTriglourd(triglourd+1)
+        }
     }
     const handelpiano = () => {
-        setPiano(!piono);
-
+        setPiano(!piano);
+        setFrigo(frigo)
+        setTriglourd(triglourd+1)
     } 
     const handelfrigo = () => {
         setFrigo(!frigo)
+        setPiano(piano)
+        console.log("frigo",frigo)
+        console.log("piano",piano)
+        setTriglourd(triglourd+1)
     }
+useEffect(()=>{
+    
+if(piano===true && frigo===false){setLourdPdf({piano:"Piano",frigo:"", pas_obejts_lourd:""})}
+else if (piano===false && frigo===true){setLourdPdf({piano:"",frigo:"Frigo", pas_obejts_lourd:""})}
+else if (piano===true && frigo===true){setLourdPdf({piano:"Piano",frigo:"Frigo", pas_obejts_lourd:""})}
+else if (piano===false && frigo===false){setLourdPdf(
+{piano:"",frigo:"", pas_obejts_lourd:"Il n'y a pas des objets lourds"}
+  
+    )
+    }
+},[triglourd])
 
     /***************************************************************************************************/
     /*****************************************************Calcul pri carton**************************************** */
@@ -312,7 +347,6 @@ forceUpdate()
         setDate(event.target.value)
 }
 /**************recevoir les adresses de départ et d'arrivée********* */
-
 const [infoadresse, setInfoadresse] = useState({
     addepart: '',
     adarrivee: '',
@@ -338,7 +372,7 @@ if(infoadresse.distance_adress > 50){
         coutTransport:infoadresse.distance_adress,
     })}
 else{
-    alert("la distance dépasse les 50 km , une tarification sera appliquée")
+   /* alert("la distance dépasse les 50 km , une tarification sera appliquée")*/
     setInfoadresse({
         addepart:localStorage.getItem('originref'),
         adarrivee:localStorage.getItem('destination'),
@@ -348,46 +382,70 @@ else{
     
   }
 }
+const send=(e,f,g,h)=>{
+    if (g<50){
+        setInfoadresse({
+            addepart:e.current.value,
+            adarrivee:f.current.value,
+            distance:g,
+            coutTransport:0
+           })
+    }
+ 
+   
+}
+
 /***************************Require signe in to get price estimation************************* */
 const [showsignin, setShowsignin]=useState(true)
-const token=localStorage.getItem('token')
-const [tk,setTk]=useState(token)
-const [user,setUser]=useState([])
-const _id=localStorage.getItem('user_id')
-useEffect(()=>{
-if(token===null){
-  setShowsignin(true)
-  const modal = document.querySelector(".modal")
-    const closeBtn3 = document.querySelector(".close3")
-    modal.style.display = "block";
-    closeBtn3.addEventListener("click", () => {
-      modal.style.display = "none";
-      
-    })
-
-}else if(token){
-setShowsignin(false)
-axios.get(`/getuserbyid/${_id}`).then((response)=>{
-    setUser(response.data);
- 
-  }).catch((err)=>{
-   
-  })
-}
-console.log("we are getting data unser for la formule final",user)
-},[])
+const [user,setUser]=useState({});
+/**********************send / user info for price estimator ******/
+const senduser=(u)=>{
+    setUser(user)
+    if(u.type_dem!=="" && u.nom !=="" && u.prenom!=="" && u.email!=="" && u.num!=="" && u.civilite!==""){
+        setUser(u)
+        setShowsignin(false)}
+    else{alert("Vous devez remplir les champs vides!")}
+    }
 /****************************Associé la commande avec le nom d'utilisateur******************************** */
-
-//console.log("user",_id)
-
-
-useEffect(()=>{
-axios.get(`/getuserbyid/${_id}`).then((response)=>{
-  setUser(response.data);
-  console.log("we are getting data unser for la formule final",user)
-}).catch((err)=>{
+const [pdf_full_info,setPdf_full_info]=useState({
+    name:"",
+    fname:"",
+    type_dem:"",
+    email:"",
+    date:"",
+    cubage:0,
+    adress1:"",
+    distance:0, 
+    adress2:"",
+    total:120, 
+    roomList:[],
+    
 })
-},[])  
+useEffect(()=>{
+    setPdf_full_info({
+        name:user.prenom,
+        fname:user.nom,
+        type_dem:user.type_dem,
+        email:user.email,
+        date:date,
+        cubage:cubage,
+        adress1:infoadresse.addepart,
+        distance:infoadresse.distance, 
+        adress2:infoadresse.adarrivee,
+        total:total, 
+        roomList:roomList, 
+    })
+},[])
+console.log("pfd info ",pdf_full_info.name)
+const sendpdftoAdmin=()=>{
+   axios.post('/ajouter-une-soto-commande', pdf_full_info).then(()=>{
+        alert("votre commande soto a étè envoyée avec succés")
+        localStorage.clear();
+        }).catch((err)=>{
+
+            console.log("error in soto post",err)
+        })
+}
 
 return (
 
@@ -399,8 +457,10 @@ return (
                     <div className="header-inventaier" onClick={()=>setShowpdf(!showpdf)}>&times;</div>
                    </div>
             <PdfComponent 
-            name={user.firsrname}
-
+            name={user.nom}
+            fname={user.prenom}
+            type_dem={user.type_dem}
+            email={user.email}
             date={date} 
             cubage={cubage} 
             adress1={infoadresse.addepart} 
@@ -409,7 +469,8 @@ return (
             total={total} 
             roomList={roomList} 
             cart={cart} 
-             
+            sendpdftoAdmin={sendpdftoAdmin}
+            lourPdf={lourPdf}
              /></div>)}
 
             <div style={{ width: "80%" }}>
@@ -433,7 +494,7 @@ return (
                                     <input type="date" className="date-input-style" value={date} onChange={getDate} />
                                 </div>
                             </div>
-                        <MyComponent send_distance={send_distance}/>
+                        <MyComponent send_distance={send_distance} send={send}/>
                            
                         </div>
 le coût du transport : {infoadresse.coutTransport}
@@ -774,7 +835,7 @@ le coût du transport : {infoadresse.coutTransport}
                                                 </div>
                                     </div>
                                     <div className="unitVolumCalc"> 
-                                        <input className="input-vol" type="number" name="vol2" value={cubage} style={{fontSize:"1em"}} />
+                                        <input className="input-vol" type="number" name="vol2" value={cubage.toFixed(2)} style={{fontSize:"1em"}} />
                                         <span className="unit-vol" style={{ marginLeft: "5px" }}>m<sup >3</sup></span>
                                     </div>
 
@@ -815,12 +876,15 @@ le coût du transport : {infoadresse.coutTransport}
 
                                     <div className="wrap-yes-no-aide">
                                 <div> 
-                                    <input  type="radio" label="Oui"  id="autoo2" value="oui" name="rdB3" checked={lourd} /*checked={autoO}*/ onChange={handelLourd} />
+                                    <input  type="radio" label="Oui"  id="autoo2" value="oui"
+                                     name="rdB3" checked={lourd}  onClick={handelLourd} />
                                     <label for="Oui">Oui</label>
                                     </div>
 
                                     <div>
-                                    <input  type="radio" label="Non"  id="autoo2" value="non" name="rdB3" checked={!lourd}  /* checked={autoO} */ onChange={handelLourd} />
+                                    <input  type="radio" label="Non"  
+                                    id="autoo2" value="non" name="rdB3" checked={!lourd}  
+                                    onClick={handelLourd} />
                                     <label for="Non">Non</label>
                                     </div>
 </div>
@@ -842,16 +906,19 @@ le coût du transport : {infoadresse.coutTransport}
                         {lourd && (
                             <div className="inter-calcul-item  dsplyclmn" style={{marginTop: "-50px"}}>
                                 <div className="mdbinput">
-                                <div style={{display:"flex"}}> 
+                                <div className='piano_Frigo'> 
                                     <input  type="radio" label="Piano"  
-                                    id="piano" value="Piano" name="rdB5" checked={piono}/*checked={autoO}*/ onChange={handelpiano} />
+                                    id="piano" value={piano} name="piano" checked={piano}
+                                    onClick={handelpiano} />
                                     <label for="Piano">Piano</label>
                                     </div>
                                 </div>
 
                                 <div className="mdbinput">
-                                <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Frigo" id="frigo" value="Frigo" name="rdB5" checked={piono}/*checked={autoO}*/ onChange={handelpiano} />
+                                <div className='piano_Frigo'> 
+                                    <input  type="radio" label="Frigo" id="frigo" 
+                                    value={frigo} name="frigo" checked={frigo}
+                                    onClick={handelfrigo} className="input_frigo_remove_margin"/>
                                     <label for="Frigo">Frigo</label>
                                     </div>
 
@@ -881,7 +948,9 @@ le coût du transport : {infoadresse.coutTransport}
                             <div className="inter-calcul-item dsplyclmn">
                                 <div className="mdbinput">
                                 <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Aucune aide" id="rmntgN" value="Aucune aide" name="rdB6" checked={rmntgN} /*checked={autoO}*/ onChange={handelRMNT1} />
+                                    <input  type="radio" label="Aucune aide" id="rmntgN" className="input_frigo_remove_margin"
+                                    value="Aucune aide" name="rdB6" checked={rmntgN} /*checked={autoO}*/ 
+                                    onChange={handelRMNT1} />
                                     <label for="Aucune aide">Aucune aide</label>
                                     </div>
 
@@ -895,7 +964,8 @@ le coût du transport : {infoadresse.coutTransport}
                                 <div className="mdbinput">
 
                                 <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Démontage et remontage" id="rmtgdmtg" value="Démontage et remontage" name="rdB6" checked={rmtgdmtg} /*checked={autoO}*/ onChange={handelRMNT2} />
+                                    <input  type="radio" label="Démontage et remontage"  className="input_frigo_remove_margin"
+                                    id="rmtgdmtg" value="Démontage et remontage" name="rdB6" checked={rmtgdmtg} /*checked={autoO}*/ onChange={handelRMNT2} />
                                     <label for="Démontage et remontage"> Démontage et remontage</label>
                                     </div>
 
@@ -907,7 +977,10 @@ le coût du transport : {infoadresse.coutTransport}
 
                                 <div className="mdbinput">
                                 <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Démontage seul" id="dementaged" value="Démontage seul" name="rdB6" checked={dementaged}  /*checked={autoO}*/ onChange={handelRMNT3} />
+                                    <input  type="radio" label="Démontage seul" id="dementaged" 
+                                    value="Démontage seul" name="rdB6" checked={dementaged}  
+                                    className="input_frigo_remove_margin"
+                                    /*checked={autoO}*/ onChange={handelRMNT3} />
                                     <label for="Démontage seul"> Démontage seul</label>
                                     </div>
 
@@ -921,7 +994,10 @@ le coût du transport : {infoadresse.coutTransport}
                                 <div className="mdbinput">
 
                                 <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Remontage seul" id="remontager" value="Démontage seul" name="rdB6" checked={remontager}  /*checked={autoO}*/ onChange={handelRMNT4} />
+                                    <input  type="radio" label="Remontage seul" id="remontager"
+                                     value="Démontage seul" name="rdB6" checked={remontager} 
+                                     className="input_frigo_remove_margin" 
+                                     /*checked={autoO}*/ onChange={handelRMNT4} />
                                     <label for="Remontage seul"> Remontage seul</label>
                                     </div>
 
@@ -989,7 +1065,7 @@ le coût du transport : {infoadresse.coutTransport}
 
 
                                     <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Oui"
+                                    <input  type="radio" label="Oui" className="input_frigo_remove_margin"
                                      id="checkbox1" value="Oui" name="rdB7" checked={box1} 
                                       /*checked={autoO}*/ onChange={handelCheck} />
                                     <label for="Oui"> Oui</label>
@@ -1004,7 +1080,8 @@ le coût du transport : {infoadresse.coutTransport}
                                     </div>
                                     <div className=" mdbinput" style={{ marginBottom: "30px" }}>
                                     <div style={{display:"flex"}}> 
-                                    <input  type="radio" label="Non" id="checkbox2" value="Oui" name="rdB7" checked={box2}  /*checked={autoO}*/ onChange={handelCheck2} />
+                                    <input  type="radio" label="Non" id="checkbox2"  className="input_frigo_remove_margin"
+                                    value="Oui" name="rdB7" checked={box2}  /*checked={autoO}*/ onChange={handelCheck2} />
                                     <label for="Non"> Non</label>
                                     </div>
 
@@ -1093,7 +1170,7 @@ le coût du transport : {infoadresse.coutTransport}
                 <div className="total-formulaire" style={{border:"none"}}>
                     <div style={{ 
                     fontWeight:"600", color:"rgb(44,33,111)",
-                     border:"none", fontSize:"1.77em", marginTop:"-30px"}}>Total: {total} €</div>
+                     border:"none", fontSize:"1.77em", marginTop:"-30px"}}>Total: {total.toFixed(2)} €</div>
 
                 </div>
                 <div className=" btn-formule btn-download" style={{border:"1px hidden black", width:"250px", background:"#ED1C24", color:"white"}}
@@ -1113,8 +1190,8 @@ complique:{complique}<br/>*/}
 <div class="modal">
 <div class="modal_content-signin">
 <span class="close3" style={{display:"none"}}>&times;</span> 
-<Signin hidesignBox={()=>setShowsignin(false)}/>
- 
+{/*<Signin hidesignBox={()=>setShowsignin(false)}/>*/}
+ <UserToform senduser={senduser}/>
 </div>
 </div>
 

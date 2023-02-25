@@ -1,7 +1,7 @@
 
 export  const producList=[
-     {name:"carton livre",
-        prix:"20",
+     {name:"carton à livre",
+        prix:"0.98",
         dimmension:"35 x 27,5 x 30 cm",
         quantite:0,
         description:"3 à 4 cartons par mètre linéaire de livres",
@@ -10,7 +10,7 @@ export  const producList=[
         {
           url:"/images/cartonstandard.jpg",
         name:"carton standard",
-        prix:"20",
+        prix:"1.37",
         dimmension:"55 x 35 x 30 cm",
         quantite:0,
         description:"10 à 20 par pièce"

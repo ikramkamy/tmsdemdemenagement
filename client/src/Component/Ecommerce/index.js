@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import Item from './ItemWrap';
 import  {MDBInput}  from 'mdbreact';
 import useForceUpdate from 'use-force-update';
+import { producList, producList2,producList3,producList4 } from './produclist';
 const Ecommerce=(props)=>{
   
 const forceUpdate = useForceUpdate();
 const{sendPrixcarton,show,sendCart}=props;
 const[prixcarton,setPrixcarton]=useState(0);
 const [increment,setIncrement]=useState();
-
+const [produit,setProduit]=useState(producList);
+/*
 const[produit,setProduit]=useState([
 {name:"carton livre",
 prix:"20 £",
@@ -30,6 +32,7 @@ description:"10 à 20 par pièce"
 },
 
   ])
+  */
 const[produit2,setProduit2]=useState([
     {
       url:"/images/cartonstandard.jpg",

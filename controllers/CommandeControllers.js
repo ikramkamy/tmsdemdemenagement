@@ -18,7 +18,7 @@ exports.addcommande =( req,res)=>{
   
         if (mycommand) {
          
-          const { cart,user} = mycommand;
+          const {cart,user} = mycommand;
     
       
           return res.status(201).json(mycommand);

@@ -1,0 +1,33 @@
+.wrap_form_user{
+    width: 70%;
+    border: 1px solid #2c216f;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    background-color: white;
+}
+.font_label_user_form{
+font-size: 1.2em;
+font-weight: 700;
+color: #2c216f;
+}
+.wrap_form_user_f{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.unify_inputs{
+    height: 45px;
+}
+.width_btn{
+    width: 50%;
+}
+.form-label{
+    font-weight: 700;
+    color:#2c216f;
+}
+.usertoform{
+    width: 100%;
+}

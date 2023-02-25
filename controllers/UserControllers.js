@@ -128,7 +128,7 @@ exports.getuserbyid=(req,res)=>{
 User.find({_id:req.params._id}).then((data)=>{
 res.json(data);
 }).catch((err)=>{
-  console.log("error",err)
+  console.log("****error on a pas trouvé l'utilisateur*******",err)
 res.json({
   err:err,
   message:"nous n'avons pas pu trouver l'utilisateur"

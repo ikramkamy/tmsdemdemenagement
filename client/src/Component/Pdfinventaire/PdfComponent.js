@@ -3,15 +3,14 @@ import { jsPDF } from "jspdf";
 import Pdfinvent from '../Pdfinventaire';
 import './pdf.css';
 const PdfComponent=(props)=>{
-    const {roomList,cart}=props;
+    const {roomList,cart,sendpdftoAdmin}=props;
     console.log("my cart is in pdf compo",cart)
     const generatepdf = () => {
+       
        var doc = new jsPDF('portrait', 'pt','a3');
-  
-       doc.html(document.querySelector("#all"), { callback: function (pdf) { pdf.save("inventaire.pdf") } })
-
-   
-    }
+       doc.html(document.querySelector("#all"), 
+       { callback: function (pdf) { pdf.save("inventaire.pdf") } })
+}
 
     return(<div className="modal-cart modal-pdf">
           <Pdfinvent generatepdf={generatepdf} className="wrap-pdf" >
@@ -33,8 +32,21 @@ const PdfComponent=(props)=>{
                 </h1>
                 <h1 className="principale-titles-pdf" style={{color:"#2c216f"}}> Votre demande</h1>
                 <div className="inevnt-item">
-                    <div>La date:</div>
+                <div>M/Mme: </div>
+                <div>{props.name} {props.fname}</div>
+                </div>
+                <div className="inevnt-item">
+               
+                    <div>La date:</div> 
                     <div>{props.date}</div>
+                </div>
+                <div className="inevnt-item">
+                    <div>Type de déménagement:</div>
+                    <div>{props.type_dem}</div>
+                </div>
+                <div className="inevnt-item">
+                    <div>Email:</div>
+                    <div>{props.email}</div>
                 </div>
                 <div className="inevnt-item">
                     <div>l'adresse de départ :</div>
@@ -49,7 +61,7 @@ const PdfComponent=(props)=>{
                     <div>Le volume de total  calculé en m³</div>
                     
                 </div>
-                <div className='total-cubage'>{props.cubage}</div>
+                <div className='total-cubage'>{props.cubage.toFixed(2)}</div>
                
                 <div className='special-item-titles'>
                     <div className='sp-it-tit-obj'>Object</div>
@@ -80,7 +92,7 @@ const PdfComponent=(props)=>{
                 </div>
                 </div>
                 <div className='wrap-cart-for-pdf_title' >
-                    <div>Objet</div>
+                    <div >Objet</div>
                     <div>Le prix unitaire</div>
                     <div>La quantité</div>
                 </div>
@@ -91,6 +103,19 @@ const PdfComponent=(props)=>{
                 </div>
 
                 )}
+                  <div className="inevnt-item special-item"><div>Les objets lourds:</div></div>
+                    
+                    <div className="inevnt-item lour_style">
+                        <div >{props.lourPdf.piano}</div>
+                        <div >{props.lourPdf.frigo}</div>
+                       <div >{props.lourPdf.pas_obejts_lourd}</div> 
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                  
                 <div className="inevnt-item invent-montant" style={{ marginBottom: "50px" }}>
                     <div>Le montant total:</div>
                     <div>{props.total} euro</div>
@@ -100,7 +125,7 @@ const PdfComponent=(props)=>{
         </div>
         <div className=" btn-formule btn-download"
             onClick={generatepdf}>Télècharger</div>
-           
+           <div onClick={sendpdftoAdmin}>Envoyez la commande soto à l'admin</div>
             </div>
             </Pdfinvent>
     </div>

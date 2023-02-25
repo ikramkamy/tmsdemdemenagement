@@ -13,3 +13,14 @@
     font-weight: 600;
     font-size: larger;
 }
+.spaceCommentClient{
+    width: 80%;
+}
+.piano_Frigo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input_frigo_remove_margin{
+    margin-bottom: 0px;
+}

@@ -19,6 +19,7 @@ import Admin from './Component/admin';
 import Stock from './Component/Stock';
 import Tranquille from './Component/Tranquille';
 import AdminSignin from './Component/admin/AdminSignin';
+import UserToform from './Component/Formulaire/UserToform';
 
 function App() {
 useEffect(() => {
@@ -76,7 +77,7 @@ useEffect(() => {
 <Route exact path="/stock"><Stock/></Route>
 <Route exact path="/contact"><Contactus/><Footer/></Route>
 <Route   exact path="/signin"     component={Signin}/>
-<Route exact path="/pdf"><Pdfinvent/></Route>
+<Route exact path="/pdf"><Pdfinvent/><UserToform/></Route>
    </Switch>
    </Router>
     </div>

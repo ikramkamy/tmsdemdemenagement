@@ -8,6 +8,7 @@ const env=require('dotenv');
 const bodyParser = require("body-parser");
 const produitRoutes=require('./routes/ProduitsRoutes');
 const cubageRoutes=require('./routes/CubageRoutes');
+const sotoRoutes=require('./routes/SotoRoutes')
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin","*"); 
@@ -19,6 +20,7 @@ app.use(userRouter);
 app.use(CommandeRoutes);
 app.use(produitRoutes);
 app.use(cubageRoutes);
+app.use(sotoRoutes);
 env.config();
 //app.use(express.static(path.join(__dirname, 'build')));
 
