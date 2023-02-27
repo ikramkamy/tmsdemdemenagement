@@ -9,8 +9,7 @@ const PdfComponent=(props)=>{
        
        var doc = new jsPDF('portrait', 'pt','a3');
        doc.html(document.querySelector("#all"), 
-       { callback: function (pdf) { pdf.save("inventaire.pdf") } })
-}
+       { callback: function (pdf) { pdf.save("inventaire.pdf") } })}
 
     return(<div className="modal-cart modal-pdf">
           <Pdfinvent generatepdf={generatepdf} className="wrap-pdf" >
@@ -61,7 +60,7 @@ const PdfComponent=(props)=>{
                     <div>Le volume de total  calculé en m³</div>
                     
                 </div>
-                <div className='total-cubage'>{props.cubage.toFixed(2)}</div>
+                <div className='total-cubage'>{props.cubage}</div>
                
                 <div className='special-item-titles'>
                     <div className='sp-it-tit-obj'>Object</div>
@@ -84,7 +83,8 @@ const PdfComponent=(props)=>{
                 
                 </div>)}
                
-                <div className="inevnt-item special-item"><div>Le volume de total estimé:</div><div>{props.vol1}</div></div>
+                <div className="inevnt-item special-item"><div>Le volume de total estimé:</div>
+                <div>{props.vol1}</div></div>
                 <div className="inevnt-item"><div>La liste d'achat: </div>
                 
                 
@@ -110,12 +110,6 @@ const PdfComponent=(props)=>{
                         <div >{props.lourPdf.frigo}</div>
                        <div >{props.lourPdf.pas_obejts_lourd}</div> 
                     </div>
-                    
-                    
-                    
-                    
-                    
-                  
                 <div className="inevnt-item invent-montant" style={{ marginBottom: "50px" }}>
                     <div>Le montant total:</div>
                     <div>{props.total} euro</div>

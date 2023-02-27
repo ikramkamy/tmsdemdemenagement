@@ -36,7 +36,7 @@ exports.getCubage =(req,res)=>{
 Cubage.find().then((data) => {
  
     res.json(data)
-    console.log("FETCH GOUT SUCCED")
+    
     })
     .catch((err) => {
       console.log("FETCH FAILED",err)

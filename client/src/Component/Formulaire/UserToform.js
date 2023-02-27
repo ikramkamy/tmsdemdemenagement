@@ -42,14 +42,16 @@ const handelchange4=(e)=>{setUserDevis({
    num:userDevis.num,
    type_dem:userDevis.type_dem,
    civilite:userDevis.civilite,})}
-const handelchange5=(e)=>{setUserDevis({email:e.target.value,
+const handelchange5=(e)=>{setUserDevis({
+   email:e.target.value,
    num:userDevis.num,
    type_dem:userDevis.type_dem,
    civilite:userDevis.civilite,
    nom:userDevis.nom,
    prenom:userDevis.prenom,
 })}
-const handelchange6=(e)=>{setUserDevis({num:e.target.value,
+const handelchange6=(e)=>{setUserDevis({
+   num:e.target.value,
    type_dem:userDevis.type_dem,
    civilite:userDevis.civilite,
    prenom:userDevis.prenom,

@@ -15,7 +15,6 @@ import Footer from '../footer/Footer';
 import PdfComponent from '../Pdfinventaire/PdfComponent';
 import './form-item-style.css';
 import MyComponent from '../PlacesAutocomplet';
-import Signin from '../Signin';
 import UserToform from './UserToform';
 import axios from 'axios';
 //simport ReactTooltip from 'react-tooltip';
@@ -273,6 +272,7 @@ forceUpdate()
             Number((Math.floor(valdistance / 10) * 40)) +
             Number((Math.floor(valdistance2 / 10) * 40)) +
             Number(cubage * 10) +
+           infoadresse.coutTransport+
             (simple * 40) * tarifRMNTG + (moy * 60) * tarifRMNTG +
             pricart + (complique * 80) * tarifRMNTG)
 
@@ -350,51 +350,20 @@ else if (piano===false && frigo===false){setLourdPdf(
 const [infoadresse, setInfoadresse] = useState({
     addepart: '',
     adarrivee: '',
-    distance_adress: 0,
+    distance_adress:"",
     coutTransport: 0,
   });
 /*const { addepart, adarrivee, distance_adress } = infoadresse;*/
-const send_distance=()=>{
-    console.log( "type of the variable",typeof infoadresse.distance_adress)
-    setInfoadresse({
-        addepart:localStorage.getItem('originref'),
-        adarrivee:localStorage.getItem('destination'),
-        distance:localStorage.getItem('distance'),
-        coutTransport: 0,
-    })
-if(infoadresse.distance_adress > 50){
-    
-    console.log("le cout du transport est ", infoadresse.coutTransport)
-    setInfoadresse({
-        addepart:localStorage.getItem('originref'),
-        adarrivee:localStorage.getItem('destination'),
-        distance:localStorage.getItem('distance'),
-        coutTransport:infoadresse.distance_adress,
-    })}
-else{
-   /* alert("la distance dépasse les 50 km , une tarification sera appliquée")*/
-    setInfoadresse({
-        addepart:localStorage.getItem('originref'),
-        adarrivee:localStorage.getItem('destination'),
-        distance:localStorage.getItem('distance'),
-        coutTransport:0,
-    })
-    
-  }
-}
-const send=(e,f,g,h)=>{
-    if (g<50){
-        setInfoadresse({
+const send=(e,f,g,h,i)=>{
+      setInfoadresse({
             addepart:e.current.value,
             adarrivee:f.current.value,
-            distance:g,
-            coutTransport:0
+            distance_adress:g,
+            coutTransport:i
            })
-    }
- 
-   
-}
-
+           setVarchange(varchange + 1);
+        }
+console.log("cout ", infoadresse.coutTransport)
 /***************************Require signe in to get price estimation************************* */
 const [showsignin, setShowsignin]=useState(true)
 const [user,setUser]=useState({});
@@ -419,7 +388,6 @@ const [pdf_full_info,setPdf_full_info]=useState({
     adress2:"",
     total:120, 
     roomList:[],
-    
 })
 useEffect(()=>{
     setPdf_full_info({
@@ -427,6 +395,7 @@ useEffect(()=>{
         fname:user.nom,
         type_dem:user.type_dem,
         email:user.email,
+        num:user.num,
         date:date,
         cubage:cubage,
         adress1:infoadresse.addepart,
@@ -435,18 +404,42 @@ useEffect(()=>{
         total:total, 
         roomList:roomList, 
     })
-},[])
-console.log("pfd info ",pdf_full_info.name)
+},[varchange])
+console.log("pfd info ",pdf_full_info.adress1)
+console.log("pfd info ",pdf_full_info.adress2)
+console.log("distance ", infoadresse.distance_adress)
 const sendpdftoAdmin=()=>{
    axios.post('/ajouter-une-soto-commande', pdf_full_info).then(()=>{
         alert("votre commande soto a étè envoyée avec succés")
-        localStorage.clear();
         }).catch((err)=>{
-
-            console.log("error in soto post",err)
-        })
+})
 }
 
+const sendStotToAdmin=()=>{
+    if(pdf_full_info.adress1=="" || pdf_full_info.adress2==""  || infoadresse.distance_adress=="") {
+        alert("Spécifiez les adresses s'il vous plait!")
+    }else {
+        axios.post('/ajouter-une-soto-commande',pdf_full_info).then(()=>{
+            alert("votre Devis a étè envoyé avec succés")
+            setPdf_full_info({
+                name:"",
+                fname:"",
+                type_dem:"",
+                email:"",
+                num:0,
+                date:"",
+                cubage:0,
+                adress1:"",
+                distance:0, 
+                adress2:"",
+                total:120, 
+                roomList:[],
+            })
+            window.location.reload()
+            }).catch((err)=>{})    
+    }
+  
+}
 return (
 
         <div className="principal-formulaire">
@@ -491,17 +484,18 @@ return (
                             <div className="date-wrap" >
 
                                 <div className="dateWrapInputSoto">
-                                    <input type="date" className="date-input-style" value={date} onChange={getDate} />
+                                    <input type="date" className="date-input-style"
+                                     value={date} onChange={getDate} />
                                 </div>
                             </div>
-                        <MyComponent send_distance={send_distance} send={send}/>
-                           
-                        </div>
+                        <MyComponent send={send}/>
+          </div>
 le coût du transport : {infoadresse.coutTransport}
 
                         <div className="calcul-bloc-item" id="date">
                             <div className="inter-calcul-item">
-                                <h1 className="principale-titles"> <img src={ImgDepart} className="reficonsFORM"/>Départ</h1>
+                                <h1 className="principale-titles"> 
+                                <img src={ImgDepart} className="reficonsFORM"/>Départ</h1>
                                 <div className="adressContainerWrapForm">
                                 
                                     <div className="addWrapperInput">
@@ -512,7 +506,8 @@ le coût du transport : {infoadresse.coutTransport}
                             </div>
                             <div className="inter-calcul-item">
                                 <label className=" Myborder-top">
-                                    <div className="title etage"> <img src={ImgEtage} className="stageImg" alt=""/>ETAGE  </div>
+                                    <div className="title etage"> 
+                                    <img src={ImgEtage} className="stageImg" alt=""/>ETAGE  </div>
                                     <select value={numetage} name='numetage' onChange={handelChangeall} className="selectFormOprionSoto">
                                         {etage.map((option) => (
                                             <option value={option.value} key={option.label}>{option.label}</option>
@@ -816,8 +811,10 @@ le coût du transport : {infoadresse.coutTransport}
                                         <div className="mdbinput">
 
                                         <div className="volumeInputBloc"> 
-                                    <input  type="radio"  id="volcalc" value="oui" name="rdB2" checked={volcalc} onChange={handeVolcalc}  />
-                                    <label for="Volume estimé avec notre calculateur de volume">Volume estimé par le calculateur</label>
+                                    <input  type="radio"  id="volcalc" value="oui" 
+                                    name="rdB2" checked={volcalc} onChange={handeVolcalc}  />
+                                    <label for="Volume estimé avec notre calculateur de volume">
+                                        Volume estimé par le calculateur</label>
                                     </div>
 
 
@@ -835,7 +832,8 @@ le coût du transport : {infoadresse.coutTransport}
                                                 </div>
                                     </div>
                                     <div className="unitVolumCalc"> 
-                                        <input className="input-vol" type="number" name="vol2" value={cubage.toFixed(2)} style={{fontSize:"1em"}} />
+                                        <input className="input-vol" 
+                                        type="number" name="vol2" value={cubage} style={{fontSize:"1em"}} />
                                         <span className="unit-vol" style={{ marginLeft: "5px" }}>m<sup >3</sup></span>
                                     </div>
 
@@ -1153,7 +1151,7 @@ le coût du transport : {infoadresse.coutTransport}
                             </div>
 
                             <div> 
-                                <button className="envoyerCommentButton"> Envoyer</button>
+                                <button className="envoyerCommentButton" onClick={sendStotToAdmin}> Envoyer</button>
                             </div>
                         </div>
                     </div>
@@ -1170,7 +1168,7 @@ le coût du transport : {infoadresse.coutTransport}
                 <div className="total-formulaire" style={{border:"none"}}>
                     <div style={{ 
                     fontWeight:"600", color:"rgb(44,33,111)",
-                     border:"none", fontSize:"1.77em", marginTop:"-30px"}}>Total: {total.toFixed(2)} €</div>
+                     border:"none", fontSize:"1.3em", marginTop:"-30px"}}>Total: {total.toFixed(2)} €</div>
 
                 </div>
                 <div className=" btn-formule btn-download" style={{border:"1px hidden black", width:"250px", background:"#ED1C24", color:"white"}}

@@ -83,18 +83,14 @@ if(token===null){
 console.log("WE ARE NO ADDING PRODUCT BEFOR SIGN IN")
 }else if(token){
 setShowsignin(false)
-
 console.log("votre session est ouvert vous pouvez commander")
 }
-
 },[])
 
 /*********************FETCHER LES UTILISATEUR PAR ID*************/
 const [user,setUser]=useState();
 const _id=localStorage.getItem('user_id');
 //console.log("user",_id)
-
-
 useEffect(()=>{
 axios.get(`/getuserbyid/${_id}`).then((response)=>{
   setUser(response.data);

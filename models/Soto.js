@@ -8,9 +8,15 @@ const Sotoschema= new mongoose.Schema(
         fname:{
             type:String,
         },
+        type_dem:{
+              type:String,
+        },
+        email:{
+            type:String,
+        },
+        num:{ type:Number},
         date:{
-            
-            type:Date,
+       type:Date,
         
         }, 
         cubage:{type:String,
@@ -26,7 +32,7 @@ const Sotoschema= new mongoose.Schema(
         }, 
         adress2:{
            type:String,
-           required:true
+         
         },
         total:{
         type: Number,

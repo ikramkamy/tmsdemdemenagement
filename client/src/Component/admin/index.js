@@ -9,6 +9,7 @@ import ProduitCreate from './Produit/CreateProduit';
 import EditeProduit from './Produit/ProduitEdite';
 import CubageCreate from './Cubage/CreateCubage';
 import Dashboard from './Dashboard';
+import DevisA from './DevisA';
 const Admin=()=>{
 const [showCommande,setshowCommande]=useState(false);
 const [showusers,setshowusers]=useState(false);
@@ -23,6 +24,7 @@ const [showtypecommande,setShowtypecommande]=useState(false)
 useEffect(()=>{
 axios.get('/afficher-les-commandes').then((response)=>{
     setCommande(response.data);
+    
     }).catch((err)=>{
 })
 },[commande])
@@ -34,6 +36,7 @@ const indexOfLastPost=currentPage * dataperpage;
 const indexOfFirstPost=indexOfLastPost-dataperpage;
 const currentPost=user.slice(indexOfFirstPost,indexOfLastPost);
 const currentPost2=commande.slice(indexOfFirstPost,indexOfLastPost);
+
 const paginate =(number)=> setCurrentPage(number);
 useEffect(()=>{
     axios.get('/getallusers').then((response)=>{
@@ -66,11 +69,18 @@ axios.delete(`/delete/${_id}`).then((response)=>{
 /*********************************CUBAGE*****************************/
 const [showcubageCreate,setshowcubageCreate]=useState(false);
 useEffect(()=>{
-axios.get('//getcubage').then((response)=>setCubage(response.data))
+axios.get('/getcubage').then((response)=>setCubage(response.data))
 },[cubage])
 const handelshowcubageCreate=()=>{
     setshowcubageCreate(!showcubageCreate)
 }
+/*************************FETCH SOTO / DEVIS ESTIMATEUR COMMAND****************** */
+const[devis,setDevis]=useState([])
+const [showdevis,setShowdevis]=useState(false)
+useEffect(()=>{
+    axios.get('/getallsoto').then((response)=>setDevis(response.data))
+    
+},[devis])
 /*******************************AFICHAGE DES ELEMENT******************************/
 const handelshowcommande=()=>{
     setshowCommande(true);
@@ -78,6 +88,7 @@ const handelshowcommande=()=>{
     setshowproduit(false);
     setShowcubage(false);
     setDash(false);
+    setShowdevis(false)
 }
 const handelshowusers=()=>{
     setshowCommande(false );
@@ -85,6 +96,7 @@ const handelshowusers=()=>{
     setShowcubage(false);
     setshowusers(true );
     setDash(false);
+    setShowdevis(false)
 }
 const handelshowproduit=()=>{
     setshowusers(false);
@@ -92,6 +104,7 @@ const handelshowproduit=()=>{
     setshowproduit(true);
     setShowcubage(false);
     setDash(false);
+    setShowdevis(false)
 }
 const handelshowcubage=()=>{
     setshowusers(false);
@@ -99,9 +112,19 @@ const handelshowcubage=()=>{
     setshowproduit(false);
     setShowcubage(true);
     setDash(false);
+    setShowdevis(false)
 }
 const showDashboard=()=>{
 setDash(true)
+setshowusers(false);
+setshowCommande(false );
+setshowproduit(false);
+setShowcubage(false);
+setShowdevis(false)
+}
+const handelshowdevis=()=>{
+    setShowdevis(true)
+    setDash(false)
 setshowusers(false);
 setshowCommande(false );
 setshowproduit(false);
@@ -115,14 +138,11 @@ const showhendel1=()=>{
 const showhendel=()=>{
     setShowedite(!showedite) 
 }
-const refresh=()=>{
-    window.location.reload()
-}
 const showtypeC=()=>{
     setShowtypecommande(true)
     setDash(false)
 setshowusers(false);
-setshowCommande(true);
+setshowCommande(false);
 setshowproduit(false);
 setShowcubage(false);
 }
@@ -134,6 +154,9 @@ setshowCommande(false );
 setshowproduit(false);
 setShowcubage(false);  
 }
+
+
+
 return(<div className="admin">
     {/*<div className="nav-admin">
         <div className="side-title">TMSDEM </div>
@@ -159,10 +182,11 @@ TMSDEM
     
      commandes</div>
      {showtypecommande && (<ul className='ul_side_btn'>
-    <li className="side-btn" onClick={()=>handelshowcommande()}>Soto</li>
+     <li className="side-btn" onClick={handelshowcommande}>E-commerce</li>
+    <li className="side-btn" onClick={handelshowdevis}>Devis </li>
     <li className="side-btn">Chrono</li>
-    <li className="side-btn">Stock</li>
-    <li className="side-btn">Tranquille</li>
+     <li className="side-btn">Aise </li>
+     <li className="side-btn">Je planifie mon déménagement </li>
 </ul>) }
 <div className="side-btn" onClick={handelshowproduit}>
    <img src="/images/icones/admin/gift.png" className='mini-icon-admin' 
@@ -178,7 +202,7 @@ TMSDEM
 <h2 className="title-admin-inter">les commandes</h2>
 {currentPost2?.map((e)=>
 
-<Comm   cart={e.cart}  user={e.user}/>
+<Comm   cart={e.cart}  user={e.user} key={e._id}/>
 
 )}
 
@@ -276,15 +300,16 @@ deletuser={
 
 {dash && (<Dashboard user={user} soto={commande}/>)}
 
+{showdevis && (<div className="item-admin">
 
-{/*<div className='info-admin'>
-    <div className='admin-img'></div>
-    <div className='admin-name'>admin name</div>
-    <div className='admin-name bnt-deconnect-admin'>
-        <img alt="" src="/images/icones/exit.png" className='mini-icon-admin '/>
-        Déconnexion
-   </div>
-</div>*/}
+<h2 className="title-admin-inter">les Devis reçus</h2>
+<div  className="item-admin-inter" >
+<div className="items-user">
+</div>
+
+</div>
+{devis?.map((e)=><DevisA name={e.name} fname={e.fname} total={e.total} email={e.email}/>)}
+</div>)}
 
 </div>
 

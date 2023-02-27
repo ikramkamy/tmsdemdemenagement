@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react"
 import {Link} from 'react-router-dom';
-import {FaQuoteRight, FaSnowman, FaStar} from 'react-icons/fa';
+import {FaQuoteRight, FaStar} from 'react-icons/fa';
 const TesmItem=(props)=>{
 const {auteur,text,nextTemoignage}=props;
 const [count, setCount] = useState(0);
@@ -8,7 +8,7 @@ const [count, setCount] = useState(0);
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Call your function here
-      console.log('Hello World');
+    
       nextTemoignage()
       setCount(count => count + 1);
     }, 2500);

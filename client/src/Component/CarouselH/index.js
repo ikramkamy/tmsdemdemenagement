@@ -13,7 +13,7 @@ const[list,setList]=useState([{
 const[count,setCount]=useState(0);
 const nextTemoignage=()=>{
        setList([test[count]])
-        console.log(test[2])
+       
         setCount(count+1)
        if(count===(test.length-1)){
         setCount(0)

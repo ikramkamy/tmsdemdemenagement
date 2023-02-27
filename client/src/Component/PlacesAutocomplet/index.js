@@ -19,40 +19,15 @@ const  MyComponent=(props) =>{
   const originRef = useRef()
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef()
- /*
-  useEffect(()=>{
-    send_distance(distance,duration,originRef,destiantionRef)
-    console.log("we are sending values from autocomplete componenet",originRef )
-    })
-    */
+
     const [cout,setCout]=useState(0);
-
-   /* const handelcost=()=>{
-      console.log(distance.split(' ')[0])
- if(Number(distance.split(' ')[0])>50){setCout(
-        (Number(distance.split(' ')[0])-50)*2)}
-      else{
-        setCout(0)
-      }
-      console.log("cout de transport dis", cout)
-    }
- */
-   
- if (!isLoaded) {
-    return <div className='isloaded'>is loaded</div>
-  }
-
-  async function calculateRoute() {
+ const[trig,setTrig]=useState(0);
+   async function calculateRoute() {
     if (originRef.current.value === '' || destiantionRef.current.value === '') {
       return
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService()
-    localStorage.setItem('originref',originRef.current.value)
-    localStorage.setItem('destination',destiantionRef.current.value)
-    localStorage.setItem('distance',distance)
-    localStorage.setItem('duration',duration)
-   
     const results = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
@@ -62,42 +37,47 @@ const  MyComponent=(props) =>{
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
-    send_distance(distance,duration)
-  
-  
-    if(Number(distance.split(' ')[0])>50){
-      alert('la distance dépasse des 50 km une tarification sera appliquée')
-      setCout(
-      (Number(distance.split(' ')[0])-50)*2)}
-    else{
-      setCout(0)
-    }
-  
-  
-  }
+   }
 
-
+  
  function clearRoute() {
     setDirectionsResponse(null)
     setDistance('')
     setDuration('')
     originRef.current.value = ''
     destiantionRef.current.value = ''
-    localStorage.removeItem('originref')
-    localStorage.removeItem('destination')
-    localStorage.removeItem('distance')
-    localStorage.removeItem('duration')
+    setCout(0)
+    send(originRef,destiantionRef,distance,duration,cout)
   }
-  const handelChange=()=>{
-    send(originRef,destiantionRef,distance,duration)
-   
-   }
+   const handelChange=()=>{
+    setDistance('')
+    setDuration('')
+    send(originRef,destiantionRef,distance,duration,cout)
+     }
+  useEffect(()=>{
+ if(distance){
+      send(originRef,destiantionRef,distance,duration,cout)
+      if(Number(distance.split(' ')[0])>50){
+        //alert("La distance dépasse des 50 km, une tarification sera appliquée")
+        setCout(
+        (Number(distance.split(' ')[0])-50)*2)
+     }
+      else{
+     setCout(0)
+      }
+    
+    }else{
+      }
+ 
+})
   
+  if (!isLoaded) {
+    return(<div>Is loaded!</div>)
+  }
   return (
     <div className='wrap_autocomplete'>
    <Autocomplete>
-              <input type='text' placeholder='Adresse de départ' ref={originRef} onChange={
-                handelChange}/>
+              <input type='text' placeholder='Adresse de départ' ref={originRef} onChange={handelChange}/>
    </Autocomplete>
    <Autocomplete>
               <input
@@ -108,7 +88,8 @@ const  MyComponent=(props) =>{
               />
     </Autocomplete>
     <div className='wrp_auto-btns'>
-    <button colorScheme='pink' type='submit' onClick={calculateRoute} className="btn_autocomplete">
+    <button colorScheme='pink' type='submit' 
+    onClick={calculateRoute} className="btn_autocomplete">
               Calculer la distance
             </button>
             <div
