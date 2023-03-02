@@ -11,9 +11,11 @@ exports.addsoto=(req,res)=>{
         cubage,
         adress1, 
         distance, 
-        adress2, 
+        adress2,
+        mycomment, 
         total, 
         roomList, 
+        cart,
         
     } = req.body;
     
@@ -28,13 +30,15 @@ exports.addsoto=(req,res)=>{
         adress1, 
         distance, 
         adress2, 
+        mycomment,
         total, 
         roomList,
+        cart
         
     });
     
     mysoto.save((error,mysoto) => {
-      console.log(mysoto)
+      console.log(mysoto.mycomment)
         if (error) {
           return res.status(400).json({
             message: "Something went wrong",

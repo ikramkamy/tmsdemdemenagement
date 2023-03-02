@@ -34,6 +34,10 @@ const Sotoschema= new mongoose.Schema(
            type:String,
          
         },
+        mycomment:{
+          type:String,
+          default:"Pas de commentaires"
+        },
         total:{
         type: Number,
         
@@ -41,6 +45,9 @@ const Sotoschema= new mongoose.Schema(
         roomList:{
             type:Array,
           
+        },
+        cart:{
+            type:Array,
         }
     }
 )

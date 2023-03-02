@@ -1,0 +1,19 @@
+.red_price{
+    color: #ED1C24;
+}
+.wrap_flex_style{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.item_devis_style{
+    text-align: center;
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+   text-align: left;
+   color: #2C216F;
+   margin-bottom: 20px;
+  
+}

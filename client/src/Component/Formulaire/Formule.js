@@ -17,7 +17,9 @@ import './form-item-style.css';
 import MyComponent from '../PlacesAutocomplet';
 import UserToform from './UserToform';
 import axios from 'axios';
+
 //simport ReactTooltip from 'react-tooltip';
+
 const Formulefinale = () => {
     const forceUpdate = useForceUpdate();
     const [showecommerce, setShowecommerce] = useState(false);
@@ -45,7 +47,13 @@ const handelCubage = (data) => {
 setVarchange(varchange + 1);
 forceUpdate()
      }
-
+/***********************General comment ******************* */
+const [general_comment,setGeneral_comment]=useState('');
+const handel_general_comment=(e)=>{
+    setGeneral_comment(e.target.value)
+    console.log("gen comment",general_comment)
+    setVarchange(varchange + 1)
+}
     /***************************************CALCUL DE VOLUM********************************* */
     const [volum, setVolum] = useState(false);
     const showVolum = () => {
@@ -260,23 +268,7 @@ forceUpdate()
         numetage: 0,
     })
 
-    /*******************************************************LA SOMME TOTALE****************************************************************************** */
-    const [total, setTotal] = useState(120)
-    useEffect(() => {
-        setTotal(120 + Number(numetage) *
-            (30 - valassenseur) +
-            Number(numetage2) *
-            (30 - valassenseur2) +
-            Number(mnt) * 1 +
-            Number(mnt2) * 1 +
-            Number((Math.floor(valdistance / 10) * 40)) +
-            Number((Math.floor(valdistance2 / 10) * 40)) +
-            Number(cubage * 10) +
-           infoadresse.coutTransport+
-            (simple * 40) * tarifRMNTG + (moy * 60) * tarifRMNTG +
-            pricart + (complique * 80) * tarifRMNTG)
-
-    }, [varchange])
+   
     /*************************************************VOIR LES OBJETS LOURD*******************************/
     const [lourd, setLourd] = useState(true);
     const [piano, setPiano] = useState(false);
@@ -311,8 +303,6 @@ forceUpdate()
     const handelfrigo = () => {
         setFrigo(!frigo)
         setPiano(piano)
-        console.log("frigo",frigo)
-        console.log("piano",piano)
         setTriglourd(triglourd+1)
     }
 useEffect(()=>{
@@ -338,6 +328,24 @@ else if (piano===false && frigo===false){setLourdPdf(
     const sendCart=(data)=>{
         setCart(data);
     }
+     /*******************************************************LA SOMME TOTALE****************************************************************************** */
+ const [total, setTotal] = useState(120)
+   
+ useEffect(() => {
+     setTotal(120 + Number(numetage) *
+         (30 - valassenseur) +
+         Number(numetage2) *
+         (30 - valassenseur2) +
+         Number(mnt) * 1 +
+         Number(mnt2) * 1 +
+         Number((Math.floor(valdistance / 10) * 40)) +
+         Number((Math.floor(valdistance2 / 10) * 40)) +
+         Number(cubage * 10) +
+        infoadresse.coutTransport+
+         (simple * 40) * tarifRMNTG + (moy * 60) * tarifRMNTG +
+         pricart + (complique * 80) * tarifRMNTG)
+
+ }, [varchange])
     /***********************************PDF GENERATION**********************************/
     const [showpdf, setShowpdf] = useState(false);
     
@@ -353,17 +361,23 @@ const [infoadresse, setInfoadresse] = useState({
     distance_adress:"",
     coutTransport: 0,
   });
-/*const { addepart, adarrivee, distance_adress } = infoadresse;*/
 const send=(e,f,g,h,i)=>{
-      setInfoadresse({
-            addepart:e.current.value,
-            adarrivee:f.current.value,
-            distance_adress:g,
-            coutTransport:i
-           })
+  const newInfoadd=e.current.value
+  const newInfoadd2=f.current.value
+  const newInfoadd3=g
+  const newInfoadd4=i
+    setInfoadresse(
+      {  addepart: newInfoadd,
+        adarrivee:newInfoadd2,
+        distance_adress:newInfoadd3,
+        coutTransport:newInfoadd4}
+    
+    )
            setVarchange(varchange + 1);
-        }
-console.log("cout ", infoadresse.coutTransport)
+         }
+useEffect(() => {
+            //console.log(infoadresse);
+          }, [infoadresse]);
 /***************************Require signe in to get price estimation************************* */
 const [showsignin, setShowsignin]=useState(true)
 const [user,setUser]=useState({});
@@ -386,11 +400,13 @@ const [pdf_full_info,setPdf_full_info]=useState({
     adress1:"",
     distance:0, 
     adress2:"",
+    mycomment:"",
     total:120, 
     roomList:[],
+    cart:[]
 })
 useEffect(()=>{
-    setPdf_full_info({
+   setPdf_full_info({
         name:user.prenom,
         fname:user.nom,
         type_dem:user.type_dem,
@@ -401,45 +417,38 @@ useEffect(()=>{
         adress1:infoadresse.addepart,
         distance:infoadresse.distance, 
         adress2:infoadresse.adarrivee,
+        mycomment:general_comment,
         total:total, 
         roomList:roomList, 
+        cart:cart,
     })
-},[varchange])
-console.log("pfd info ",pdf_full_info.adress1)
-console.log("pfd info ",pdf_full_info.adress2)
-console.log("distance ", infoadresse.distance_adress)
+},[varchange,total,general_comment])
+useEffect(() => {
+//console.log(pdf_full_info)
+  }, [infoadresse, pdf_full_info]);
+/****************************************************** */
 const sendpdftoAdmin=()=>{
    axios.post('/ajouter-une-soto-commande', pdf_full_info).then(()=>{
+    //console.log("comment test before sending ", pdf_full_info.mycomment)
         alert("votre commande soto a étè envoyée avec succés")
         }).catch((err)=>{
 })
 }
 
 const sendStotToAdmin=()=>{
+    //console.log("is the value sent to admin updated?",pdf_full_info)
     if(pdf_full_info.adress1=="" || pdf_full_info.adress2==""  || infoadresse.distance_adress=="") {
         alert("Spécifiez les adresses s'il vous plait!")
     }else {
         axios.post('/ajouter-une-soto-commande',pdf_full_info).then(()=>{
             alert("votre Devis a étè envoyé avec succés")
-            setPdf_full_info({
-                name:"",
-                fname:"",
-                type_dem:"",
-                email:"",
-                num:0,
-                date:"",
-                cubage:0,
-                adress1:"",
-                distance:0, 
-                adress2:"",
-                total:120, 
-                roomList:[],
-            })
             window.location.reload()
             }).catch((err)=>{})    
     }
   
 }
+
+
 return (
 
         <div className="principal-formulaire">
@@ -480,7 +489,8 @@ return (
 
 
                         <div className="calcul-bloc-item" id="date">
-                            <h1 className="text-conatiner"> <img src={ImgDateForm} className="reficonsFORM"/> Date</h1>
+                            <h1 className="text-conatiner">*
+                             <img src={ImgDateForm} className="reficonsFORM"/> Date</h1>
                             <div className="date-wrap" >
 
                                 <div className="dateWrapInputSoto">
@@ -490,7 +500,7 @@ return (
                             </div>
                         <MyComponent send={send}/>
           </div>
-le coût du transport : {infoadresse.coutTransport}
+          <div className='info_adresse'>le coût du transport: <span>{infoadresse.coutTransport } €</span></div> 
 
                         <div className="calcul-bloc-item" id="date">
                             <div className="inter-calcul-item">
@@ -1147,7 +1157,7 @@ le coût du transport : {infoadresse.coutTransport}
 
                             <div className="inter-calcul-item">
 
-                                <textarea type="text" className="input-commantaires" />
+                                <textarea type="text" className="input-commantaires" value={general_comment} onChange={handel_general_comment}/>
                             </div>
 
                             <div> 
@@ -1168,7 +1178,7 @@ le coût du transport : {infoadresse.coutTransport}
                 <div className="total-formulaire" style={{border:"none"}}>
                     <div style={{ 
                     fontWeight:"600", color:"rgb(44,33,111)",
-                     border:"none", fontSize:"1.3em", marginTop:"-30px"}}>Total: {total.toFixed(2)} €</div>
+                     border:"none", fontSize:"1.3em", marginTop:"-30px"}}>Total: {total} €</div>
 
                 </div>
                 <div className=" btn-formule btn-download" style={{border:"1px hidden black", width:"250px", background:"#ED1C24", color:"white"}}

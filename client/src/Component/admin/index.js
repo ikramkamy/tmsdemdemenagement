@@ -308,7 +308,17 @@ deletuser={
 </div>
 
 </div>
-{devis?.map((e)=><DevisA name={e.name} fname={e.fname} total={e.total} email={e.email}/>)}
+<div className="wrap_flex_style">
+
+        <div  className='item_devis_style'>Client</div>
+        <div  className='item_devis_style'>Adresses</div>
+        <div  className='item_devis_style'>Devis</div>
+
+</div>
+
+{devis?.map((e)=><DevisA name={e.name} fname={e.fname} total={e.total} email={e.email} num={e.num}
+add1={e.adress1.split(',')[0]} add2={e.adress2.split(',')[0]} typedem={e.type_dem}
+/>)}
 </div>)}
 
 </div>

@@ -20,6 +20,7 @@ export default function NavBar() {
 <div className="item"><Link to="/presentation" style={{"textDecoration" : "none"}}>TMS-DEM</Link></div>
 <div className="item"><Link to="/services">Nos services</Link>  </div>
 <div className="item"><Link to="/boutique">Boutique</Link> </div>
+<div className="item"><Link to="/admin">Admin</Link>  </div>
 <div className="item"><Link to="/contact">Contact</Link>  </div>
 
 
@@ -53,6 +54,8 @@ export default function NavBar() {
 <div className="item"><Link to="/services"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Nos services</Link>  </div>
 <div className="item"><Link to="/boutique"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Boutique</Link> </div>
 <div className="item"><Link to="/contact"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Contact</Link>  </div>
+<div className="item"><Link to="/admin"  style={{"textDecoration" : "none", "color":"black", "fontSize":"1.1em"}}>Admin</Link>  </div>
+  
    </div>
 
 }

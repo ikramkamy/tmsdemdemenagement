@@ -13,15 +13,18 @@ const  MyComponent=(props) =>{
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  
   const [trigerdistansecal,setTrigerdistansecal]=useState(0)
   const {send_distance,send}=props;
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef()
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef()
-
-    const [cout,setCout]=useState(0);
- const[trig,setTrig]=useState(0);
+  const [cout,setCout]=useState(0);
+  const[trig,setTrig]=useState(0);
+  const handeltrig=()=>{
+    setTrigerdistansecal(trigerdistansecal+1)
+  }
    async function calculateRoute() {
     if (originRef.current.value === '' || destiantionRef.current.value === '') {
       return
@@ -37,6 +40,8 @@ const  MyComponent=(props) =>{
     setDirectionsResponse(results)
     setDistance(results.routes[0].legs[0].distance.text)
     setDuration(results.routes[0].legs[0].duration.text)
+    setTrigerdistansecal(trigerdistansecal+1)
+    handeltrig()
    }
 
   
@@ -47,35 +52,36 @@ const  MyComponent=(props) =>{
     originRef.current.value = ''
     destiantionRef.current.value = ''
     setCout(0)
-    send(originRef,destiantionRef,distance,duration,cout)
+    /*send(originRef,destiantionRef,distance,duration,cout)*/
+   
   }
    const handelChange=()=>{
     setDistance('')
     setDuration('')
-    send(originRef,destiantionRef,distance,duration,cout)
+    //console.log("after clear",originRef,destiantionRef,distance,duration,cout)
+    send(originRef,destiantionRef,distance,"",0)
+    setTrigerdistansecal(trigerdistansecal+1)
      }
+
+
   useEffect(()=>{
- if(distance){
-      send(originRef,destiantionRef,distance,duration,cout)
-      if(Number(distance.split(' ')[0])>50){
-        //alert("La distance dépasse des 50 km, une tarification sera appliquée")
-        setCout(
-        (Number(distance.split(' ')[0])-50)*2)
-     }
-      else{
-     setCout(0)
+      if (distance) {
+        const distanceNumber = parseFloat(distance.split(' ')[0]);
+        const newCout = distanceNumber > 50 ? (distanceNumber - 50) * 2 : 0;
+        setCout(newCout);
+        
+        //console.log("originRef, destiantionRef, distance, duration, newCout", originRef, destiantionRef, distance, duration, newCout);
+        send(originRef, destiantionRef, distance, duration, newCout);
+      } else {
+        //console.log('la distance est encour de calcul');
       }
-    
-    }else{
-      }
- 
-})
+    },[trigerdistansecal])
   
   if (!isLoaded) {
     return(<div>Is loaded!</div>)
   }
   return (
-    <div className='wrap_autocomplete'>
+    <div className='wrap_autocomplete' onM={handeltrig}>
    <Autocomplete>
               <input type='text' placeholder='Adresse de départ' ref={originRef} onChange={handelChange}/>
    </Autocomplete>
